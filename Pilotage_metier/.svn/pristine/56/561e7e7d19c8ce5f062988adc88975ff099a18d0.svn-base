@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+ <class name="Planning_Cycle_Equipe" table="planning_cycle_equipe">
+  <id column="id" name="id" type="integer">
+   <generator class="increment"/>
+  </id>
+  <property column="dateDebut" 	generated="never" lazy="false"  length="10" name="dateDebut" not-null="true" type="date"/>
+  <property column="dateFin" 	generated="never" lazy="false" 	length="10" name="dateFin" type="date"/>
+   
+  <many-to-one class="pilotage.metier.Planning_Cycle" 		column="idNomCycle" 	lazy="false" name="idNomCycle"/>
+  <many-to-one class="pilotage.metier.Planning_Nom_Equipe"  column="idNomEquipe" 	lazy="false" name="idNomEquipe"/>
+ </class>
+</hibernate-mapping>

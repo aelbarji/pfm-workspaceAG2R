@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+ <class name="pilotage.metier.Incidents_Qualite" table="INCIDENTS_QUALITE">
+  <id name="id" type="java.lang.Integer">
+   <column name="ID"/>
+   <generator class="native"/>
+  </id>
+  <property name="dateEvenement" not-null="true" type="java.util.Date">
+   <column name="DATE_EVENEMENT"/>
+  </property>
+  <property name="description" not-null="true" type="java.lang.String">
+   <column name="DESCRIPTION"/>
+  </property>
+  <property name="cause_raison" not-null="false" type="java.lang.String">
+   <column name="CAUSE_RAISON"/>
+  </property>
+  <property name="incidence" not-null="false" type="java.lang.String">
+   <column name="INCIDENCE"/>
+  </property>
+  <property name="echeance" not-null="false" type="java.lang.String">
+   <column name="ECHEANCE"/>
+  </property>
+  <property name="dateResolution" not-null="false" type="java.util.Date">
+   <column name="DATE_RESOLUTION"/>
+  </property>
+  <many-to-one class="pilotage.metier.Incidents_Qualite_Statut"	column="STATUT"	lazy="false" name="statut"/>
+ </class>
+</hibernate-mapping>

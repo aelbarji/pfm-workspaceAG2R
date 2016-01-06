@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+	<class name="pilotage.metier.Incidents_Qualite_Action" table="INCIDENTS_QUALITE_ACTION">
+		<id name="id" type="java.lang.Integer">
+			<column name="ID"/>
+			<generator class="native"/>
+		</id>
+		<many-to-one name="idIncidentsQualite"	class="pilotage.metier.Incidents_Qualite">
+			<column name="ID_INCIDENTS_QUALITE"/>
+		</many-to-one>
+		<property name="dateAction" not-null="true" type="java.util.Date">
+   			<column name="DATE_ACTION"/>
+  		</property>
+		<property name="action" type="java.lang.String" not-null="true">
+			<column name="ACTION"/>
+		</property>
+	</class>
+</hibernate-mapping>

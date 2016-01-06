@@ -1,0 +1,38 @@
+body{
+	 
+color: white;
+/* change font style*/
+font-family : "Arial";
+}
+.table{
+border-width : 3px;
+border-spacing : 5px;
+border-style : solid;
+border-color : #2E170F;
+border-collapse: collapse;
+background-color : #414141;
+width : 230px;
+}
+td{
+border-width : 2px;
+padding : 5px;
+border-style :solid;
+border-color : ##2E170F;
+}
+.menuPremiere{
+background-color:#2E170F;
+}
+.menuSecond{
+background-color:#00B9E7;
+text-indent:30px;
+}
+.forSpace{
+height : 150px;
+padding : 0px;
+background-color:#2E170F;
+border-color : #2E170F;
+}
+a:link {text-decoration: none; color: white}
+a:visited {text-decoration: none; color: white}
+a:active {text-decoration: none; color: white}
+a:hover {text-decoration: none; color: white}

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory name="MysqlDSParametre">
+		<property name="hibernate.bytecode.use_reflection_optimizer">false</property>
+		<property name="hibernate.connection.datasource">java:MysqlDSParametre</property>
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="current_session_context_class">thread</property>
+		<property name="show_sql">false</property>
+		<property name="format_sql">false</property>
+		<property name="connection.autocommit">false</property>
+		<property name="cache.provider_class">org.hibernate.cache.NoCacheProvider</property>
+
+		<mapping class="pilotage.admin.metier.Profil" resource="pilotage/admin/metier/Profil.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Affectation_menu" resource="pilotage/admin/metier/Affectation_menu.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Menu" resource="pilotage/admin/metier/Menu.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Parametre" resource="pilotage/admin/metier/Parametre.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Titre_page" resource="pilotage/admin/metier/Titre_page.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Titre_page" resource="pilotage/admin/metier/Checklist_color.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Profil_Droits" resource="pilotage/admin/metier/Profil_Droits.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Droits_Liste" resource="pilotage/admin/metier/Droits_Liste.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Images" resource="pilotage/admin/metier/Images.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Module" resource="pilotage/admin/metier/Module.hbm.xml" />
+		<mapping class="pilotage.admin.metier.Sous_Module" resource="pilotage/admin/metier/Sous_Module.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

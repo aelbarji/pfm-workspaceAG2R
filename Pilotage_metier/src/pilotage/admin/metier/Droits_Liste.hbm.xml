@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Droits_Liste" table="droits_liste">
+		<id column="ID" name="id">
+			<generator class="increment"/>
+		</id>
+		<property column="libelle" lazy="false" name="libelle" type="string" />
+		<property column="description" lazy="false" name="description" type="string" />
+	</class>
+</hibernate-mapping>

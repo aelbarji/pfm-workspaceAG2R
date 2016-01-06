@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Liste_URL" table="liste_url" >
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="increment" />
+        </id>
+        <property name="application" type="java.lang.String" lazy="false" >
+            <column name="application" />
+        </property>
+        <property name="adresse" type="java.lang.String" lazy="false" >
+            <column name="adresse" />
+        </property>
+        <property name="image" lazy="true">
+            <column name="image" />
+        </property>
+    </class>
+</hibernate-mapping>

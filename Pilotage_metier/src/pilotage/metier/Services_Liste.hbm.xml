@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Services_Liste" table="services_liste">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="nomService"
+			column="nomService"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+		<property
+			name="consigne_meteo"
+			column="consigne_meteo"
+			type="text"
+			not-null="false"
+		/>
+		<property
+			name="actif"
+			column="actif"
+			type="integer"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Derogation_Etat" table="derogation_etat">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property name="etat" column="etat" type="string" not-null="true" length="20" />
+	</class>	
+</hibernate-mapping>

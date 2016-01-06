@@ -1,0 +1,20 @@
+Version V9.3
+
+Contenue :
+	Blocage des pilotes s'ils n'ont pas lu et validé toutes les consignes
+	Correctifs différents bugs
+	tâche 131 => Incohérence dans la table "com_incidents",  l'attribut "etat_service" pointe vers un état météo => Créer une table dédiée aux services GUP
+
+Modification de la BASE EPI	
+	pas de modification
+	
+Modification de la Base PARAMETRE
+	pas de modification
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

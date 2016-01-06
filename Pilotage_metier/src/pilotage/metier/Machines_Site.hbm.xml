@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Machines_Site" table="machines_site">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="site" 		column="site" 		type="string" 	not-null="true" length="45" />
+		<property name="adresse1" 	column="adresse1" 	type="string" 	not-null="true" length="30" />
+		<property name="adresse2" 	column="adresse2" 	type="string" 	not-null="true" length="30" />
+		<property name="cp" 		column="CP" 		type="integer" 	not-null="true" length="5" />
+
+	</class>
+</hibernate-mapping>

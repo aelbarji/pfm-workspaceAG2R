@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE log4j:configuration SYSTEM "log4j.dtd">
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/" threshold="all" debug="false">
+	<appender name="stdout" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+	    <layout class="org.apache.log4j.PatternLayout">
+	    	<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+	    </layout>
+	</appender>
+	<appender name="pilotage" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="C\:\\apps\\jboss\\jboss-6.1.0.Final\\server\\default\\log\\pilotage.log" />
+		<param name="MaxFileSize" value="50MB" />
+		<param name="MaxBackupIndex" value="10" />
+	    <layout class="org.apache.log4j.PatternLayout">
+	    	<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+	    </layout>
+     	<filter class="org.apache.log4j.varia.LevelRangeFilter">
+         	<param name="levelMin" value="INFO"/>
+         	<param name="levelMax" value="WARN"/>
+     	</filter>
+    	<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+	<appender name="erreur" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="C\:\\apps\\jboss\\jboss-6.1.0.Final\\server\\default\\log\\erreur.log" />
+		<param name="MaxFileSize" value="50MB" />
+		<param name="MaxBackupIndex" value="10" />
+	    <layout class="org.apache.log4j.PatternLayout">
+	    	<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+	    </layout>
+     	<filter class="org.apache.log4j.varia.LevelRangeFilter">
+         	<param name="levelMin" value="WARN"/>
+         	<param name="levelMax" value="FATAL"/>
+     	</filter>
+     	<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+	<appender name="debug" class="org.apache.log4j.RollingFileAppender">
+		<param name="File" value="C\:\\apps\\jboss\\jboss-6.1.0.Final\\server\\default\\log\\debug.log" />
+		<param name="MaxFileSize" value="50MB" />
+		<param name="MaxBackupIndex" value="10" />
+	    <layout class="org.apache.log4j.PatternLayout">
+	    	<param name="ConversionPattern" value="%d{ABSOLUTE} %5p %c{1}:%L - %m%n" />
+	    </layout>
+     	<filter class="org.apache.log4j.varia.LevelMatchFilter">
+         	<param name="levelToMatch" value="debug"/>
+         	<param name="AcceptOnMatch" value="true"/>
+     	</filter>
+     	<filter class="org.apache.log4j.varia.DenyAllFilter" />
+	</appender>
+	<logger name="org.hibernate.SQL">
+	 	<level value="debug" />
+	 </logger> 
+	<logger name="org.hibernate.type"> 
+		<level value="debug"/>
+	</logger>
+	<logger name="org.hibernate">
+		<level value="info"/> 
+	</logger>
+	<logger name="org.hibernate.transaction">
+		<level value="debug" />
+	</logger>
+	<root>
+		<level value="debug"></level>
+		<appender-ref ref="pilotage"/>
+		<appender-ref ref="stdout"/>
+		<appender-ref ref="erreur"/>
+		<appender-ref ref="debug"/>
+	</root>
+</log4j:configuration>

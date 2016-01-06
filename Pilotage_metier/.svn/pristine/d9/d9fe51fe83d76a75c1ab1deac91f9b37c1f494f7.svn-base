@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping  package="pilotage.metier">
+    <class name="Com_Incident_Etat" table="com_incident_etat">
+        <id name="id" type="integer" column="id" >
+            <generator class="native" />
+        </id>
+        <property name="libelle" type="string" column="libelle" />
+        <property name="definition" type="string" column="definition" />
+    </class>
+</hibernate-mapping>

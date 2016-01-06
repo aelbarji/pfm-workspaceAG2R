@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+	<class name="Bug" table="bug">
+		<id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		<property column="date" generated="never" lazy="false" name="date" 	not-null="true" type="timestamp" length="19"/>
+		<property column="bug" 	generated="never" lazy="false" name="bug" 	not-null="true" type="string" 				/>
+		<property column="etat" generated="never" lazy="false" name="etat" 	not-null="true" type="string" length="10"	/>
+
+
+		<many-to-one class="pilotage.metier.Users" column="id_user" lazy="false" name="idUser" />
+	</class>
+</hibernate-mapping>

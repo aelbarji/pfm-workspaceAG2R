@@ -1,0 +1,20 @@
+Version V9.3
+
+Contenue :
+	tache 120 : Administration Checklist
+	tâche 135 : Incident
+	
+Modification de la BASE EPI	
+	=> lancer le SQL V9.4_modif_bdd_pilotage.sql
+	=> En cas de problème et retour arrière, importer fichier checklist_consignes.sql
+	
+Modification de la Base PARAMETRE
+	pas de modification
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

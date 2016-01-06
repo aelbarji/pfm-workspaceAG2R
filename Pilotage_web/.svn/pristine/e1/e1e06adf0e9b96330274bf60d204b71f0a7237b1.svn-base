@@ -1,0 +1,20 @@
+Version V810
+Contenue :
+	Evolution de la saisie des astreintes avec un envoi de mail
+	modification de la présentation du mail des astreintes
+	ajout d'un champ infogene dans la table astreinte_planning avec sa gestion.
+	
+Modification de la BASE EPI	
+	Ajout de la table Astreinte_Destinataire : 
+		lancer le SQL V810_Modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	aucune
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Dans le répertoire jbossWorkspace, copier sous votre répertoire "jbossWorkspace" le fichier "astreinte.css" se trouvant dans l'EAR, sous "Pilotage_web.war\<entite>\jbossWorkspace"
+
+Mettre en place l'EAR
+		

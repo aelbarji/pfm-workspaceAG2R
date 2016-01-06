@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Changement" table="changement">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="libelle"
+			column="libelle"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="environnement"
+			column="environnement"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="datedebut"
+			column="datedebut"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="datefin"
+			column="datefin"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="intervenant"
+			column="intervenant"
+			type="string"
+			not-null="true"
+			length="30"
+		/>
+		<property
+			name="statut"
+			column="statut"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+	</class>	
+</hibernate-mapping>

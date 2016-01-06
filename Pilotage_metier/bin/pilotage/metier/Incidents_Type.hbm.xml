@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Incidents_Type" table="incidents_type">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="type" column="type" type="string" not-null="true" length="50" />
+		<property name="description" column="description" type="string" not-null="true" length="50" />
+		<property name="impact" column="impact" type="int" not-null="true"/>
+		<property name="titre_bilan" column="titre_bilan" type="string" not-null="true" length="50" />
+	</class>	
+</hibernate-mapping>

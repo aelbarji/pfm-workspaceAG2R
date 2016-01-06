@@ -1,0 +1,35 @@
+Version V9.0
+
+Contenue :
+	Export du CRA
+	
+Modification à faire dans la partie admin de l'ODIP
+	- Ajouter un menu:
+		Libellé: Planning
+		Place:8
+		Lien:showPlanningMoisPiloteAction.action
+		Image icône: planning.png
+	- Affecter le nouveau menu aux profils: pilote, pilote coordinateur, communication production, coordinateur communication production,
+											administrateur, responsable exploitation
+	- Supprimer les sous menus de "Gestion Pilotage" concernant le planning
+	- Gestion des droits: Dans le module Planning, ajouter un sous-modules "Export CRA" avec le droit d'ajout se nommant "PLN_CRA_EXP".
+	- Affecter de droit aux profils:
+		Pilote
+		Pilote coordinateur
+		Communication Production
+		Coordinateur Communication Production
+	- Supprimer pour le profil "Pilote" tous les droits d'ajout, de modification et de suppression concernant le planning (hors CRA).
+
+Modification de la BASE EPI	
+	=> lancer le SQL V9_modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	pas de modification
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

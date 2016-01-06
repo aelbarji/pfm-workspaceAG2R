@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Menu" table="menu">
+		<id column="ID" name="id">
+			<generator class="increment"/>
+		</id>
+		<property column="PLACE" generated="never" lazy="false" name="place" type="integer" />
+		<property column="LIBELLE" generated="never" lazy="false" name="libelle" type="string" />
+		<property column="LIEN" generated="never" lazy="false" name="lien" type="string" />
+		<property column="ICONE" generated="never" lazy="false" name="icone" type="integer" />
+		<property column="ID_PARENT" generated="never" lazy="false" name="id_parent" type="integer" />
+		<property column="INTEROP" generated="never" lazy="false" name="interop" type="boolean" />
+	</class>
+</hibernate-mapping>

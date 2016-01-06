@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+
+    <class name="TdB_Commentaire" table="tdb_commentaire">
+        <id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+       	<property name="date" column="date" type="org.joda.time.contrib.hibernate.PersistentDateTime" not-null="true"	/>
+       	<many-to-one class="Environnement" column="environnement" lazy="false" name="environnement" not-null="true" />
+       	<property 	column="commentaire" name="commentaire" not-null="true" type="text"	/>
+       	<many-to-one class="Users" column="pilote" lazy="false" name="pilote" not-null="true" />  
+    </class>
+    
+</hibernate-mapping>

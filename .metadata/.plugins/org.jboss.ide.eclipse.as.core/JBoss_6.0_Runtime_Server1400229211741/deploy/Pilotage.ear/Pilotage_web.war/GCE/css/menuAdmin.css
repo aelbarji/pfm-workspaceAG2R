@@ -1,0 +1,38 @@
+body{
+background-color: #D3CBC5;  
+color: white;
+/* change font style*/
+font-family : "Arial";
+}
+.table{
+border-width : 3px;
+border-spacing : 5px;
+border-style : solid;
+border-color : black;
+border-collapse: collapse;
+background-color : #9D0020;
+width : 230px;
+}
+td{
+border-width : 2px;
+padding : 5px;
+border-style :solid;
+border-color : #FFA500;
+}
+.menuPremiere{
+background-color:#9D0020;
+}
+.menuSecond{
+background-color:#FFA500;
+text-indent:30px;
+}
+.forSpace{
+height : 150px;
+padding : 0px;
+background-color:#9D0020;
+border-color : #9D0020;
+}
+a:link {text-decoration: none; color: white}
+a:visited {text-decoration: none; color: white}
+a:active {text-decoration: none; color: white}
+a:hover {text-decoration: none; color: white}

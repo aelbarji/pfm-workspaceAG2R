@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+	<class dynamic-update="true" name="Incidents" table="incidents">
+		<id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		<many-to-one	class="pilotage.metier.Users" 				column="user" 		lazy="false" 	name="user" 	not-null="true" />
+		<many-to-one 	class="pilotage.metier.Heures_Oceor" 		column="oceor" 		lazy="false" 	name="oceor" 					/>
+		<many-to-one 	class="pilotage.metier.Environnement" 		column="domaine" 	lazy="false" 	name="domaine" 	not-null="true" />
+		<many-to-one 	class="pilotage.metier.Machines_Liste" 		column="machine" 	lazy="false" 	name="machine" 					/>
+		<many-to-one 	class="pilotage.metier.Incidents_Type" 		column="type" 		lazy="false" 	name="type" 	not-null="true" />
+		<many-to-one 	class="pilotage.metier.Incidents_Outils" 	column="idOutil" 	lazy="false" 	name="idOutil" 					/>
+		
+		<property 	column="datedebut" 		generated="never" 	lazy="false" 	name="dateDebut" 		not-null="true" 	type="timestamp" 				/>
+		<property 	column="datedebut_gmt" 	generated="never" 	lazy="false" 	name="dateDebutGmt" 	not-null="true" 	type="timestamp" 				/>
+		<property 	column="datefin" 			generated="never" 	lazy="false" 	name="dateFin" 							type="timestamp" 				/>
+		<property 	column="datefin_gmt" 		generated="never" 	lazy="false" 	name="dateFinGmt" 							type="timestamp" 				/>
+		<property 	column="applicatif" 		generated="never" 	lazy="false" 	name="applicatif" 		not-null="true" 	type="string"		length="25" />
+		<property 	column="appli_ordonnanceur" generated="never" 	lazy="false" 	name="appli_ordonnanceur" not-null="true" 	type="string"		length="25" />
+		<property 	column="job" 				generated="never" 	lazy="false" 	name="job" 				not-null="true" 	type="string"		length="25" />
+		<property 	column="hard_software" 		generated="never" 	lazy="false" 	name="hard_software" 	not-null="true" 	type="string"		length="25" />
+		<property 	column="observation" 		generated="never" 	lazy="false" 	name="observation" 		not-null="true" 	type="string" 					/>
+		<property 	column="action" 			generated="never" 	lazy="false" 	name="action" 			not-null="true" 	type="string" 					/>
+		<property 	column="ars" 				generated="never" 	lazy="false"  	name="ars" 				not-null="true" 	type="string" 		length="10"	/>
+		<property 	column="astreinte" 			generated="never" 	lazy="false" 	name="astreinte" 		not-null="true" 	type="string" 		length="20" />
+		<property 	column="coupure" 			generated="never" 	lazy="false" 	name="coupure" 			not-null="true" 	type="integer" 		length="11" />
+		<property 	column="service" 			generated="never" 	lazy="false" 	name="service" 								type="string" 					/>
+		<property 	column="resoluPil" 			generated="never" 	lazy="false" 	name="resoluPil" 						 	type="integer" 		length="11" />
+		<property 	column="aAstreinte" 		generated="never" 	lazy="false" 	name="hasAstreinte" 						type="integer" 		length="11" />
+
+	</class>
+</hibernate-mapping>

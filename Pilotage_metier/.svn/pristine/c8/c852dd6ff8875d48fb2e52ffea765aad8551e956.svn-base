@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping package="pilotage.metier">
+
+    <class name="pilotage.metier.Hardware_Software" table="hardware_software">
+        <id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+   		<property	column="libelle"	name="libelle"	generated="never"	lazy="false"	type="string"	length="50" />
+    </class>
+    
+</hibernate-mapping>

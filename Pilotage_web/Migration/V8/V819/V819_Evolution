@@ -1,0 +1,36 @@
+Version V819
+
+Contenue :
+	Changement des types incident pour se rapprocher de la norme ITIL
+		- Critique, coupure de service
+		- Incident, service dégradé
+		- Alerte, sans impact service
+		- Information
+	Suppression des doublons lors d'un rafraichissement de page grâce à l'utilisation des tokens
+		- Dans fichier struts.xml
+			<interceptor-ref name="token" />
+            <interceptor-ref name="defaultStack" />
+            <result name="invalid.token" type="redirectAction">showIncidents</result>    
+		- Dans page jsp
+			<s:token></s:token> 
+	Correction Planning des astreintes
+		- Activation de l'astreinte dans la liste
+		- Envoi du planning avec choix de la semaine
+	Correction Consigne BBR
+		- Chemin du fichier
+	
+Modification de la BASE EPI	
+	Modification de la table incidents && incidents_type : 
+		lancer le SQL V819_modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	Insertion dans la table parametre:
+		lancer le SQL V819_modif_bdd_parametre.sql
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

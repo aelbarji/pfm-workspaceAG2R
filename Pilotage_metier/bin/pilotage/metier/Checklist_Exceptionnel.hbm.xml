@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Exceptionnel" table="checklist_exceptionnel">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="jour" column="jour" type="date" not-null="true" length="10" />
+		
+		<many-to-one 	name="idChecklist"		column="id_checklist" 	class="pilotage.metier.Checklist_Base" 	lazy="false"/>
+	</class>
+</hibernate-mapping>

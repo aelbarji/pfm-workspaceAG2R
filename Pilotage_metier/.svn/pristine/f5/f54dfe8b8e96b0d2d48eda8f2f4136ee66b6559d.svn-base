@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Bilan" table="bilan" dynamic-insert="true" dynamic-update="true">
+		<id name="id" type="java.util.Date" column="date">
+			<generator class="assigned" />
+		</id>
+
+		<many-to-one name="vacationaprem" class="pilotage.metier.Users" fetch="join">
+			<column name="VACATIONAPREM" />
+		</many-to-one>
+		<many-to-one name="vacationmatin" class="pilotage.metier.Users" fetch="join">
+			<column name="VACATIONMATIN" />
+		</many-to-one>
+		<many-to-one name="vacationnuit" class="pilotage.metier.Users" fetch="join">
+			<column name="VACATIONNUIT" />
+		</many-to-one>
+
+	</class>
+</hibernate-mapping>

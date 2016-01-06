@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Environnement_Type" table="environnement_type">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="type"
+			column="type"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+		<property 
+			column="principal" 
+			generated="never" 	
+			lazy="false" 	
+			name="principal" 			
+			not-null="true" 	
+			type="integer" 		
+			length="11" 
+			/>
+	</class>	
+</hibernate-mapping>

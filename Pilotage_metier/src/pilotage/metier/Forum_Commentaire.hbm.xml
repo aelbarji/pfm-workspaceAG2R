@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Forum_Commentaire" table="forum_commentaire">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="sujet"
+			column="sujet"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="text"
+			column="text"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="createur"
+			column="createur"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="dateCreation"
+			column="date_creation"
+			type="timestamp"
+			not-null="true"
+			
+		/>
+		<property
+			name="numero"
+			column="numero"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="sousCommentaire"
+			column="sousCommentaire"
+			type="integer"
+			not-null="true"
+			length="4"
+		/>
+	</class>	
+</hibernate-mapping>

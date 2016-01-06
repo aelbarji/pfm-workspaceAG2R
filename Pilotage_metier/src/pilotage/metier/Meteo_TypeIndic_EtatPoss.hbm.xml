@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping  package="pilotage.metier">
+    <class name="Meteo_TypeIndic_EtatPoss" table="meteo_typeindic_etatpossible">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="etatPoss" class="pilotage.metier.Meteo_EtatPossible" lazy="false" column="id_etatPossible" />
+        <many-to-one name="typeIndic" class="pilotage.metier.Meteo_TypeIndicateur" lazy="false" column="id_typeIndicateur" />
+        
+    </class>
+</hibernate-mapping>

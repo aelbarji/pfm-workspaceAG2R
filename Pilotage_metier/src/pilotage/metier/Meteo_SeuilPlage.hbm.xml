@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_SeuilPlage" table="meteo_seuil_plage">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="ko_min" type="string" column="ko_min" lazy="false"/>
+        <property name="ko_max" type="string" column="ko_max" lazy="false"/>
+        <property name="pertu_min" type="string" column="pertu_min" lazy="false"/>
+        <property name="pertu_max" type="string" column="pertu_max" lazy="false"/>
+    </class>
+</hibernate-mapping>
+

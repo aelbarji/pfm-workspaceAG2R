@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Astreinte" table="astreinte">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property 	name="nom" 		column="nom" 	type="string" 	not-null="true" 	length="20" />
+		<property 	name="prenom" 	column="prenom" type="string" 	not-null="true" 	length="20" />
+		<property 	name="tel1" 	column="tel1" 	type="string" 	not-null="true" 	length="20" />
+		<property 	name="tel2" 	column="tel2" 	type="string" 	not-null="true" 	length="20" />
+		<property 	name="actif" 	column="actif" 	type="boolean" 	not-null="true" 				/>
+		<many-to-one class="pilotage.metier.Astreinte_Type" column="type" name="type" lazy="false" 	/>
+	</class>	
+</hibernate-mapping>

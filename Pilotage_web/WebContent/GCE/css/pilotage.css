@@ -1,0 +1,758 @@
+@CHARSET "ISO-8859-1";
+
+/***************** Zones *****************/
+body {
+	font-family: "Arial", "Helvetica",Verdana, sans-serif;
+	font-size: 14px;
+	background-color: #D3CBC5;
+	color: black;
+}
+
+.questionBorder{
+	background-color: orange;	
+}
+
+.content{
+	vertical-align: top;
+	text-align: center;
+	margin-left: 50px;
+}
+
+.menuContent{
+	width: 80px;
+}
+
+.titleContent{
+	height: 35px;	
+}
+
+.headerContent{
+	clear: both;
+	height: 180px
+}
+
+.plusDiv{
+	width : 100%;
+}
+
+.titreCenter{
+	font-size: 16px;
+	text-align:center;
+}
+
+/***************** Titre des pages *****************/
+.titleTop {
+	position: fixed;
+	top: 108px;
+	left: 0px;
+	
+	height: 35px;
+	width: 100%;
+	
+	border: none;
+	line-height: 35px;
+	
+	background-color: #948683;
+	color: white;
+	text-align:center;
+	font-size: 16px;
+	font-weight : bold;
+}
+
+.titleTop #pickDate {
+	display: none;
+}
+
+.titleTopRight{
+	text-align:right;
+	float: right;
+	display: table;
+	height : 100%;
+	margin-right: 19px;
+}
+.titleTopRight p{
+	display: table-cell;
+	vertical-align: middle
+	
+}
+/***************** Images *****************/
+img {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+}
+
+.icone {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+}
+
+.icone2 {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 18px;
+	width: 18px;
+}
+
+.iconeOption {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 20px;
+	width: 20px;
+}
+.iconeOptionExport {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 40px;
+	width: 40px;
+}
+.iconeOption26 {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 26px;
+	width: 26px;
+}
+
+.listIcones{
+	position: absolute;
+	top: 100px; 
+	left: 0px;
+	
+	height: 35px;
+	width: 100%;
+}
+
+.plus{
+	font-size: 90%;
+	color: black;
+	font-weight: bold;
+	text-align: left;
+	float: left;
+	width: 100%;
+	margin-top: 20px;
+}
+
+.plusDroite{
+	text-align: right;
+	float: right;
+}
+
+#plus_consigne_interEquipe{
+	font-size: 90%;
+	color: black;
+	font-weight: bold;
+	text-align: left;
+	width: 100%;
+	margin-top: 20px;
+}
+/********************** Autocompleter  ************************/
+
+.autoselect {
+	width:320px;
+	float:left;
+}
+.autoselectBouton {
+	width:100px;
+	height:100px;
+	display:inline-block;
+}
+
+.AutoselectIcone {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 36px;
+	width: 36px;
+} 
+
+/********************** Liens et boutons **********************/
+a,a:link,a:visited,a:hover,a:active{
+	text-decoration: none;
+}
+
+.mailto{
+	color: inherit;
+}
+
+.pageSelected{
+	color: red;	
+}
+
+.boutonRechercher, .boutonRetour, .boutonValider {
+	display: inline-block;
+	background-color: orange;
+	width: 140px;
+	height: 25px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	line-height: 25px;
+	font-size: 1em;
+	font-weight: bold;
+	border: ridge;
+	border-width: 3px;
+	border-color: orange;
+}
+
+ .boutonSubmit {
+	display: inline-block;
+	background-color: orange;
+	width: 140px;
+	height: 31px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	line-height: 25px;
+	font-size: 1em;
+	font-weight: bold;
+	border: ridge;
+	border-width: 3px;
+	border-color: orange;
+}
+
+.boutonValiderEtEnvoyer {
+	display: inline-block;
+	background-color: orange;
+	width: 200px;
+	height: 31px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	line-height: 25px;
+	font-size: 1em;
+	font-weight: bold;
+	border: ridge;
+	border-width: 3px;
+	border-color: orange;
+}
+
+.ajouter{
+	vertical-align: middle;
+	text-decoration: none;
+	color: black;
+}
+
+.boutonPopupRetour, .boutonPopupValider, .boutonPopupFermer {
+	display: block;
+	background-color: black;
+	width: 100px;
+	height: 20px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	line-height: 20px;
+	font-size: 1em;
+	font-weight: bold;
+	border: solid;
+	border-width: 1px;
+	border-color: silver;
+}
+
+.boutonRight {
+	text-align:	right;
+}
+
+/********************** Pagination *********************/
+.pageLeft{
+	float:left;
+}
+.pageCenter{
+	float:left;
+	width: 40%;
+	margin-left: 30%;
+	text-align:	center;
+}
+.pageRight{
+	float:right;
+}
+
+/********************** Textes *********************/
+.filtreString{
+	top: 170px;
+	width: auto;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 90%;
+	font-weight: bold;
+	text-align: center;
+	display: block;
+	padding: 0 60px 0 120px;
+	clear: both;
+}
+
+.infopopup, .errorpopup{
+	width: auto;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 90%;
+	font-weight: bold;
+	text-align: center;
+}
+
+.info{
+	position:absolute;
+	top: 150px;
+	width: 99%;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 100%;
+	font-weight: bold;
+	text-align: center;
+	color: green;
+}
+
+.infoVacation{
+	position:absolute;
+	top: 150px;
+	width: 75%;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 100%;
+	font-weight: bold;
+	text-align: center;
+	color: green;
+}
+
+.error{
+	position:absolute;
+	top: 170px;
+	width: 75%;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 100%;
+	font-weight: bold;
+	text-align: center;
+	color: #9D0020;
+}
+
+.datePickerNotValid{
+	font-size: 100%;
+	font-weight: bold;
+	color: #9D0020;
+	background-color: #FFC0CB;
+	border-color: #9D0020;
+}
+
+.outOffBoundDate{
+	font-weight: bold;
+	background-color: #FFC0CB;
+}
+
+.infopopup{
+	color: green;
+}
+
+.errorpopup{
+	color: red;
+}
+
+.starObligatoire{
+	color: red;
+}
+
+.colonneNomComplet{
+	width:330px;
+}
+
+.champObligatoire{
+	color : red;
+	font-style: italic;
+	font-size: 90%;
+}
+
+.champObligatoireDuo{
+	color : green;
+	font-style: italic;
+	font-size: 90%;
+}
+
+.emptyListText{
+	font-style: italic;	
+	text-align: center;
+}
+
+.detailDerogationTitle{
+	text-align : center;
+	font-weight: bold; 
+	font-size: 20px;
+}
+
+.detailDerogationText{
+	text-align : center;
+	font-style: italic;
+}
+
+.detailDerogationTextPartie{
+	font-weight: bold;
+	text-align: center;
+}
+
+.incidentEnCours{
+	font-weight: bold;
+}
+
+/********************** Formulaires *********************/
+.filterBox{
+	width: 100%;
+	padding-left: 50px;
+	text-align: center;
+	display: none;
+}
+select#idFichier {
+	width:1000px;
+}
+
+/********************** Tableaux *********************/
+.tabFilter3Col {
+	width: 35%;
+	margin-left: auto; 
+ 	margin-right: auto; 
+ 	clear: both; 
+}
+
+.tabFilter4Col {
+	width: 1000px;
+	margin-left: auto; 
+ 	margin-right: auto; 
+}
+
+.contentTable{
+	width: auto;
+	margin-left: auto;
+	margin-right: auto;
+	padding: 0 60px 0 120px;
+	display: block;
+}
+
+.contentTableRight{
+	position: relative;
+	float: right;
+	display: inline-block;
+	width: 49%;
+}
+
+.contentTableLeft{
+	position: relative;
+	float: left;
+	display: inline-block;
+	width: 49%;
+}
+
+.contentTableBottom{
+	padding-top: 1em;
+	clear:	both;
+}
+
+.dataTable, .dataTableChecklist, .dataTableAstreintes, .dataTableAstreinteHistorique, .tableSaisieMeteo{
+	width: 100%;
+	border-collapse:collapse;
+	padding:0px;
+	margin-right: auto;
+	margin-left: auto;
+ 	border-style: solid;
+ 	border-color: black;
+ 	border-width: 1px;
+}
+
+.titreTable {
+	text-align: center;
+	margin-top: 2em;
+}
+
+.titreColonne, .titreColonne a {
+	background-color: #677780;
+	color: white;
+	text-align: center;
+	vertical-align : middle;
+	font-weight: bold;
+	height: 2em;
+	border-color: black;
+}
+
+.dataTable>tbody>tr{
+	background-color: #FFF6E8;
+	color: black;
+}
+
+.dataTable>tbody>tr:hover, .dataTableChecklist>tbody>tr:hover, .dataTableAstreintes>tbody>tr:hover, .dataTableAstreinteHistorique>tbody>tr:hover{
+	background-color: #FFD18B;
+	color: black;
+}
+
+.dataTable>tbody>tr:nth-child(odd){
+	background-color: #E3E6E8;
+	color: black;
+}
+
+.dataTable>tbody>tr:nth-child(even){
+	background-color: #C8CED1;
+	color: black;
+}
+
+.dataTable>tbody>tr:nth-child(odd):hover{
+	background-color: #DFBEDF;
+	color: black;
+}
+
+.dataTable>tbody>tr:nth-child(even):hover{
+	background-color: #DFBEDF;
+	color: black;
+}
+
+.oddRow{
+	background-color:#E3E6E8;
+	color: black;
+}
+
+.evenRow{
+	background-color: #C8CED1;
+	color: black;
+}
+
+.oddRow:hover{
+	background-color: #FFD18B;
+	color: black;
+}
+
+.evenRow:hover{
+	background-color: #FFD18B;
+	color: black;
+}
+
+
+.formTable{
+	margin-left: auto;
+ 	margin-right: auto;
+}
+
+table.formTableInfo{
+	margin-left: auto;
+ 	margin-right: auto;
+ 	border-collapse: collapse;
+	border-spacing: 0px;
+	width: 1060px;
+}
+
+table.formTableInfo td{
+ 	border:solid;
+ 	border-width: 1px;
+}
+
+table.formTableInfo .listeDomaine{
+	display:block;
+	background-color:#FFE3B9;
+}
+
+table.formTableInfo .listeDomaine a{
+	color:#000000;
+}
+
+table.formTableInfo .listeDomaine a:hover{
+	color:#9D0020;
+}
+
+td.titreTd{
+	background-color: #948683;
+}
+
+.titreTable{
+	font-weight: bolder;
+	background-color: #948683;
+	color: #FFFFFF;
+}
+
+.formTableInfo .titreTableBis{
+	font-weight: bolder;
+}
+
+.titreDomaine{
+	display: block;
+	background-color: #9D0020;
+	margin-top: 20px;
+	border-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	padding: 10px;
+	color: #FFFFFF;	
+}
+
+.titreDomaine .titre{
+	font-weight: bolder;
+}
+
+.domaineDetail{
+	display: block;
+	border-left-style: solid;
+	border-right-style: solid;
+	border-bottom-style: solid;
+	border-width: 1px;
+	border-color: #000000;
+	padding: 10px;
+}
+	
+	
+.astreintePlanningFutur{
+   background-color: #EFEFFF;
+}
+
+.astreintePlanningFuturOdd{
+   background-color: #DEDFFF;
+}
+
+.astreintePlanningEnCours{
+	background-color: #DEFFDE;
+}
+
+.astreintePlanningEnCoursOdd{
+	background-color: #BDFFBD;
+}
+
+.astreintePlanningPassee{
+	background-color: #FFDAC7;
+}
+
+.astreintePlanningPasseeOdd{
+	background-color: #F0B99E;
+}
+
+.astreintesObligatoires{
+	background-color: #FC0000;
+}
+	
+.ligneImportante{
+	color: #DA4646;
+	font-weight: bold;
+}
+
+.questionTable{
+	width: 80%;
+	height : 300px;
+	margin-left: auto;
+ 	margin-right: auto;
+ 	margin-top: 45px;
+ 	margin-bottom: auto;
+ 	background-color: white;
+}
+
+.detailDerogationTitreTableau{
+	font-weight: bold;
+	font-size: 15px;
+	background-color: #DDDDDD;
+	text-align: center;
+}
+
+.detailDerogationKeyTableau{
+	font-weight: bold;
+	background-color: orange;
+	text-align: center;
+}
+
+.detailDerogationValueTableau{
+	text-align: center;
+}
+
+.detailDerogationTable{
+	 width: 60%;
+	 padding: 0;
+	 border: 1px;
+}
+
+.statServiceTableTitle{
+	border: solid; 
+	border-color: black; 
+	border-width: 1px;
+	padding: 0px;
+	color: white;
+	background-color: #0404B4;
+}
+
+.statServiceTableDate{
+	border: solid; 
+	border-color: black; 
+	border-width: 1px;
+	padding: 0px;
+	color: white;
+	background-color: #0404B4;
+}
+
+.statServiceTableService{
+	border: solid; 
+	border-color: black; 
+	border-width: 1px;
+}
+
+.disabled{
+background:red;
+color:red;
+}
+
+.textCenter{
+	width: auto;
+	margin-left:auto;
+	margin-right: auto;
+	text-align: center;
+}
+
+#url_favoris{
+	width: 100%;
+	margin-right: auto;
+	margin-left: auto;
+	text-align:center;
+}
+
+.tableSaisieMeteo tr:hover{
+	background-color: #948683;
+
+}
+.tableSaisieMeteo tr{
+	background-color: #D3CBC5;
+	color:black;
+	text-align:left;
+	font-weight:normal;
+}
+.heure {
+	float: left;
+    margin-bottom: 15px;
+    margin-right: 20px;
+    text-align: center;
+    width: 80px;
+	font-weight: bold;
+}
+.heure img {
+	margin-top: 5px;
+}
+
+/************* Astreinte Planning ********************/
+
+#exportAstreintePlanning{
+	background:grey;
+	border-radius: 10px;
+}
+
+#tabMailAstrPlanning{
+	text-align:center;
+	padding:10px;
+}
+
+/************* Tableau de Bord ********************/
+#tableauDeBord{
+	text-align:center; 
+	margin:10px; 
+	height:100%; 
+	line-height:100%;
+}
+
+.imgTDB:hover{
+	 /*box-shadow:0px 2px 2px 0px rgba(0, 0, 0, 0.5),0px 2px 2px 0px rgba(255, 255, 255, 0.5) inset;*/
+}
+
+.envirTDB:hover{
+	 color:white;
+}

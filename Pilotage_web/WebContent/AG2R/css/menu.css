@@ -1,0 +1,101 @@
+@CHARSET "ISO-8859-1";
+/*position and hide the menu initially - leave room for menu items to expand...*/
+.menuLink,.menuLink:link,.menuLink:visited,.menuLink:hover,.menuLink:active {
+	text-decoration: none;
+}
+
+#menu {
+	display: none;
+	position: fixed;
+	top: 160px;
+	left: 0;
+	width: 50px;
+	display: none;
+}
+
+#menuDiv {
+	padding-top: 160px;
+	padding-bottom: 20px;
+	width: 50px;
+	float: left;
+}
+
+/*hide the submenus...*/
+#submenus {
+	display: none;
+}
+/*dock styling...*/
+/*...centre the dock...*/
+#menu div.jqDockWrap {
+	margin: 0 auto;
+}
+/*...set the cursor...*/
+#menu div.jqDock {
+	cursor: pointer;
+}
+
+/*label styling...*/
+/*this is actually the sub-menu positioning and styling...*/
+.jqDockLabel {
+	z-index: 999;
+}
+
+.jqDockLabel ul {
+	position: absolute;
+	padding: 0;
+	margin: 0;
+	list-style-type: none;
+	white-space: nowrap;
+	background-color: #2e170f;
+	border: none;
+	text-decoration: none;
+	top: 20px;
+}
+
+.jqDockLabel li {
+	position: relative;
+	border: 0 none;
+	padding: 0;
+	margin: 0;
+}
+
+.titre_menu{
+	background-color:#00b9e7;
+}
+
+.titre_menu a:hover{
+	background-color:#00B9E7;
+}
+
+.jqDockLabel li a {
+	display: block;
+	height: 18px;
+	line-height: 18px;
+	outline: 0 none;
+	position: relative;
+	text-decoration: none;
+	color: white;
+}
+
+.jqDockLabel li:hover{
+	background-color: #00B9E7;
+}
+
+.jqDockLabel li a span {
+	padding: 0 15px 0 5px;
+	display: block;
+}
+
+.jqDockLabel a img {
+	position: absolute;
+	top: 4px;
+	right: 0;
+}
+/*...and sub-sub-menus...*/
+.jqDockLabel ul ul {
+	left: 100%;
+	top: -2px;
+	right: auto;
+	display: none;
+	text-decoration: none;
+}

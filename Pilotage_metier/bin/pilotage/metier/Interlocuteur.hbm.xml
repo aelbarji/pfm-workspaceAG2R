@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Interlocuteur" table="interlocuteur">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="nomService" 	column="Nom_Service" 	type="string" 	not-null="true" />
+		<property name="nomComplet" 	column="Nom_Complet" 	type="string" 	not-null="true" />
+		<property name="balService"	 	column="BAL_Service" 	type="string" 	not-null="true" />
+
+		<many-to-one class="pilotage.metier.Users" 	column="Id_Responsable" 	name="idResponsable"  lazy="false"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,55 @@
+Version V821
+
+Contenue :
+	Statistiques:gestion dynamique du type d'environnement : N°115
+	Droits : N°100
+	Validation jQuery pour incidents avec prise en charge en un seul champs de la date
+	UTF8 N°116
+	Problème datepicker : N°117
+	
+
+Modification de la BASE EPI	
+	Changement de la table incidents et "incidents_colonnes" : 
+		changer le nom des attributs "heure_fin" par "datefin" 
+		changer le nom des attributs "heure_debut" par "datedebut" 
+		changer le nom des attributs "heure_debut_gmt" par "datedebut_gmt" 
+		changer le nom des attributs "heure_fin_gmt" par "datefin_gmt" 
+	Changement classes JAVA/OBJET:
+		changement classes java pour prise en compte de la date sur un seul champs.
+	Changement JSP:	
+		modification du champs de saisie de la date pour la creation et modification.
+		
+	Changement de la table environnement_type:
+		ajout d'un champ principal dans la table environnement_type avec sa gestion.
+		Création d'une nouvelle colonne dans la environnement_type de la BDD pilotage --> principal(NN et valeur par défault = 0)
+			=> lancer le SQL V821_modif_bdd_pilotage.sql
+			
+	Changement classes JAVA/OBJET:	
+  		Modification StatistiqueIncidentAction.java pour les incidents types.
+		Creation d'une classe action pour changer l'état d'un environnement type et le mettre à principal---> ChangePrincipalTypeAction.java
+		Mise à jour de struts.xml
+		Modification de la classe EnvironnementTypeDatabaseService.java
+		Modification de la classe StatistiqueIncidentDatabaseService.java pour faire appel aux environnement principal
+		Création d'une méthode isPrincipal(id) pour vérifier que l'environnement n'est pas principal avant de le suprimmer.
+		Modification de l'action SupprimerEnvironnementTypeAction.action pour empecher de supprimer un environnement principal.
+		Modification de ressources.properties pour les messages erreur et info
+		Modification ModifierEnvironnementTypeAction.action pour rendre impossible le changement de libellé pour un type déjà principal
+		
+	Changement JSP:	
+		Modification de list environnemntType.jsp pour le changement de l'environnement principal ou pas.
+		Modification de la jsp modifyEnvironnmentType.jsp
+			
+	Validation JQuery Engine:
+		Pour les incidents.	
+	
+Modification de la Base PARAMETRE
+	Correction lien vers environnement  
+		=> lancer le SQL V821_modif_bdd_parametre.sql
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Consigne_Documents" table="checklist_consigne_documents">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="document" 			column="document" 			type="string" 	not-null="true" />
+		<many-to-one 	name="idConsigne"	column="id_consigne" 	class="pilotage.metier.Checklist_Consignes" 	lazy="false"/>
+	</class>
+</hibernate-mapping>

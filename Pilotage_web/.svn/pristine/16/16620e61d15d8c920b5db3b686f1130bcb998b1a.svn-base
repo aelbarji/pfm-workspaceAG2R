@@ -1,0 +1,18 @@
+Version V81213
+Contenue :
+	Correction sur les météos, planning, consigne
+	
+Modification de la BASE EPI	
+	Création de la table meteo_service : 
+		lancer le SQL V81213_modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	lancer le SQL V81213_Modif_bdd_param.sql
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

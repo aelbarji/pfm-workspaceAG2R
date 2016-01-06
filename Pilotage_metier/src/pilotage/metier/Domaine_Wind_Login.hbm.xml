@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+ <class lazy="false" name="Domaine_Wind_Login" table="domaine_wind_login">
+  <id column="id" name="id" type="integer">
+   <generator class="native"/>
+  </id>
+  <property column="login" generated="never" lazy="false" length="45"
+   name="login" not-null="true" type="string"/>
+  <property column="password" generated="never" lazy="false" length="45"
+   name="password" not-null="true" type="string"/>
+  <many-to-one class="pilotage.metier.Domaine_Wind" column="domaine"
+   lazy="false" name="domaine"/>
+ </class>
+</hibernate-mapping>

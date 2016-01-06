@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_Envoi" table="meteo_envoi">
+        <id name="id" type="integer" column="id" >
+            <generator class="native" />
+        </id>
+        <property name="date" type="date" column="date" />
+        <property name="horaire" type="time" column="horaire" />
+        <property name="date_envoi" type="date" column="date_envoi" />
+        <property name="heure_envoi" type="time" column="heure_envoi" />
+        <many-to-one name="groupe" class="pilotage.metier.Meteo_GroupeMeteo" lazy="false" column="id_groupeMeteo" />
+    </class>
+</hibernate-mapping>

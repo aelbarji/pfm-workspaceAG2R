@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Visit_Consigne" table="visit_consigne">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="user"
+			column="user"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="date"
+			column="date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pilotage.metier.Historique" table="HISTORIQUE">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="dateAction" type="java.util.Date" not-null="true">
+            <column name="DATEACTION" />
+        </property>
+        <property name="action" type="java.lang.String" not-null="true">
+            <column name="ACTION" />
+        </property>
+        <many-to-one name="utilisateur" class="pilotage.metier.Users" fetch="join" not-null="true">
+            <column name="UTILISATEUR" />
+        </many-to-one>
+        <property name="module" type="java.lang.String" not-null="true">
+            <column name="MODULE" />
+        </property>
+    </class>
+</hibernate-mapping>

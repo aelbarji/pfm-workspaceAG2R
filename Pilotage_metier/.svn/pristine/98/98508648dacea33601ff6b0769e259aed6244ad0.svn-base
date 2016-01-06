@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Planning_Vacation" table="planning_vacation">
+		<id name="id" type="integer" column="id">
+			<generator class="increment"/>
+		</id>
+
+		<property name="heureDebut"	 column="heureDebut"   type="time"	not-null="true" />
+		<property name="heureFin"	 column="heureFin" 	  type="time"   not-null="true" />
+		<property name="codeCouleur" column="codeCouleur" type="string" not-null="true" />
+		<property name="libelle" 	 column="libelle"	  type="string" not-null="true" />
+		<many-to-one class="pilotage.metier.Planning_Cra_Partie_Jour"  name="partiJour" column="partiJour" not-null="true" lazy="false"/>
+		<property name="active" 	column="active" 	type="boolean" 	not-null="true"/>
+	</class>
+</hibernate-mapping>

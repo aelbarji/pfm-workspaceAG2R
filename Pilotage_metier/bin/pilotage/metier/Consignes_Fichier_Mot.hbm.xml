@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes_Fichier_Mot" table="consignes_fichier_mot">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+        <many-to-one class="pilotage.metier.Consignes_Fichier" 	column="id_fichier" 	name="idFichier" 	lazy="false" />
+		<many-to-one class="pilotage.metier.Consignes_Mots" 	column="id_mot"		name="idMot" 	lazy="false" />
+		
+	</class>	
+</hibernate-mapping>

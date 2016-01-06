@@ -1,0 +1,10 @@
+V 8.16
+
+Contenu:
+	Optimisation des météos
+	
+Modification de la base epi:
+	Exécuter le script V81516_modif_bdd_pilotage.sql
+	Exécuter le script V81516_procedure.sql
+	
+Mettre en place l'EAR

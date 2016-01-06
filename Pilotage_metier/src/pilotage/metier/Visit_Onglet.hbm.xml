@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Visit_Onglet" table="visit_onglet">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="dateVisit"
+			column="date_visit"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="dateVisitStamp"
+			column="date_visit_stamp"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="idUser"
+			column="id_user"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="lienVisit"
+			column="lien_visit"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+	</class>	
+</hibernate-mapping>

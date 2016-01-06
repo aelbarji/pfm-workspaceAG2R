@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes_Pilotes_Validation" table="consignes_pilotes_validation">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+        <many-to-one        
+		    class="pilotage.metier.Users" 
+		    column="id_pilote"
+	        name="idPilote" 
+	        lazy="false"
+	    />
+		<many-to-one 
+		    class="pilotage.metier.Consignes" 
+		    column="id_consigne"
+	        name="idConsigne" 
+	        lazy="false"
+	    />
+		<many-to-one 
+		    class="pilotage.metier.Consignes_Validation" 
+		    column="valid"
+	        name="valid" 
+	        lazy="false"
+	    />
+		<property
+			name="question"
+			column="question"
+			type="string"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

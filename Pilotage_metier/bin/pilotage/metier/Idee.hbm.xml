@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Idee" table="idee">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="idee"
+			column="idee"
+			type="string"
+			not-null="true"
+			
+		/>
+		<property
+			name="date"
+			column="date"
+			type="date"
+			not-null="true"
+			
+		/>
+		<property
+			name="etat"
+			column="etat"
+			type="string"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="idUser"
+			column="id_user"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>	
+	</class>	
+</hibernate-mapping>

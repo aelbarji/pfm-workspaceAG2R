@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Derogation_Valideur" table="derogation_valideur">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<many-to-one 	name="valideur"		column="valideur"	lazy="false" 	class="pilotage.metier.Users" />
+	</class>	
+</hibernate-mapping>

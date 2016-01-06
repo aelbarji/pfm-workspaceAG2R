@@ -1,0 +1,73 @@
+body {
+	font-family: "calibri";
+	font-size: 14px;
+	text-align: left;
+	
+}
+table.innerTable {
+	border-width: 1px;
+	border-spacing: 0px;
+	border-style: solid;
+	border-color: black;
+	border-collapse: collapse;
+	width:80%;
+}
+
+table.innerTable td {
+	border-width: 1px;
+	border-spacing: 0px;
+	padding: 0px;
+	padding-left: 1em;
+	border-style: solid;
+	border-color: black;
+	empty-cells: show;
+	border-collapse: collapse;
+	text-align: left;
+	height: 1.3em;
+}
+
+table.innerTable tr:nth-child(odd){
+	background-color: #E3E6E8;
+	color: black;
+}
+
+table.innerTable tr:nth-child(even){
+	background-color: #C8CED1;
+	color: black;
+}
+
+table.innerTable tr:nth-child(odd):hover{
+	background-color: #DFBEDF;
+	color: black;
+}
+
+table.innerTable tr:nth-child(even):hover{
+	background-color: #DFBEDF;
+	color: black;
+}
+
+table.innerTable td.domaineTitle {
+	font-weight: bold;
+	text-align: left;
+	padding-left: 0.2em;
+	background-color: #DDD9D3;
+}
+
+.header{
+	height: 150px;
+}
+
+.logo{
+	text-align: center;
+	width: 80%;
+}
+
+.title{
+	width:80%;
+	color: Black;
+	font-size: 1.28em;
+	font-weight: bold;
+	padding-left:5em;
+	border: none;
+	height: 50px;
+}

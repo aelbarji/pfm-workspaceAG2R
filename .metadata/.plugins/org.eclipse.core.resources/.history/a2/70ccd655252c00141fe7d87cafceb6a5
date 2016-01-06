@@ -1,0 +1,951 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib prefix="s" uri="/struts-tags"%>
+<%@ taglib prefix="sj" uri="/struts-jquery-tags"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html>
+<head>
+<s:include value="/jsp/user_pages/commun/html_head.jsp" />
+
+<link rel="stylesheet" type="text/css"
+	href="js/time/jquery.timeentry.css" />
+<script type="text/javascript" src="js/time/jquery.timeentry.js"></script>
+<script type="text/javascript" src="js/time/jquery.timeentry-fr.js"></script>
+<script type="text/javascript" src="js/time/jquery.mousewheel.min.js"></script>
+<script type="text/javascript">
+			$(function() {
+				$('#heurePonctuelle').timeEntry({show24Hours: true , spinnerImage: ''});
+				$('#heureDebut').timeEntry({show24Hours: true , spinnerImage: ''});
+				$('#heureFin').timeEntry({show24Hours: true , spinnerImage: ''});
+				$('#frequence').timeEntry({show24Hours: true , spinnerImage: ''});
+			});
+		
+	        $.subscribe('dateExceptionnelleChange',function(event,data) {
+	        	ajoutDateExceptionnelle();
+	    	})
+
+			function onLoad(){
+				changeTypeFrequenceDate('<s:property value="%{typeFrequenceDate}" />');
+				changeTypeFrequenceHeure('<s:property value="%{typeFrequenceHeure}" />');
+
+			}
+			
+			//Changement de type de fréquence de date
+			function changeTypeFrequenceDate(frequence){
+				for(var i = 1; i < 6; ++i){
+					if(frequence == i){
+						$("#frequenceDate" + i).show();
+					}
+					else{
+						$("#frequenceDate" + i).hide();
+					}
+				}
+			}
+
+			//Changement de type de fréquence d'horaire
+			function changeTypeFrequenceHeure(frequence){
+				if(frequence == 1){
+					$("#frequenceHeure1").show();
+					$("#frequenceHeure2").hide();
+				}
+				else{
+					$("#frequenceHeure1").hide();
+					$("#frequenceHeure2").show();
+				}
+			}
+
+			//lorsqu'on sélectionne une entrée dans les jours fériés, on voit si on check la case 'tous'
+			function checkAllFerie(idList, idCheckbox){
+				var select = document.getElementById(idList);
+				var nb = select.options.length;
+				for(var i = 0; i < nb; i++){
+					if(!select.options[i].selected){
+						document.getElementById(idCheckbox).checked = false;
+						return;
+					}
+				}
+				document.getElementById(idCheckbox).checked = true;
+			}
+
+			//cochage/décochage de la checkbox des veilles des jours fériés
+			function changeVeille(bool){
+				var select = document.getElementById('listVeilleFerie');
+				var nb = select.options.length;
+				for(var i = 0; i < nb; i++){
+					select.options[i].selected = bool;
+				}
+			}
+
+			//cochage/décochage de la checkbox des jours fériés
+			function changeJour(bool){
+				var select = document.getElementById('listJourFerie');
+				var nb = select.options.length;
+				for(var i = 0; i < nb; i++){
+					select.options[i].selected = bool;
+				}
+			}
+
+			//cochage/décochage de la checkbox des lendemains des jours fériés
+			function changeLendemain(bool){
+				var select = document.getElementById('listLendemainFerie');
+				var nb = select.options.length;
+				for(var i = 0; i < nb; i++){
+					select.options[i].selected = bool;
+				}
+			}
+
+			//ajout d'un jour exceptionnel
+			function ajoutDateExceptionnelle(){
+				var dateSaisie = $("#dateExceptionnelle").val();
+
+				if(dateSaisie == ""){
+					alert('Veuillez entrer une date');
+					return;
+				}
+				
+				var i = 0;
+				while(document.getElementById("jourExceptionnel" + i)){
+					if(document.getElementById("jourExceptionnel" + i).innerHTML == dateSaisie){
+						alert("La date saisie existe déjà");
+						return
+					}
+					i++;
+				}
+
+				var tableau = document.getElementById("tabJoursExceptionnelles");
+				var tr = tableau.insertRow(tableau.rows.length);
+
+				var td1 = tr.insertCell(0);
+				td1.setAttribute("align", "center");
+				var td2 = tr.insertCell(1);
+				td2.setAttribute("id",'jourExceptionnel' + i);
+				td2.setAttribute("align", "center");
+				
+				var elementSuppression = '<a href="#" onclick="javascript:supprimerDateExceptionnelle(' + i + ');">';
+				elementSuppression += '<img align="top" border="0" alt="Supprimer" title="Supprimer" src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />';
+				elementSuppression += '</a>';
+				td1.innerHTML = elementSuppression;
+				td1.innerHTML += '<input type="hidden" id="dateExceptionnelle' + i + '" name="dateExceptionnelle' + i + '" value="' + dateSaisie + '"/>';
+
+				td2.innerHTML = dateSaisie;
+
+				//$("#dateExceptionnelle").val("");
+			}
+
+			//suppression d'un jour exceptionnel
+			function supprimerDateExceptionnelle(ligne){
+				var i = ligne + 1;
+				while(document.getElementById("jourExceptionnel" + i)){
+					
+					document.getElementById("dateExceptionnelle" + (i - 1)).value = document.getElementById("dateExceptionnelle" + i).value;
+					document.getElementById("jourExceptionnel" + (i - 1)).innerHTML = document.getElementById("jourExceptionnel" + i).innerHTML;
+					i++;
+				}
+
+				document.getElementById("tabJoursExceptionnelles").deleteRow(-1);
+			}
+
+			//ajout d'une heure ponctuelle
+			function ajoutHeurePonctuelle(){
+				var timeSaisie = document.getElementById("heurePonctuelle").value;
+				if(timeSaisie == ""){
+					alert("Veuillez entrer une heure.");
+					return;
+				}
+
+				var i = 0;
+				while(document.getElementById("heureExceptionnel" + i)){
+					if(document.getElementById("heureExceptionnel" + i).innerHTML == timeSaisie){
+						alert("L'heure saisie existe déjà");
+						return
+					}
+					i++;
+				}
+
+				var tableau = document.getElementById("tabHeuresPonctuelles");
+				var tr = tableau.insertRow(tableau.rows.length);
+
+				var td1 = tr.insertCell(0);
+				td1.setAttribute("id",'supprHeureExceptionnel' + i);
+				td1.setAttribute("align", "center");
+				var td2 = tr.insertCell(1);
+				td2.setAttribute("id",'heureExceptionnel' + i);
+				td2.setAttribute("align", "center");
+				
+				var elementSuppression = '<a href="#" onclick="javascript:supprimerHeurePonctuelle(' + i + ');">';
+				elementSuppression += '<img align="top" border="0" alt="Supprimer" title="Supprimer" src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />';
+				elementSuppression += '</a>';
+				td1.innerHTML = elementSuppression;
+				td1.innerHTML += '<input type="hidden" id="heurePonctuelle' + i + '" name="heurePonctuelle' + i + '" value="' + timeSaisie + '"/>';
+
+				td2.innerHTML = timeSaisie;
+
+				document.getElementById("heurePonctuelle").value = "";
+			}
+
+			//suppression d'une heure ponctuelle
+			function supprimerHeurePonctuelle(ligne){
+				var i = ligne + 1;
+				while(document.getElementById("heureExceptionnel" + i)){
+					
+					document.getElementById("heurePonctuelle" + (i - 1)).value = document.getElementById("heurePonctuelle" + i).value;
+					document.getElementById("heureExceptionnel" + (i - 1)).innerHTML = document.getElementById("heureExceptionnel" + i).innerHTML;
+					i++;
+				}
+
+				document.getElementById("tabHeuresPonctuelles").deleteRow(-1);
+			}
+			
+			//Suppression de document
+			function supprimerDocument(table , ligne ){ 
+				var i = ligne + 1;
+				var listConsigne = new Array();
+				var tableau = document.getElementById("documentTableId"+table);
+				while (tableau.rows[i+1]){ 
+						tableau.rows[i].cells[1].children[0].value = tableau.rows[i+1].cells[1].children[0].value;
+						tableau.rows[i].cells[1].children[1].innerHTML = tableau.rows[i+1].cells[1].children[1].innerHTML;
+						i++;
+					}
+				tableau.deleteRow(-1);
+				}
+			
+			//ajout d'une ligne dans le tableau des sous taches
+			function ajouter(){
+				var i = 0;
+				while(document.getElementById("nomSousTache" + i)){
+					i++;
+				}
+				document.getElementById("sousTache").value = 1;
+				var tableau = document.getElementById("sousTacheTable");
+				var tr = tableau.insertRow(tableau.rows.length);
+
+				var td1 = tr.insertCell(0);
+				td1.setAttribute("align", "center");
+				td1.innerHTML = "<input type='text' id='nomSousTache" + i + "' name='nomSousTache" + i + "' maxlength='50' style='width:90%'/>";
+
+				var td2 = tr.insertCell(1);
+				var elementDocumentation = "<table id='documentTableId" + i + "'>";
+				elementDocumentation += "<tr>";
+				elementDocumentation += "<td id='showDocumentId"+i+"' align='center'>";
+				elementDocumentation += '<div align="center" style="width: 100%">';
+				elementDocumentation += '<a href="#" onclick="javascript:showDocumentationTree('+i+');">';
+				elementDocumentation += '<img border="0" src="<s:property value="#session.ENSEIGNE" />/img/ajouter-16.png" />&nbsp;ajouter Document';
+				elementDocumentation += '</a>';
+				elementDocumentation += "</div>";
+				elementDocumentation += "</td>";
+				elementDocumentation += "</tr>";
+				elementDocumentation += "</table>";
+				td2.innerHTML = elementDocumentation;
+				
+				var td3 = tr.insertCell(2);
+				td3.setAttribute("align", "center");
+				td3.innerHTML = "<input type='text' name='decalageSousTacheHeure" + i + "' id='decalageSousTacheHeure" + i + "' size='4' maxlength='4'/>:<input type='text' name='decalageSousTacheMinute" + i + "' id='decalageSousTacheMinute" + i + "' size='2' maxlength='2'/>";
+
+				var td4 = tr.insertCell(3);
+				td4.setAttribute("align", "center");
+				td4.innerHTML = "<textarea id='consigneSousTache" + i + "' name='consigneSousTache" + i + "' style='width:100%' rows='3'></textarea>";
+
+				var td5 = tr.insertCell(4);
+				td5.setAttribute("align", "center");
+				var elementSuppression = '<a href="#" onclick="javascript:supprimerSousTache(' + i + ');">';
+				elementSuppression += '<img align="top" border="0" alt="Supprimer" title="Supprimer" src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />';
+				elementSuppression += '</a>';
+				td5.innerHTML = elementSuppression;
+				
+				$('#textNoSousTache').hide();
+			}
+			
+			//suppression d'une sous tache
+			function supprimerSousTache(ligne){
+				
+				var i = ligne + 1;
+				
+				while(document.getElementById("nomSousTache" + i)){
+					
+					document.getElementById("nomSousTache" + (i - 1)).value = document.getElementById("nomSousTache" + i).value;
+					document.getElementById("decalageSousTacheHeure" + (i - 1)).value = document.getElementById("decalageSousTacheHeure" + i).value;
+					document.getElementById("decalageSousTacheMinute" + (i - 1)).value = document.getElementById("decalageSousTacheMinute" + i).value;
+					document.getElementById("consigneSousTache" + (i - 1)).value = document.getElementById("consigneSousTache" + i).value;
+					
+					var tableau1 = document.getElementById("documentTableId" + (i-1));
+					var tableau2 = document.getElementById("documentTableId" + i);
+					var rowCount = $("#documentTableId"+ (i-1)+" tr").length;
+					for (var j = 1; j < rowCount; j++) {
+						tableau1.deleteRow(-1);
+					}
+					var listDocument = new Array();
+					var j=0;
+					while (tableau2.rows[j+1]){ 
+						var doc = tableau2.rows[j+1].cells[1].children[1].innerHTML;
+						listDocument[j] = doc;
+						j++;
+					}
+					for(var j = 0; j < listDocument.length; j++){
+						var row = tableau1.insertRow(j+1);
+						var td1 = row.insertCell(0);
+						td1.setAttribute("id",'supprDocument' + (i-1) + j);
+						td1.setAttribute("align", "center");
+						var td2 = row.insertCell(1);
+						var elementDocument = "<textarea readonly='true' id='documentSousTache" + (i-1) + j + "' name='documentSousTache" + (i-1) + j + "' style='width:90%;display:none;' rows='3'></textarea>";
+						elementDocument += "<div id='documentSousTacheDisplay" + (i-1) + j + "' align='left'>";
+						td2.innerHTML = elementDocument;
+						document.getElementById("documentSousTache" + (i-1) + j).value = listDocument[j];
+						document.getElementById("documentSousTacheDisplay" + (i-1) + j).innerHTML = listDocument[j].replace(/;/g,"<br/>");
+						
+						var elementSuppression = '<a href="#" onclick="javascript:supprimerDocument(' + (i-1) + ',' + j + ');">';
+						elementSuppression += '<img align="top" border="0" alt="Supprimer" title="Supprimer" src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />';
+						elementSuppression += '</a>';
+						td1.innerHTML = elementSuppression;
+						
+						}
+					
+					i++;
+				}
+				
+				document.getElementById("sousTacheTable").deleteRow(-1);
+				if(! document.getElementById("nomSousTache0")){
+					$('#textNoSousTache').show();
+					document.getElementById("sousTache").value = 0;
+				}
+			}
+
+			//bouton retour
+			function retour(){
+				submitData('showChecklistBaseAction.action');
+			}
+
+			//bouton valider
+			function valider(){
+				if(document.getElementById("nom").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""){
+					alert("Veuillez entrer un nom");
+					document.getElementById("nom").focus();
+					return;
+				}
+				else if(document.getElementById("environnement").value == -1){
+					alert("Veuillez sélectionner un environnement");
+					document.getElementById("environnement").focus();
+					return;
+				}
+				else if($("#dateDebut").val() == ""){
+					alert("Veuillez entrer une date de début");
+					document.getElementById("dateDebut").focus();
+					return;
+				}
+				else if(document.getElementById("etat").value == -1){
+					alert("Veuillez sélectionner un état");
+					document.getElementById("etat").focus();
+					return;
+				}
+				else if(document.getElementById("criticite").value == -1){
+					alert("Veuillez sélectionner une criticité");
+					document.getElementById("criticite").focus();
+					return;
+				}
+				
+				//fréquence hebdomadaire
+				if(document.getElementById('typeFrequenceDate').value == 1){
+					if(!document.getElementById("f1_lundi").checked
+							&& !document.getElementById("f1_mardi").checked
+							&& !document.getElementById("f1_mercredi").checked
+							&& !document.getElementById("f1_jeudi").checked
+							&& !document.getElementById("f1_vendredi").checked
+							&& !document.getElementById("f1_samedi").checked
+							&& !document.getElementById("f1_dimanche").checked){
+						alert("Pour une fréquence hebdomadaire, veuillez sélectionner au moins un jour");
+						return;
+					}
+				}
+				//fréquence mensuelle
+				else if(document.getElementById('typeFrequenceDate').value == 2){
+					if(!document.getElementById("f2_1er").checked
+							&& !document.getElementById("f2_2eme").checked
+							&& !document.getElementById("f2_3eme").checked
+							&& !document.getElementById("f2_4eme").checked
+							&& !document.getElementById("f2_der").checked){
+						alert("Pour une fréquence mensuelle, veuillez sélectionner au moins une des semaines du mois");
+						return;
+					}
+					if(!document.getElementById("f2_lundi").checked
+							&& !document.getElementById("f2_mardi").checked
+							&& !document.getElementById("f2_mercredi").checked
+							&& !document.getElementById("f2_jeudi").checked
+							&& !document.getElementById("f2_vendredi").checked
+							&& !document.getElementById("f2_samedi").checked
+							&& !document.getElementById("f2_dimanche").checked){
+						alert("Pour une fréquence mensuelle, veuillez sélectionner au moins un jour");
+						return;
+					}
+				}
+				//fréquence semaines pair/impair
+				else if(document.getElementById('typeFrequenceDate').value == 3){
+					if(!document.getElementById("f3_pair").checked
+							&& !document.getElementById("f3_impair").checked){
+						alert("Pour une fréquence semaine pair/impair, veuillez sélectionner une parité");
+						return;
+					}
+					if(!document.getElementById("f3_lundi").checked
+							&& !document.getElementById("f3_mardi").checked
+							&& !document.getElementById("f3_mercredi").checked
+							&& !document.getElementById("f3_jeudi").checked
+							&& !document.getElementById("f3_vendredi").checked
+							&& !document.getElementById("f3_samedi").checked
+							&& !document.getElementById("f3_dimanche").checked){
+						alert("Pour une fréquence semaine pair/impair, veuillez sélectionner au moins un jour");
+						return;
+					}
+				}
+				//fréquence jour férié
+				else if(document.getElementById('typeFrequenceDate').value == 4){
+					var veilleSelected = false;
+					var jourSelected = false;
+					var lendemainSelected = false;
+					
+					var select;
+					var nb;
+					
+					select = document.getElementById('listVeilleFerie');
+					nb = select.options.length;
+					for(var i = 0; i < nb; i++){
+						if(select.options[i].selected)
+							veilleSelected = true;
+					}
+
+					select = document.getElementById('listJourFerie');
+					nb = select.options.length;
+					for(var i = 0; i < nb; i++){
+						if(select.options[i].selected)
+							jourSelected = true;
+					}
+
+					select = document.getElementById('listLendemainFerie');
+					nb = select.options.length;
+					for(var i = 0; i < nb; i++){
+						if(select.options[i].selected)
+							lendemainSelected = true;
+					}
+
+					if(!veilleSelected && !jourSelected && !lendemainSelected){
+						alert("Pour une fréquence en jour férié, veuillez sélectionner au moins un jour");
+						return;
+					}
+				}
+				//fréquence jour exceptionnel
+				else if(document.getElementById('typeFrequenceDate').value == 5){
+					if(! document.getElementById("dateExceptionnelle0")){
+						alert("Pour une fréquence exceptionnelle, veuillez ajouter au moins un jour");
+						return;
+					}
+				}
+				
+				//fréquence heure exceptionnelle
+				if(document.getElementById('typeFrequenceHeure').value == 1){
+					if(! document.getElementById("heurePonctuelle0")){
+						alert("Pour un horaire ponctuel, veuillez ajouter au moins une heure");
+						return;
+					}
+				}
+				//fréquence heure régulier
+				else if(document.getElementById('typeFrequenceHeure').value == 2){
+					if(document.getElementById("heureDebut").value == ""){
+						alert("Pour un horaire régulier, veuillez entrer l'heure de début");
+						document.getElementById("heureDebut").focus();
+						return;
+					}
+					else if(document.getElementById("heureFin").value == ""){
+						alert("Pour un horaire régulier, veuillez entrer l'heure de fin");
+						document.getElementById("heureFin").focus();
+						return;
+					}
+					else if(document.getElementById("frequence").value == ""){
+						alert("Pour un horaire régulier, veuillez entrer l'intervalle");
+						document.getElementById("frequence").focus();
+						return;
+					}
+					else{
+						var deb = new Date("01/01/1970 " + document.getElementById("heureDebut").value);
+						var fin = new Date("01/01/1970 " + document.getElementById("heureFin").value);
+						if(deb > fin){
+							alert("Veuillez entrer une heure de début antérieure à l'heure de fin");
+							return;
+						}
+					}
+				}
+
+				// sous tache obligatoire
+				if(document.getElementById("sousTache").value == "0"){
+					alert("Veuillez ajouter une sous tâche");
+					return;
+				}
+				
+				//sous taches
+				var i = 0;
+				while(document.getElementById("nomSousTache" + i)){
+					var heureDecalage = document.getElementById("decalageSousTacheHeure" + i).value.replace(/^\s+/g,'').replace(/\s+$/g,'');
+					var minuteDecalage = document.getElementById("decalageSousTacheMinute" + i).value.replace(/^\s+/g,'').replace(/\s+$/g,'');
+					
+					if(document.getElementById("nomSousTache" + i).value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""){
+						alert("Au moins une des sous taches ajoutées n'a pas de nom");
+						document.getElementById("nomSousTache" + i).focus();
+						return;
+					}
+					else if(document.getElementById("consigneSousTache" + i).value == ""){
+						alert("Au moins une des sous taches ajoutées n'a pas de consigne");
+						document.getElementById("consigneSousTache" + i).focus();
+						return;
+					}
+					else if((heureDecalage != "" && !checkNombreEntier(heureDecalage)) || (minuteDecalage != "" && !checkNombreEntier(minuteDecalage))){
+						alert("Le décalage d'une des sous tache n'est pas correct");
+						document.getElementById("decalageSousTacheHeure" + i).focus();
+						return;
+					}
+
+					if(heureDecalage == ""){
+						document.getElementById("decalageSousTacheHeure" + i).value = "00";
+					}
+					else if(heureDecalage.length == 1){
+						document.getElementById("decalageSousTacheHeure" + i).value = "0" + heureDecalage;
+					}
+					if(minuteDecalage == ""){
+						document.getElementById("decalageSousTacheMinute" + i).value = "00";
+					}
+					else if(minuteDecalage.length == 1){
+						document.getElementById("decalageSousTacheMinute" + i).value = "0" + minuteDecalage;
+					}
+					i++;
+				}
+				
+				submitData('createChecklistBaseAction.action');
+			}
+			function showDocumentationTree(i){
+				var url = "showDocumentationTree.action";
+				var iWidth = 400; 
+			    var iHeight = 400;
+			    var iTop = Math.round((screen.availHeight-iHeight)/2);
+			    var iLeft = Math.round((screen.availWidth-iWidth)/2);
+			  //  var returnValue = window.showModalDialog(url, document.getElementById("documentationSousTache" + i).value, "dialogHeight:" + iHeight + "px; dialogWidth:"+iWidth+"px; toolbar:no; menubar:no; scrollbars:no; resizable:no; location:no; status:no; dialogLeft:" + iLeft + "px; dialogTop:" + iTop +"px;");    
+			    var returnValue = window.showModalDialog(url, "dialogHeight:" + iHeight + "px; dialogWidth:"+iWidth+"px; toolbar:no; menubar:no; scrollbars:no; resizable:no; location:no; status:no; dialogLeft:" + iLeft + "px; dialogTop:" + iTop +"px;");    
+		
+			    if (typeof returnValue=="undefined"){
+					   return false;
+				   }
+				   
+				var tableau = document.getElementById("documentTableId" + i);
+				
+				for (var t = 1, row; row = tableau.rows[t]; t++) {
+					var doc = tableau.rows[t].cells[1].children[1].innerHTML;
+					if(returnValue.trim() == doc.trim()){
+						alert("Ce document est déjà ajouté!");
+						return false;
+						}
+				}
+				var tr = tableau.insertRow(tableau.rows.length);
+				var j=0;
+				for (var t = 2, row; row = tableau.rows[t]; t++) {
+					j++;
+				}
+				
+				var td1 = tr.insertCell(0);
+				td1.setAttribute("id",'supprDocument' + i + j);
+				td1.setAttribute("align", "center");
+				var td2 = tr.insertCell(1);
+				var elementDocument = "<textarea readonly='true' id='documentSousTache" + i + j + "' name='documentSousTache" + i + j + "' style='width:90%;display:none;' rows='3'></textarea>";
+				elementDocument += "<div id='documentSousTacheDisplay" + i + j + "' align='left'>";
+				td2.innerHTML = elementDocument;
+				document.getElementById("documentSousTache" + i + j).value = returnValue;
+				document.getElementById("documentSousTacheDisplay" + i + j).innerHTML = returnValue.replace(/;/g,"<br/>");
+				
+				var elementSuppression = '<a href="#" onclick="javascript:supprimerDocument(' + i + ',' + j + ');">';
+				elementSuppression += '<img align="top" border="0" alt="Supprimer" title="Supprimer" src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />';
+				elementSuppression += '</a>';
+				td1.innerHTML = elementSuppression;
+			}
+		</script>
+</head>
+<body onload="onLoad();">
+	<s:include value="/jsp/user_pages/commun/html_body_top.jsp">
+		<s:param name="titre">
+			<s:property value="#session.TITLE_IN_SESSION.get('CKL_ADD')" />
+		</s:param>
+	</s:include>
+
+	<div class="contentTable">
+		<s:form theme="simple" id="mainForm">
+			<s:token></s:token>
+			<s:hidden name="sort" id="sort" />
+			<s:hidden name="sens" id="sens" />
+			<s:hidden name="page" id="page" />
+			<s:hidden name="nrPerPage" id="nrPerPage" />
+			<s:hidden name="nrPages" id="nrPages" />
+
+			<s:hidden name="filtreNom" id="filtreNom" />
+			<s:hidden name="filtreEnvironnement" id="filtreEnvironnement" />
+			<s:hidden name="filtreDateDebut" id="filtreDateDebut" />
+			<s:hidden name="filtreEtat" id="filtreEtat" />
+			<s:hidden name="filtreCriticite" id="filtreCriticite" />
+
+			<table class="dataTable" rules="rows">
+				<col width="35%" />
+				<col width="20%" />
+				<col width="20%" />
+				<col width="15%" />
+				<col width="20%" />
+				<thead>
+					<tr>
+						<th class="titreColonne">Nom</th>
+						<th class="titreColonne">Environnement</th>
+						<th class="titreColonne">Date de d&eacute;but</th>
+						<th class="titreColonne">Etat</th>
+						<th class="titreColonne">Criticit&eacute;</th>
+					</tr>
+				</thead>
+				<tbody>
+					<tr>
+						<td align="center"><s:textfield name="nom" id="nom" size="60" />
+						</td>
+						<td align="center"><s:select list="%{listEnvironnement}"
+								listKey="id" listValue="environnement" name="environnement"
+								id="environnement" headerKey="-1" headerValue="" />
+						</td>
+						<td align="center" id="datetimepicker1"
+							onkeydown="javascript:disableControls('dateDebut');"
+							onmousedown="javascript:disableControls('dateDebut')"><sj:datepicker
+								name="dateDebut" id="dateDebut" displayFormat="dd/mm/yy"
+								showOn="focus">
+							</sj:datepicker></td>
+						<td align="center"><s:select list="%{listEtat}" listKey="id"
+								listValue="etat" name="etat" id="etat" headerKey="-1"
+								headerValue="" />
+						</td>
+						<td align="center"><s:select list="%{listCriticite}"
+								listKey="id" listValue="libelle" name="criticite" id="criticite"
+								headerKey="-1" headerValue="" />
+						</td>
+					</tr>
+				</tbody>
+			</table>
+
+			<br />
+			<br />
+
+			<div class="contentTableLeft">
+				<table class="dataTable" rules="rows">
+					<thead>
+						<tr>
+							<th class="titreColonne">Dates</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td align="center"><s:select
+									list="#{'1':'Fréquence hebdomadaire','2':'Fréquence mensuelle','3':'Semaine Pair/Impair','4':'Jour férié','5':'Jour exceptionnel'}"
+									name="typeFrequenceDate" id="typeFrequenceDate"
+									onchange="changeTypeFrequenceDate(this.value)" /></td>
+						</tr>
+						<tr id="frequenceDate1">
+							<td align="center">
+								<table width="90%">
+									<tr>
+										<td align="center">Lun<br /> <s:checkbox name="f1_lundi"
+												id="f1_lundi" /></td>
+										<td align="center">Mar<br /> <s:checkbox name="f1_mardi"
+												id="f1_mardi" /></td>
+										<td align="center">Mer<br /> <s:checkbox
+												name="f1_mercredi" id="f1_mercredi" /></td>
+										<td align="center">Jeu<br /> <s:checkbox name="f1_jeudi"
+												id="f1_jeudi" /></td>
+										<td align="center">Ven<br /> <s:checkbox
+												name="f1_vendredi" id="f1_vendredi" /></td>
+										<td align="center">Sam<br /> <s:checkbox name="f1_samedi"
+												id="f1_samedi" /></td>
+										<td align="center">Dim<br /> <s:checkbox
+												name="f1_dimanche" id="f1_dimanche" /></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="7">
+											<hr /> Jours fériés inclus? <s:checkbox
+												name="f1_notFerie" /></td>
+									</tr>
+								</table></td>
+						</tr>
+						<tr id="frequenceDate2">
+							<td align="center">
+								<table width="90%">
+									<tr>
+										<td align="center" colspan="7">
+											<table width="100%">
+												<tr>
+													<td align="center">1<sup>er</sup><br /> <s:checkbox
+															name="f2_1er" id="f2_1er" /></td>
+													<td align="center">2<sup>&egrave;me</sup><br /> <s:checkbox
+															name="f2_2eme" id="f2_2eme" /></td>
+													<td align="center">3<sup>&egrave;me</sup><br /> <s:checkbox
+															name="f2_3eme" id="f2_3eme" /></td>
+													<td align="center">4<sup>&egrave;me</sup><br /> <s:checkbox
+															name="f2_4eme" id="f2_4eme" /></td>
+													<td align="center">Der<br /> <s:checkbox name="f2_der"
+															id="f2_der" /></td>
+												</tr>
+											</table>
+											<hr /></td>
+									</tr>
+									<tr>
+										<td align="center">Lun<br /> <s:checkbox name="f2_lundi"
+												id="f2_lundi" /></td>
+										<td align="center">Mar<br /> <s:checkbox name="f2_mardi"
+												id="f2_mardi" /></td>
+										<td align="center">Mer<br /> <s:checkbox
+												name="f2_mercredi" id="f2_mercredi" /></td>
+										<td align="center">Jeu<br /> <s:checkbox name="f2_jeudi"
+												id="f2_jeudi" /></td>
+										<td align="center">Ven<br /> <s:checkbox
+												name="f2_vendredi" id="f2_vendredi" /></td>
+										<td align="center">Sam<br /> <s:checkbox name="f2_samedi"
+												id="f2_samedi" /></td>
+										<td align="center">Dim<br /> <s:checkbox
+												name="f2_dimanche" id="f2_dimanche" /></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="7">
+											<hr /> Sauf les jours fériés ? <s:checkbox
+												name="f2_notFerie" /></td>
+									</tr>
+								</table></td>
+						</tr>
+						<tr id="frequenceDate3">
+							<td align="center">
+								<table width="90%">
+									<tr>
+										<td align="center" colspan="7">
+											<table width="100%">
+												<col width="50%" />
+												<col width="50%" />
+												<tr>
+													<td align="center">Pair<br /> <s:checkbox
+															name="f3_pair" id="f3_pair" /></td>
+													<td align="center">Impair<br /> <s:checkbox
+															name="f3_impair" id="f3_impair" /></td>
+												</tr>
+											</table>
+											<hr /></td>
+									</tr>
+									<tr>
+										<td align="center">Lun<br /> <s:checkbox name="f3_lundi"
+												id="f3_lundi" /></td>
+										<td align="center">Mar<br /> <s:checkbox name="f3_mardi"
+												id="f3_mardi" /></td>
+										<td align="center">Mer<br /> <s:checkbox
+												name="f3_mercredi" id="f3_mercredi" /></td>
+										<td align="center">Jeu<br /> <s:checkbox name="f3_jeudi"
+												id="f3_jeudi" /></td>
+										<td align="center">Ven<br /> <s:checkbox
+												name="f3_vendredi" id="f3_vendredi" /></td>
+										<td align="center">Sam<br /> <s:checkbox name="f3_samedi"
+												id="f3_samedi" /></td>
+										<td align="center">Dim<br /> <s:checkbox
+												name="f3_dimanche" id="f3_dimanche" /></td>
+									</tr>
+									<tr>
+										<td align="center" colspan="7">
+											<hr /> Sauf les jours fériés ? <s:checkbox
+												name="f3_notFerie" /></td>
+									</tr>
+								</table></td>
+						</tr>
+						<tr id="frequenceDate4">
+							<td align="center">
+								<table width="90%">
+									<col width="33%" />
+									<col width="33%" />
+									<col width="33%" />
+									<tr>
+										<td align="left">La veille</td>
+										<td align="left">Le jour</td>
+										<td align="left">Le lendemain</td>
+									</tr>
+									<tr>
+										<td align="center"><s:select name="veilleFerie"
+												id="listVeilleFerie" size="6" list="listFerie" listKey="id"
+												listValue="nom" cssStyle="width:100%;" theme="simple"
+												multiple="true"
+												onclick="javascript:checkAllFerie('listVeilleFerie', 'checkAllVeilles')">
+											</s:select></td>
+										<td align="center"><s:select name="jourFerie"
+												id="listJourFerie" size="6" list="listFerie" listKey="id"
+												listValue="nom" cssStyle="width:100%;" theme="simple"
+												multiple="true"
+												onclick="javascript:checkAllFerie('listJourFerie', 'checkAllJours')">
+											</s:select></td>
+										<td align="center"><s:select name="lendemainFerie"
+												id="listLendemainFerie" size="6" list="listFerie"
+												listKey="id" listValue="nom" cssStyle="width:100%;"
+												theme="simple" multiple="true"
+												onclick="javascript:checkAllFerie('listLendemainFerie', 'checkAllLendemains')">
+											</s:select></td>
+									</tr>
+									<tr>
+										<td align="left"><s:checkbox name="checkAllVeilles"
+												id="checkAllVeilles" onclick="changeVeille(this.checked)" />Toutes
+											les veilles</td>
+										<td align="left"><s:checkbox name="checkAllJours"
+												id="checkAllJours" onclick="changeJour(this.checked)" />Tous
+											les fériés</td>
+										<td align="left"><s:checkbox name="checkAllLendemains"
+												id="checkAllLendemains"
+												onclick="changeLendemain(this.checked)" />Tous les
+											lendemains</td>
+									</tr>
+								</table></td>
+						</tr>
+						<tr id="frequenceDate5">
+							<td align="center">
+								<table width="90%">
+									<tr>
+										<td align="center">
+											<table width="100%" id="tabJoursExceptionnelles">
+												<col width="20px" />
+												<col width="" />
+
+												<s:iterator value="listJoursExceptionnelsString"
+													status="stat">
+													<tr>
+														<td align="center"><a href="#"
+															onclick="javascript:supprimerDateExceptionnelle(<s:property value="#stat.index" />);">
+																<img align="top" border="0" alt="Supprimer"
+																title="Supprimer"
+																src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />
+														</a> <input type="hidden"
+															id="dateExceptionnelle<s:property value="#stat.index" />"
+															name="dateExceptionnelle<s:property value="#stat.index" />"
+															value="<s:property />" /></td>
+														<td align="center"
+															id="jourExceptionnel<s:property value="#stat.index" />">
+															<s:property /></td>
+													</tr>
+												</s:iterator>
+											</table></td>
+									</tr>
+									<tr>
+										<td align="center"
+											onkeydown="javascript:disableControls('dateExceptionnelle');"
+											onmousedown="javascript:disableControls('dateExceptionnelle')">
+											<sj:datepicker name="dateExceptionnelle"
+												id="dateExceptionnelle" displayFormat="dd/mm/yy"
+												label="Choisir une date"
+												onChangeTopics="dateExceptionnelleChange">
+											</sj:datepicker></td>
+									</tr>
+								</table></td>
+						</tr>
+					</tbody>
+				</table>
+			</div>
+
+			<div class="contentTableRight">
+				<table class="dataTable" rules="rows">
+					<tr>
+						<td class="titreColonne">Horaires</td>
+					</tr>
+					<tr>
+						<td align="center"><s:select
+								list="#{'1':'Horaire','2':'Fréquence horaire'}"
+								name="typeFrequenceHeure" id="typeFrequenceHeure"
+								onchange="changeTypeFrequenceHeure(this.value)" /></td>
+					</tr>
+					<tr id="frequenceHeure1">
+						<td align="center">
+							<table width="90%">
+								<tr>
+									<td align="center"><input type="text"
+										name="heurePonctuelle" id="heurePonctuelle" size="6" /> <s:a
+											href="#" onclick="ajoutHeurePonctuelle();">
+											<img align="top" alt="valider" title="valider" border="0"
+												src="<s:property value="#session.ENSEIGNE" />/img/valider-16.png" />
+										</s:a></td>
+								</tr>
+								<tr>
+									<td align="center">
+										<table width="100%" id="tabHeuresPonctuelles">
+											<col width="20px" />
+											<col width="" />
+
+											<s:iterator value="listHeuresPonctuellesString" status="stat">
+												<tr>
+													<td align="center"><a href="#"
+														onclick="javascript:supprimerHeurePonctuelle(<s:property value="#stat.index" />);">
+															<img align="top" border="0" alt="Supprimer"
+															title="Supprimer"
+															src="<s:property value="#session.ENSEIGNE" />/img/supprimer-16.png" />
+													</a> <input type="hidden"
+														id="heurePonctuelle<s:property value="#stat.index" />"
+														name="heurePonctuelle<s:property value="#stat.index" />"
+														value="<s:property />" /></td>
+													<td align="center"
+														id="heureExceptionnel<s:property value="#stat.index" />">
+														<s:property /></td>
+												</tr>
+											</s:iterator>
+										</table></td>
+								</tr>
+							</table></td>
+					</tr>
+					<tr id="frequenceHeure2">
+						<td align="center">
+							<table width="90%">
+								<col width="50%" />
+								<col width="50%" />
+								<tr>
+									<td align="center">Heure d&eacute;but : <input type="text"
+										name="heureDebut" id="heureDebut" size="6"
+										value="${heureDebut}" /></td>
+									<td align="center">Heure fin : <input type="text"
+										name="heureFin" id="heureFin" size="6" value="${heureFin}" />
+									</td>
+								</tr>
+								<tr>
+									<td align="center" colspan="2">
+										<hr /> R&eacute;p&eacute;ter toutes les <input type="text"
+										name="frequence" id="frequence" size="6" value="${frequence}" />
+									</td>
+								</tr>
+							</table></td>
+					</tr>
+				</table>
+			</div>
+
+			<br />
+			<br />
+
+			<s:include
+				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+
+			<br />
+			<br />
+
+			<s:include value="/jsp/user_pages/commun/html_body_div_plus.jsp" />
+			<table class="dataTable" rules="rows" id="sousTacheTable">
+				<col width="20%" />
+				<col width="30%" />
+				<col width="10%" />
+				<col width="35%" />
+				<col width="5%" />
+				<tr>
+					<td class="titreColonne">Nom de la sous tache</td>
+					<td class="titreColonne">Documentation</td>
+					<td class="titreColonne">D&eacute;calage</td>
+					<td class="titreColonne">Consigne</td>
+					<td class="titreColonne">Supprimer</td>
+				</tr>
+				<tr id="textNoSousTache">
+					<td colspan="5" class="emptyListText">Aucune sous tâche <s:hidden
+							name="sousTache" id="sousTache" value="0" /></td>
+
+				</tr>
+			</table>
+
+			<s:include
+				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+		</s:form>
+	</div>
+</body>
+</html>

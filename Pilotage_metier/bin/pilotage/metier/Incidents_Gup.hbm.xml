@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+
+    <class name="pilotage.metier.Incidents_Gup" table="com_incidents">
+    
+        <id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		
+       	<many-to-one	class="pilotage.metier.Users" 					column="user" 		lazy="false" 	name="user" 	not-null="true" />
+       	<property name="date_deb" 	column="date_deb" 		type="org.joda.time.contrib.hibernate.PersistentDateTime"	not-null="true"	/>
+       	<property name="date_fin" 	column="date_fin" 		type="org.joda.time.contrib.hibernate.PersistentDateTime"	not-null="true"	/>
+       	<many-to-one	class="pilotage.metier.Com_Incident_Etat" 		column="etat_service" 	lazy="false" 	name="etat" 	not-null="true" />
+       	<property 	column="description_prob" 	generated="never" 	lazy="false" 	name="description_prob" 			not-null="true" 	type="string"	/>
+  		<property 	column="impactON" 		generated="never" 	lazy="false" 	name="impact" 	type="integer" 		length="11" />
+  		<property 	column="ars" 		generated="never" 	lazy="false" 	name="ars" 	type="string" 		length="11" />
+          
+    </class>
+</hibernate-mapping>

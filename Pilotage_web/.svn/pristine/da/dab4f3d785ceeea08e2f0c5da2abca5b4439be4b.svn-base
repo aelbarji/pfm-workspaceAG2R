@@ -1,0 +1,14 @@
+V8.16
+
+Contenu:
+	Error setting expression corrigées dans la partie admin
+	Filtres changés au format Json
+
+Modification de la base epi:
+	exécuter le batch Migration_filtre
+	
+	éxécuter modif_bdd_epi_V816.txt
+	
+Modification de la base paramètre:
+
+	éxécuter modif_bdd_parametreV816.txt

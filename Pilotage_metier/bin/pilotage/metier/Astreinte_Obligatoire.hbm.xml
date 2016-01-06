@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Astreinte_Obligatoire" table="astreinte_obligatoire">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+		
+		<property name="indicEnvoi" column="indic_envoi" type="boolean" not-null="true"/>
+		
+		<many-to-one class="pilotage.metier.Astreinte_Domaine" 	column="domaine" 	name="domaine" 	lazy="false" />
+		<many-to-one class="pilotage.metier.Astreinte_Type" 	column="type"		name="type" 	lazy="false" />
+		
+	</class>	
+</hibernate-mapping>

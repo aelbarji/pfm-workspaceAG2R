@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_PlageFonct_Jour" table="meteo_plagefonct_jour">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="plageFonct" class="pilotage.metier.Meteo_PlageFonctionnement" column="id_plageFonct" lazy="false" />
+        <property name="jour" type="int" column="jour" />
+        <property name="ferie" type="int" column="ferie" />
+    </class>
+</hibernate-mapping>

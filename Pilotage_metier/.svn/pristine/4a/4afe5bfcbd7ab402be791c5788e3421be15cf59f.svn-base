@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+
+    <class name="pilotage.metier.Debordement_Noc_Destinataire" table="com_debordement_noc_destinataire">
+    
+        <id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		
+        <many-to-one column="id_destinataire" name="destinataire" class="pilotage.metier.Destinataires" lazy="false"	not-null="true"/>
+        <property column="cc" lazy="false" name="cc" type="integer" length="11" not-null="true"/>
+    </class>
+</hibernate-mapping>

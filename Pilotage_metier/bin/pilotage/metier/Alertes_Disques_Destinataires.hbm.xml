@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2011 16:09:16 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pilotage.metier.Alertes_Disques_Destinataires" table="ALERTES_DISQUES_DESTINATAIRES" lazy="false">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="mail" type="java.lang.String" not-null="true">
+            <column name="MAIL" />
+        </property>
+        <property name="nom" type="java.lang.String" not-null="true">
+            <column name="NOM" />
+        </property>
+        <property name="prenom" type="java.lang.String" not-null="true">
+            <column name="PRENOM" />
+        </property>
+    </class>
+</hibernate-mapping>

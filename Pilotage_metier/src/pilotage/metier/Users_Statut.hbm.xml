@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2011-6-13 10:49:06 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="pilotage.metier">
+    <class name="Users_Statut" table="users_statut">
+        <id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+		
+        <property
+			name="libelle"
+			column="libelle"
+			type="string"
+		/>
+    </class>
+</hibernate-mapping>

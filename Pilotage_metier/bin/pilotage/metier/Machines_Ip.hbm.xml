@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Machines_Ip" table="machines_ip">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+	
+		<property name="ip" 			column="ip" 			type="string" not-null="true" length="20" />
+		<property name="commentaire" 	column="commentaire" 	type="string" not-null="true" length="100" />
+		
+		<many-to-one class="pilotage.metier.Machines_Liste" column="idmachine" name="machines_liste"/>
+	</class>	
+</hibernate-mapping>

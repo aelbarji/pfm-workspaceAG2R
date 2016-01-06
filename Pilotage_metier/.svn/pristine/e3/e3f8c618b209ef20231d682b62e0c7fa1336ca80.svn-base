@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_GroupeMeteo_Horaire" table="meteo_groupemeteo_horaire">
+        <id name="id" type="integer" column="id" >
+            <generator class="native" />
+        </id>
+        <many-to-one name="groupeMeteo" class="pilotage.metier.Meteo_GroupeMeteo" column="id_groupeMeteo" lazy="false"/>
+        <property name="horaire" type="time" column="horaire" />
+        <property name="dateException" type="date" column="date_exception" />
+        <property column="date_debut" generated="never" lazy="false" name="dateDebut" not-null="true" type="org.joda.time.contrib.hibernate.PersistentDateTime" />
+		<property column="date_fin" generated="never" lazy="false" name="dateFin" type="org.joda.time.contrib.hibernate.PersistentDateTime" />
+    </class>
+</hibernate-mapping>
+

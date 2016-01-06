@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+	<class name="Machines_Liste" table="machines_liste" lazy="false">
+		<id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		
+		<property column="nom" 		generated="never" lazy="false" length="40" name="nom" 		not-null="true" type="string" />
+
+		<many-to-one class="pilotage.metier.Machines_Type" 	column="type" 				name="id_type" 			lazy="false"/>
+		<many-to-one class="pilotage.metier.Machines_Site" 	column="site" 				name="id_site" 			lazy="false"/>
+		<many-to-one class="pilotage.metier.Domaine_Wind" 	column="domaine" 			name="id_domaine" 		lazy="false"/>
+		<many-to-one class="pilotage.metier.Interlocuteur" 	column="id_interlocuteur" 	name="id_interlocuteur" lazy="false"/>
+		<many-to-one class="pilotage.metier.Environnement" 	column="id_environnement" 	name="id_environnement" lazy="false"/>
+		<many-to-one class="pilotage.metier.Machine_Os" 	column="id_OS" 				name="id_os" 			lazy="false"/>
+
+		<property column="commentaire" 	generated="never" lazy="false" length="40" name="commentaire" 	not-null="true" type="string" />
+		
+	</class>
+</hibernate-mapping>

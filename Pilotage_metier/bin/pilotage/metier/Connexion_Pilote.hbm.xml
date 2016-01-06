@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Connexion_Pilote" table="connexion_pilote">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="idPilote"
+			column="idPilote"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="nom"
+			column="nom"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+		<property
+			name="prenom"
+			column="prenom"
+			type="string"
+			not-null="true"
+			length="25"
+		/>
+		<property
+			name="mois"
+			column="mois"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="date"
+			column="date"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="nbConnexion"
+			column="nbConnexion"
+			type="java.lang.Float"
+			not-null="true"
+			length="12"
+		/>
+	</class>	
+</hibernate-mapping>

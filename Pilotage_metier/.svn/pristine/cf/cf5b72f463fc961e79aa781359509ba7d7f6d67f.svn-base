@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping>
+    <class name="pilotage.metier.Consignes_Type" table="consignes_type">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="assigned" />
+        </id>
+        <property name="type" type="java.lang.String">
+            <column name="type" />
+        </property>
+        <property name="dossier" type="java.lang.String">
+            <column name="dossier" />
+        </property>
+    </class>
+</hibernate-mapping>

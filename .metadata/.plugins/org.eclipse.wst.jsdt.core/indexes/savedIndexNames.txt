@@ -1,0 +1,7 @@
+INDEX VERSION 1.122+C:\Users\aelbarji\Documents\workspace\workspace_AG2R\.metadata\.plugins\org.eclipse.wst.jsdt.core\indexes
+3822380417.index
+594363597.index
+2524089227.index
+3016056572.index
+4223234401.index
+3877604842.index

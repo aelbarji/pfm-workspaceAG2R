@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes_Mots" table="consignes_mots">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="mot"
+			column="mot"
+			type="string"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="hashcode"
+			column="Hashcode"
+			type="java.math.BigInteger"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="recherche"
+			column="recherche"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+	</class>	
+</hibernate-mapping>

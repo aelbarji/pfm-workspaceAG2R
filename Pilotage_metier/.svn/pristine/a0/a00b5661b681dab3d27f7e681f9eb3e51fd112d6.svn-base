@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes_Pilotes_Changements" table="consignes_pilotes_changements">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+        <many-to-one 
+		    class="pilotage.metier.Users" 
+		    column="id_user"
+	        name="idUser" 
+	    />
+        <many-to-one 
+		    class="pilotage.metier.Consignes" 
+		    column="id_consigne"
+	        name="idConsigne" 
+	    />
+		<many-to-one 
+		    class="pilotage.metier.Consignes_Type_Changement" 
+		    column="type_changement"
+	        name="typeChangement" 
+	    />
+		<property
+			name="dateChangement"
+			column="date_changement"
+			type="date"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="avant"
+			column="avant"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="apres"
+			column="apres"
+			type="string"
+			not-null="true"
+		/>
+	</class>	
+</hibernate-mapping>

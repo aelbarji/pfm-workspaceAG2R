@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Annule" table="checklist_annule">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="date" 		column="date" 		type="date"		not-null="true" 	length="10" />
+		
+		<many-to-one 	name="tache"	column="tache" 		class="pilotage.metier.Checklist_Base_Soustache" />
+		<many-to-one 	name="horaire"	column="horaire" 	class="pilotage.metier.Checklist_Horaire" />
+		<many-to-one 	name="user"		column="user" 		class="pilotage.metier.Users" />
+	</class>
+</hibernate-mapping>

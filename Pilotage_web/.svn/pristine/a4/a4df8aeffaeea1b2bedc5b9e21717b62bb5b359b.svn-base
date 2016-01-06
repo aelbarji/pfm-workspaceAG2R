@@ -1,0 +1,38 @@
+body{
+	 
+color: white;
+/* change font style*/
+font-family : "Arial";
+}
+.table{
+border-width : 3px;
+border-spacing : 5px;
+border-style : solid;
+border-color : black;
+border-collapse: collapse;
+background-color : #414141;
+width : 230px;
+}
+td{
+border-width : 2px;
+padding : 5px;
+border-style :solid;
+border-color : #8c014c;
+}
+.menuPremiere{
+background-color:#414141;
+}
+.menuSecond{
+background-color:#8c014c;
+text-indent:30px;
+}
+.forSpace{
+height : 150px;
+padding : 0px;
+background-color:#414141;
+border-color : #414141;
+}
+a:link {text-decoration: none; color: white}
+a:visited {text-decoration: none; color: white}
+a:active {text-decoration: none; color: white}
+a:hover {text-decoration: none; color: white}

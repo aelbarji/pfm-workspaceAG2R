@@ -1,0 +1,19 @@
+Version V9.1
+
+Contenue :
+	Modification météo pour prise en compte changement d'horaire du groupe Météo
+	Correctifs création d'incident et affectation appel astreinte
+
+Modification de la BASE EPI	
+	=> lancer le SQL V9.1_modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	pas de modification
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

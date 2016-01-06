@@ -1,0 +1,1 @@
+UPDATE `parametre`.`menu` SET `LIEN`='showEnvironnementAction.action' WHERE `ID`='68';

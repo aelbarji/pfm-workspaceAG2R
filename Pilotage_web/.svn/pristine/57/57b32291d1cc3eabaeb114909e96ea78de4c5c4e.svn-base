@@ -1,0 +1,1 @@
+ALTER TABLE users MODIFY `timezone` INT( 11 ) NOT NULL DEFAULT 0;

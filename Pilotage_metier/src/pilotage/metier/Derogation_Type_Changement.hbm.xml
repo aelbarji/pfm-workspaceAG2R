@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Derogation_Type_Changement" table="derogation_type_changement">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="typeChangement" column="type_changement" type="string" not-null="true" length="30" />
+	</class>	
+</hibernate-mapping>

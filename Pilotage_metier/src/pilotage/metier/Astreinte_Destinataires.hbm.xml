@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2011 16:09:16 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+ <class name="pilotage.metier.Astreinte_Destinataires" table="ASTREINTE_DESTINATAIRES">
+  <id name="id" type="java.lang.Integer">
+   <column name="ID"/>
+   <generator class="native"/>
+  </id>
+  <property generated="never" lazy="false" name="mail" not-null="true" type="java.lang.String">
+   <column name="MAIL"/>
+  </property>
+  <property generated="never" lazy="false" name="nom" not-null="true" type="java.lang.String">
+   <column name="NOM"/>
+  </property>
+  <property generated="never" lazy="false" name="prenom" not-null="true" type="java.lang.String">
+   <column name="PRENOM"/>
+  </property>
+ </class>
+</hibernate-mapping>

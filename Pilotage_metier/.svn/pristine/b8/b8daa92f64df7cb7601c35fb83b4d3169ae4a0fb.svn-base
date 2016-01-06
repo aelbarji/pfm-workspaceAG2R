@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Affectation_menu" table="affectation_menu">
+		<composite-id>
+			<key-many-to-one class="pilotage.admin.metier.Menu" column="ID_MENU" name="id_menu" lazy="false"/>
+			<key-many-to-one class="pilotage.admin.metier.Profil" column="ID_PROFIL" name="id_profil" lazy="false"/>
+		</composite-id>
+	</class>
+</hibernate-mapping>

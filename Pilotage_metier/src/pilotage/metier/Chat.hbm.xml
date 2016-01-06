@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Chat" table="chat">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="date"
+			column="date"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="datestamp"
+			column="datestamp"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="text"
+			column="text"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="idUser"
+			column="id_user"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+	</class>	
+</hibernate-mapping>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Jour_Spe" table="checklist_jour_spe">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="jour" column="jour" type="integer" not-null="true" length="20" />
+		
+		<many-to-one 	name="idChecklist"	column="id_checklist" 	class="pilotage.metier.Checklist_Base"/>
+	</class>
+</hibernate-mapping>

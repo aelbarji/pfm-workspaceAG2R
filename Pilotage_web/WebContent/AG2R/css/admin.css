@@ -1,0 +1,152 @@
+@CHARSET "ISO-8859-1";
+
+body{
+	font-family: "Arial", "Helvetica",Verdana, sans-serif;
+	color: black;
+}
+
+/***************** Titre des pages *****************/
+.title{
+	font-size: 120%;
+	font-weight: bold;
+	color: #2E170F;
+}
+
+/******* Tableaux de mise en page uniquement *******/
+.Pagecontents{
+	margin-top:	50px;
+	margin-left: auto;
+	margin-right: auto;
+	width: auto;
+	text-align: center;
+}
+
+.tabTable{
+	margin-left: 100px;
+}
+
+.tabCenter{
+	margin-left: auto;
+	margin-right: auto;
+	text-align: left;
+}
+
+.tabSaisie{
+	margin: 20px auto 20px auto;
+	text-align: left;
+}
+
+/*************** Tableaux de données ***************/
+.colTitle{
+	background-color: #2E170F;
+	height: 40px;
+	color: white;
+	text-align: center;
+}
+
+.colTitleDroit{
+	background-color: #2E170F;
+	color: white;
+	text-align: center;
+}
+
+.colTitleAjout{
+	background-color: #00B9E7;
+	height: 40px;
+	color: white;
+	text-align: center;
+}
+
+.oddRow{
+	background-color: #8AD3E4;
+	color: black;
+}
+
+.evenRow{
+	color: black;
+}
+
+.oddRow:hover{
+	background-color: #CCCCCC;
+	color: black;
+}
+
+.evenRow:hover{
+	background-color: #d7d7d7;
+	color: black;
+}
+
+/********************** Liens **********************/
+a,a:link,a:visited,a:hover,a:active{
+	text-decoration: none;
+}
+
+.ajouter{
+	vertical-align: middle;
+}
+
+.valider, .annuler {
+	display: block;
+	background-color: #2E170F;
+	width: 120px;
+	height: 20px;
+	text-decoration: none;
+	color: white;
+	text-align: center;
+	vertical-align: middle;
+	line-height: 20px;
+	font-size: 80%;
+	font-weight: bold;
+	border: solid;
+	border-width: 1px;
+	border-color: silver;
+}
+
+.icone {
+	border: none;
+	text-decoration: none;
+	vertical-align: middle;
+	height: 16px;
+	width: 16px;
+}
+
+/********************** Textes *********************/
+.info, .error{
+	top: 20px;
+	width: 99%;
+	margin-left:auto;
+	margin-right: auto;
+	font-size: 100%;
+	font-weight: bold;
+	text-align: center;
+}
+
+.info{
+	color: green;
+}
+
+.error{
+	color: red;
+}
+
+.plus{
+	font-size: 90%;
+	color: black;
+	font-weight: bold;
+	text-align: left;
+}
+
+.starObligatoire{
+	color: red;
+}
+
+.champObligatoire{
+	color : red;
+	font-style: italic;
+	font-size: 80%;
+}
+
+.emptyListText{
+	font-style: italic;	
+	text-align: center;
+}

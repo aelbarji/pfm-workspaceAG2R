@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="pilotage.admin.metier.Sous_Module" table="SOUS_MODULE">
+        <id column="id" name="id">
+			<generator class="increment"/>
+		</id>
+        <property name="nom" column="nom" type="string"/>
+        
+        
+        <many-to-one class="pilotage.admin.metier.Module" column="id_parent" name="idParent" lazy="false"/>
+        <many-to-one class="pilotage.admin.metier.Droits_Liste" column="id_modif" name="idModif" lazy="false"/>
+        <many-to-one class="pilotage.admin.metier.Droits_Liste" column="id_ajout" name="idAjout" lazy="false"/>
+        <many-to-one class="pilotage.admin.metier.Droits_Liste" column="id_suppr" name="idSuppr" lazy="false"/>
+        <many-to-one class="pilotage.admin.metier.Droits_Liste" column="id_detail" name="idDetail" lazy="false"/>
+        
+        <!-- <property name="idParent" column="id_parent" type="java.lang.Integer"/> 
+        <property name="idModif" column="id_modif" type="java.lang.Integer"/>
+        <property name="idSuppr" column="id_suppr" type="java.lang.Integer"/>
+        <property name="idAjout" column="id_ajout" type="java.lang.Integer"/> -->
+        
+    </class>
+</hibernate-mapping>

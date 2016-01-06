@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN" "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping>
+    <class name="pilotage.metier.Espaces_Disques" table="ESPACES_DISQUES" lazy="false">
+        <id name="id" column="ID" type="java.lang.Integer">
+            <generator class="native" />
+        </id>
+        <property name="date"	column="DATE" 	type="java.util.Date" 	not-null="true"/>
+        <property name="espace"	column="ESPACE" type="float" 			not-null="true"/>
+        <property name="seuil"	column="SEUIL" type="float" 			not-null="true"/>
+        
+        <many-to-one 	class="pilotage.metier.Disques" 	column="DISQUE" 	lazy="false" 	name="disque" 	not-null="true"	/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Bilan_Envoie" table="bilan_envoie">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="nom" 			column="Nom" 			type="string" 	not-null="true" 	length="24" 	/>
+		<property name="libelle" 		column="Libelle" 		type="string" 	not-null="true" 	length="127" 	/>
+		<property name="clauseSelect" 	column="ClauseSelect" 	type="string" 	not-null="false" 	length="127" 	/>
+		<property name="logo" 			column="Logo" 			type="string" 	not-null="true" 	length="63" 	/>
+		<property name="vacation" 		column="Vacation" 		type="boolean" 	not-null="true" />
+		<property name="actionEPI" 		column="ActionEPI" 		type="boolean"	not-null="true" />
+		<property name="espaceDisk" 	column="EspaceDisk" 	type="boolean" 	not-null="true" />
+		<property name="disknonOCEOR" 	column="DisknonOCEOR" 	type="boolean" 	not-null="true" />
+		<property name="etatCFT" 		column="EtatCFT"		type="boolean" 	not-null="true" />
+		<property name="statEPI" 		column="StatEPI" 		type="boolean" 	not-null="true" />
+		<property name="nbDailySent" 	column="NbDailySent" 	type="integer" 	not-null="true" />
+		<property name="lundi" 			column="Lundi" 			type="java.lang.Byte" not-null="true" length="3" />
+		<property name="mardi" 			column="Mardi" 			type="java.lang.Byte" not-null="true" length="3" />
+		<property name="mercredi" 		column="Mercredi" 		type="java.lang.Byte" not-null="true" length="3" />
+		<property name="jeudi" 			column="Jeudi" 			type="java.lang.Byte" not-null="true" length="3" />
+		<property name="vendredi" 		column="Vendredi" 		type="java.lang.Byte" not-null="true" length="3" />
+		<property name="samedi" 		column="Samedi" 		type="java.lang.Byte" not-null="true" length="3" />
+		<property name="dimanche" 		column="Dimanche" 		type="java.lang.Byte" not-null="true" length="3" />
+		<property name="ferie"			column="Ferie" 			type="java.lang.Byte" not-null="true" length="3" />
+	</class>
+</hibernate-mapping>

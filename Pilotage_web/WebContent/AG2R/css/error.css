@@ -1,0 +1,17 @@
+@CHARSET "ISO-8859-1";
+
+.errorText{
+	color: red;
+	font-size: 140%;
+	text-align: center;
+}
+
+.errorLink{
+	text-align: center;
+}
+
+.errorLink a{
+	color: red;
+	text-decoration: none;
+}
+

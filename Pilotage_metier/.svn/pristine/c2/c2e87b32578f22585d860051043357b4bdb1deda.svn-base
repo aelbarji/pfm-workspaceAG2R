@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Astreinte_Planning" table="astreinte_planning">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property 	name="datedeb" 			column="datedeb" 		type="timestamp" 	not-null="true" 	length="19" />
+		<property 	name="datefin"			column="datefin" 		type="timestamp" 	not-null="true" 	length="19" />
+		<property 	name="commentaires" 	column="commentaires" 	type="string" 		not-null="true" 				/>
+		<property 	name="tel" 				column="tel" 			type="string" 		not-null="true" 				/>
+		<property 	name="infogene" 		column="infogene" 		type="string" 		not-null="false" 				/>
+
+		<many-to-one class="pilotage.metier.Astreinte" 			column="astreinte" 	name="astreinte" 	lazy="false" />
+	    <many-to-one class="pilotage.metier.Astreinte_Domaine" 	column="domaine" 	name="domaine"  	lazy="false" />
+	</class>	
+</hibernate-mapping>

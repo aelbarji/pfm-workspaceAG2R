@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Environnement" table="environnement">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="environnement"
+			column="environnement"
+			type="string"
+			not-null="true"
+			length="80"
+		/>
+
+       <many-to-one 
+       class="pilotage.metier.Environnement_Type" 
+       column="Type" 
+       name="type" 
+       lazy="false" 	
+       />
+
+	</class>	
+</hibernate-mapping>

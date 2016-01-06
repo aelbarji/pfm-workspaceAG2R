@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_IndicateurBase" table="meteo_indicateur_base">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="meteo" class="Meteo_Meteo" column="meteo" lazy="false"/>
+        <many-to-one name="service" class="pilotage.metier.Meteo_Service" column="service" lazy="false"/>
+        <many-to-one name="environnement" class="pilotage.metier.Meteo_Environnement" column="environnement" lazy="false"/>
+        <many-to-one name="typeIndicateur" class="pilotage.metier.Meteo_TypeIndicateur" column="typeIndic" lazy="false"/>
+   		<property name="format" type="string" column="formatIndic" />
+        <property name="etat_desire" type="string" column="etat_desire" />
+        <many-to-one name="plage" class="pilotage.metier.Meteo_PlageFonctionnement" column="plage" lazy="false"/>
+        <property name="heure_debut" type="string" column="heure_debut" />
+        <property name="heure_fin" type="string" column="heure_fin" />
+        <property name="indic_heure" type="int" column="indic_heure" />
+    </class>
+</hibernate-mapping>
+

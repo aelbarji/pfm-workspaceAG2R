@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Current" table="checklist_current">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="heure" 			column="heure" 			type="timestamp" 	not-null="true" 	length="19" />
+		<property name="heureStamp" 	column="heure_stamp" 	type="long" 		not-null="true" 	length="10" />
+		<property name="heureGmt" 		column="heure_gmt" 		type="timestamp" 	not-null="true" 	length="19" />
+		<property name="jour" 			column="jour" 			type="date"			not-null="true" 	length="10" />
+		<property name="jourStamp" 		column="jour_stamp" 	type="long" 		not-null="true" 	length="10" />
+		<property name="commentaire" 	column="commentaire" 	type="string" 		not-null="false" 				/>
+		<property name="time_used" 		column="time_used" 		type="time" 		not-null="false" 				/>
+
+
+		<many-to-one 	name="tache"		column="tache" 			class="pilotage.metier.Checklist_Base" 				lazy="false"/>
+		<many-to-one 	name="sousTache"	column="sous_tache" 	class="pilotage.metier.Checklist_Base_Soustache" 	lazy="false"/>
+		<many-to-one 	name="status"		column="status" 		class="pilotage.metier.Checklist_Status" 			lazy="false"/>
+		<many-to-one 	name="user"			column="user" 			class="pilotage.metier.Users" 						lazy="false"/>
+		<many-to-one 	name="idHoraire"	column="id_horaire" 	class="pilotage.metier.Checklist_Horaire" 			lazy="false"/>
+	</class>
+</hibernate-mapping>

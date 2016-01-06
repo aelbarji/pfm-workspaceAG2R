@@ -1,0 +1,135 @@
+table.outTable {
+	border-width: 0px;
+	border-spacing: 0px;
+	border-style: none;
+	border-color: gray;
+	border-collapse: collapse;
+}
+
+table.outTable td {
+	border-width: 0px;
+	border-spacing: 0px;
+	padding: 0px;
+	border-style: none;
+	border-color: gray;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+table.innerTable {
+	border-width: 2px;
+	border-spacing: 0px;
+	border-style: solid;
+	border-color: black;
+	border-collapse: collapse;
+}
+
+table.innerTable td {
+	border-width: 2px;
+	border-spacing: 0px;
+	padding: 0px;
+	border-style: solid;
+	border-color: black;
+	empty-cells: show;
+	border-collapse: collapse;
+	text-align: center;
+}
+
+
+.header{
+	height: 150px;
+}
+
+.logo{
+	text-align: center;
+	width: 30%;
+}
+
+.BigTitle{
+	color: #FF4000; 
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+}
+
+.title{
+	color: #FF4000; 
+	font-weight: bold;
+	font-style: italic;
+	text-align: center;
+	border: none;
+	height: 50px;
+}
+
+.vacationHours{
+	 text-align: right;
+	 width: 50%;
+}
+
+.vacationName{
+	text-align: left;
+	 width: 50%;
+}
+
+.operationTitle{
+	text-align: center;
+	 background-color: #2EFE9A;
+}
+
+.operationValue{
+	text-align: center;
+}
+
+.separation{
+	height: 20px;
+}
+
+.incidentTableTitle{
+	font-style: italic;
+	font-weight: bold;
+	text-align: center;
+}
+
+.incidentTableTH{
+	background-color: #FFD1A8;
+	text-align: center;
+}
+
+.espaceDisqueTH{
+	background-color: #01A9DB;
+}
+
+.noData{
+	text-align: center;
+	font-style: italic;
+}
+
+.alerteDisqueTH{
+	background-color: #01A00B;
+}
+
+.fluxName{
+	text-align: center;
+	background-color: red;
+}
+
+.fluxValue{
+	text-align: center;
+}
+
+
+.espaceDisqueString{
+	text-align: left;
+}
+
+.espaceDisqueNumber{
+	text-align: center;
+}
+
+.alerteDisqueString{
+	text-align: left;
+}
+
+.alerteDisqueNumber{
+	text-align: center;
+}

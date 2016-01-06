@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+<hibernate-mapping>
+    <class name="pilotage.metier.Bilan_Destinataires" table="BILAN_DESTINATAIRES">
+        <id name="id" type="java.lang.Integer">
+            <column name="ID" />
+            <generator class="native" />
+        </id>
+        <property name="mail" type="java.lang.String" not-null="true">
+            <column name="MAIL" />
+        </property>
+        <property name="nom" type="java.lang.String" not-null="true">
+            <column name="NOM" />
+        </property>
+        <property name="prenom" type="java.lang.String" not-null="true">
+            <column name="PRENOM" />
+        </property>
+        <many-to-one name="type_bilan" class="pilotage.metier.Bilan_Envoie" fetch="join" lazy="false" not-null="true">
+            <column name="TYPE_BILAN" />
+        </many-to-one>
+    </class>
+</hibernate-mapping>

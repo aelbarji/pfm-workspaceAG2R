@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Planning_Semaine" table="planning_semaine">
+		<id name="id" type="integer" column="id">
+			<generator class="increment"/>
+		</id>
+
+		<property name="nomSemaine"	   column="nomSemaine" 	  type="string"	 not-null="true" />
+		<property name="numeroSemaine" column="numeroSemaine" type="integer" not-null="true" />
+
+		<many-to-one name="idNomCycle"	column="idNomCycle"	class="pilotage.metier.Planning_Cycle" 		lazy="false"/>
+		<many-to-one name="lundi"		column="lundi"		class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="mardi"		column="mardi"		class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="mercredi"	column="mercredi"	class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="jeudi"		column="jeudi"		class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="vendredi"	column="vendredi"	class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="samedi"		column="samedi"		class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<many-to-one name="dimanche"	column="dimanche"	class="pilotage.metier.Planning_Vacation"	lazy="false"/>
+		<property name="dateDeb" 	column="dateDeb" 		type="org.joda.time.contrib.hibernate.PersistentDateTime"	not-null="true"	lazy="false"/>
+       	<property name="dateFin" 	column="dateFin" 		type="org.joda.time.contrib.hibernate.PersistentDateTime"	not-null="false" lazy="false"/>
+	</class>
+</hibernate-mapping>

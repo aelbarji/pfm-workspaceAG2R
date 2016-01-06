@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Forum_Post_Par_Page" table="forum_post_par_page">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="idUser"
+			column="id_user"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+		<property
+			name="nbPost"
+			column="nb_post"
+			type="integer"
+			not-null="true"
+			length="11"
+		/>
+	</class>	
+</hibernate-mapping>

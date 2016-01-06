@@ -1,0 +1,7 @@
+V8.17
+
+Contenu:
+	Gestion affichage du bilan
+
+Modification de la base epi:
+	éxécuter modif_bdd_epi_V817.txt

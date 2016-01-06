@@ -1,0 +1,19 @@
+Version V810
+Contenue :
+	Ajout d'un nom de fichier dans les informations générales afin de pouvoir lier un fichier à une information
+	
+Modification de la BASE EPI	
+	Modification de la table consignes : 
+		lancer le SQL V811_Modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	aucune
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR
+		

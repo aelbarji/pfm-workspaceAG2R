@@ -1,0 +1,24 @@
+V 814
+
+Contenu:
+	Ajout des heures des DOM TOM sur la checklist, réglage du temps d'inactivité session pour le rendre paramétrable, le bilan devient paramétrable aussi,
+	sauvegarde du nombre de pages sélectionné par le pilote sur la checklist
+	
+Modification de la base parametre:
+	Exécuter le script V814_modif_bdd_parametre.sql
+
+Modification de la base epi:
+	Exécuter le script V814_modif_bdd_epi.sql
+	
+Mettre en place l'EAR
+
+
+******************************************
+V 814 - correctif
+
+Dans la checklist, affichage des filtres modifié
+Dans planning mensuel par équipe, le filtre cycle a été enlevé et correction des bugs sur le changement de vacation
+Pour le bilan, seul le titre est paramétrable
+
+Modification de la base parametre:
+	Exécuter le script V814_modif_bdd_parametre.sql

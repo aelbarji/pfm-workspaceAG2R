@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+	<session-factory>
+		<!-- local connection properties -->
+		<property name="hibernate.connection.driver_class">com.mysql.jdbc.Driver</property>
+		<property name="hibernate.current_session_context_class">thread</property>	
+		<property name="dialect">org.hibernate.dialect.MySQLDialect</property>
+		<property name="hibernate.show_sql">false</property>
+		
+		<property name="hibernate.transaction.factory_class">org.hibernate.transaction.JDBCTransactionFactory</property>
+		
+		<mapping class="pilotage.metier.Bilan" resource="pilotage/metier/BilanBatch.hbm.xml" />
+		<mapping class="pilotage.metier.Disques" resource="pilotage/metier/Disques.hbm.xml" />
+		<mapping class="pilotage.metier.Espaces_Disques" resource="pilotage/metier/Espaces_Disques.hbm.xml" />
+		<mapping class="pilotage.metier.Flux_CFT" resource="pilotage/metier/Flux_CFT.hbm.xml" />
+		<mapping class="pilotage.metier.Flux_Erreur" resource="pilotage/metier/Flux_Erreur.hbm.xml" />
+		<mapping class="pilotage.metier.Users" resource="pilotage/metier/Users.hbm.xml" />
+	</session-factory>
+</hibernate-configuration>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Base" table="checklist_base">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="tache" 		column="tache" 		type="string" 	not-null="true"					/>
+		<property name="dateDebut" 	column="date_debut" type="date" 	not-null="true" 	length="10"	/>
+		<property name="actif" 		column="actif" 		type="boolean" 	not-null="true" 				/>
+		
+		<many-to-one 	name="etat"				column="etat" 			class="pilotage.metier.Checklist_Etat" 		lazy="false"	/>
+		<many-to-one 	name="environnement"		column="environnement" 	class="pilotage.metier.Environnement" 		lazy="false"	/>
+		<many-to-one 	name="criticite"		column="criticite" 		class="pilotage.metier.Checklist_Criticite" lazy="false"	/>
+	</class>	
+</hibernate-mapping>

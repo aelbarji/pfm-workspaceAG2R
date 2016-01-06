@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Checklist_Horaire" table="checklist_horaire">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property name="horaire" 		column="horaire" 		type="time"		not-null="true" 	length="8" 	/>
+		<property name="horaireStamp" 	column="horaire_stamp" 	type="long" 	not-null="true" 	length="10" />
+		<property name="actif" 			column="actif" 			type="boolean" 	not-null="true" 				/>
+		
+		<many-to-one 	name="idChecklist"	column="id_checklist" 	class="pilotage.metier.Checklist_Base"/>
+	</class>
+</hibernate-mapping>

@@ -1,0 +1,631 @@
+package pilotage.database.checklist;
+
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Date;
+import java.util.Iterator;
+import java.util.List;
+
+
+import org.hibernate.Criteria;
+import org.hibernate.Query;
+import org.hibernate.Session;
+import org.hibernate.criterion.Order;
+import org.hibernate.criterion.Projections;
+import org.hibernate.criterion.Restrictions;
+import org.hibernate.type.LongType;
+import org.hibernate.type.StandardBasicTypes;
+import org.hibernate.type.Type;
+
+import pilotage.metier.Checklist_Annule;
+import pilotage.metier.Checklist_Base;
+import pilotage.metier.Checklist_Base_Soustache;
+import pilotage.metier.Checklist_Consignes;
+import pilotage.metier.Checklist_Creation;
+import pilotage.metier.Checklist_Criticite;
+import pilotage.metier.Checklist_Current;
+import pilotage.metier.Checklist_Etat;
+import pilotage.metier.Checklist_Horaire;
+import pilotage.metier.Checklist_Status;
+import pilotage.metier.Environnement;
+import pilotage.metier.Users;
+import pilotage.service.checklist.ChecklistCurrentSorter;
+import pilotage.service.constants.PilotageConstants;
+import pilotage.service.date.DateService;
+import pilotage.session.PilotageSession;
+import pilotage.utils.Pagination;
+
+public class ChecklistDatabaseService {
+
+	/**
+	 * COUNT test si la checklist du jour a été créée
+	 * @param dateList 
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static boolean isCreated(Date dateList) {
+
+		Session session = PilotageSession.getCurrentSession();
+		
+		List<Long> results = session.createCriteria(Checklist_Creation.class)
+			 						.add(Restrictions.eq("jour", dateList))
+			 						.setProjection(Projections.rowCount())
+			 						.list();
+		session.getTransaction().commit();
+		if (results != null && results.size() > 0 && results.get(0) > 0) {
+			return true;
+		}
+		else {
+			return false;
+		}
+	}
+
+	/**
+	 * Lancement des procédures stockées de création des check de la journée.
+	 * @param userLogin
+	 * @param date
+	 */
+	public static void createChecklistOfTheDay(String userLogin, Date date) {
+		//récupération des annulations
+		
+		Session session = PilotageSession.getCurrentSession();
+		
+		//checklist_creation
+		Checklist_Creation creation = new Checklist_Creation();
+		creation.setJour(date);
+		creation.setUser(userLogin);
+		session.save(creation);
+		System.out.println("Utilisateur : "+userLogin+" Date : "+DateService.dateToStr(date, DateService.p4));
+		//Construction de la requete HQL pour les procédures stockés
+		Query query = session.createSQLQuery(
+				"CALL epi.CreateCheckJour(:datejour)")
+				.setParameter("datejour", DateService.dateToStr(date, DateService.p4));
+		query.executeUpdate();
+		session.getTransaction().commit();
+	}
+	
+
+	/**
+	 * INSERT construction de la checklist du jour
+	 * @param userLogin
+	 * @param date
+	 * @param baseEtSousTaches 
+	*/
+/*
+  	public static void createChecklistOfTheDay(String userLogin, Date date, Map<Integer, List<Integer>> baseEtSousTaches) {
+ 
+		//récupération des annulations
+		List<Checklist_Annule> listeAnnulations = getAnnulationsOfTheDay(date);
+		
+		Session session = PilotageSession.getCurrentSession();
+		
+		//checklist_creation
+		Checklist_Creation creation = new Checklist_Creation();
+		creation.setJour(date);
+		creation.setUser(userLogin);
+		
+		//construction de la liste des checklist_current
+		List<Checklist_Current> listCurrent = createLocalChecklistOfTheDay(date);
+		
+		//suppression des taches annulées les jours précédents
+		List<Checklist_Current> listCurrentToDelete = new ArrayList<Checklist_Current>();
+		if(listeAnnulations != null && !listeAnnulations.isEmpty()){
+			for(Checklist_Annule annulation : listeAnnulations){
+				for(Checklist_Current current : listCurrent){
+					if(annulation.getTache().getId().equals(current.getSousTache().getId()) && annulation.getHoraire().getId().equals(current.getIdHoraire().getId())){
+						listCurrentToDelete.add(current);
+						break;
+					}
+				}
+			}
+			listCurrent.removeAll(listCurrentToDelete);
+		}
+		
+		for(Checklist_Current current : listCurrent){
+			session.save(current);
+		}
+		
+		session.save(creation);
+		
+		session.getTransaction().commit();
+	}
+*/	
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Current> createLocalChecklistOfTheDay(Date date) {
+		Session session = PilotageSession.getCurrentSession();
+		
+		//checklist_current
+		List<Checklist_Current> listCurrent = new ArrayList<Checklist_Current>();
+		//Construction de la requete HQL pour les procédures stockés
+		Query query = session.createSQLQuery(
+				"CALL epi.CreateFutureCheckJour(:datejour)")
+				.addEntity(Checklist_Current.class)
+				.setParameter("datejour", DateService.dateToStr(date, DateService.p4));
+		listCurrent = query.list();
+		session.getTransaction().commit();
+		return listCurrent;
+	}
+	
+	/**
+	 * INSERT ajout dans la checklist du jour
+	 * @param userLogin
+	 * @param date
+	 * @param listSousSousTaches
+	 * @param listHoraires
+	 */
+	public static void addInChecklistOfTheDay(String userLogin, Date date, List<Integer> listSousSousTaches, List<Checklist_Horaire> listHoraires) {
+		Session session = PilotageSession.getCurrentSession();
+		
+		//checklist_current
+		List<Checklist_Current> listCurrent = new ArrayList<Checklist_Current>();
+		Date zeroDate = DateService.strToDate("01/01/1970");
+		Checklist_Status status = (Checklist_Status)session.load(Checklist_Status.class, PilotageConstants.STATUT_A_VENIR);
+		for(Integer sousTacheID : listSousSousTaches){
+			Checklist_Base_Soustache sousTache = (Checklist_Base_Soustache)session.load(Checklist_Base_Soustache.class, sousTacheID);
+			
+			for(Checklist_Horaire checkHoraire : listHoraires){
+				
+				Date jourHeureExecution = DateService.addTime(DateService.addTime(date, checkHoraire.getHoraire()), sousTache.getDecalageStamp());
+				Date jourExecution = DateService.getDayWithoutHour(jourHeureExecution);
+				
+				Checklist_Current currentSousTache = new Checklist_Current();
+				currentSousTache.setTache(sousTache.getIdBase());
+				currentSousTache.setSousTache(sousTache);
+				currentSousTache.setHeure(zeroDate);
+				currentSousTache.setHeureStamp(new Long(0));
+				currentSousTache.setHeureGmt(zeroDate);
+				currentSousTache.setJour(jourExecution);
+				currentSousTache.setJourStamp(jourExecution.getTime());
+				currentSousTache.setStatus(status);
+				currentSousTache.setIdHoraire(checkHoraire);
+				
+				listCurrent.add(currentSousTache);
+			}
+		}
+		
+		for(Checklist_Current current : listCurrent){
+			session.save(current);
+		}
+		
+		session.getTransaction().commit();
+	}
+
+	/**
+	 * SELECT de la checklist du jour
+	 * @param sort
+	 * @param sens
+	 * @param today
+	 * @param filtreEnvironnement 
+	 * @param filtreTypeListe 
+	 * @param tempsModif 
+	 * @return
+	 */
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	public static List<Checklist_Current> getListCurrent(Pagination<Checklist_Current> pagination,Date today, Integer filtreTypeListe, Integer[] filtreEnvironnement, Integer filtreChampEnvironnement, 
+			String filtreChampHeure, Integer filtreChampCriticite, String filtreChampTache) {
+		boolean selectTache = true;
+		Session session = PilotageSession.getCurrentSession();
+		
+		Criteria criteria = session.createCriteria(Checklist_Current.class);
+		criteria.createAlias("tache", "base", Criteria.LEFT_JOIN);
+		
+		if(filtreEnvironnement != null && filtreEnvironnement.length != 0){
+				List<Environnement> env = session.createCriteria(Environnement.class).add(Restrictions.in("id", filtreEnvironnement)).list();
+				criteria.add(Restrictions.in("base.environnement", env));
+		}
+		if(filtreChampEnvironnement != null && filtreChampEnvironnement != -1){
+			Environnement env = (Environnement)session.load(Environnement.class, filtreChampEnvironnement);
+			criteria.add(Restrictions.eq("base.environnement", env));
+		}
+		if(filtreChampCriticite != null && filtreChampCriticite != -1){
+			Checklist_Criticite crit = (Checklist_Criticite)session.load(Checklist_Criticite.class, filtreChampCriticite);
+			criteria.add(Restrictions.eq("base.criticite", crit));
+		}
+		
+		if(filtreChampHeure != null && !filtreChampHeure.equals("")){
+			Date timeFiltre = DateService.getTimeFromString(filtreChampHeure);
+			//Date timefin = DateService.getTimeFromString("23:59:59");
+			Long filtre;
+			try {
+				filtre = DateService.getLongTime(timeFiltre);
+				criteria.add(Restrictions.sqlRestriction("(((horaire2_.horaire_stamp + sstache3_.decalage_stamp) % 86400000)) >= ?" , filtre,StandardBasicTypes.LONG));
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		if(filtreChampTache != null && !filtreChampTache.equals("")){
+			List<Checklist_Base> tach = session.createCriteria(Checklist_Base.class).add(Restrictions.ilike("tache", "%" + filtreChampTache + "%" )).list();
+			if (!tach.isEmpty()) {
+				criteria.add(Restrictions.in("tache", tach));
+			} else {
+				selectTache = false;
+			}
+		}
+		
+		//Checklist normale : toutes les taches non OK, KO, Annulée
+		//Checklist du jour : normale + tache OK, KO, Annulée qui ont été modifié il y a moins de {temps_modif}
+		if(PilotageConstants.LIST_CHECKLIST_NORMALE.equals(filtreTypeListe) || PilotageConstants.LIST_CHECKLIST_COMPLETE.equals(filtreTypeListe)){
+			if(DateService.getTodayWithoutHour().equals(today) && PilotageConstants.LIST_CHECKLIST_NORMALE.equals(filtreTypeListe)) {
+				criteria.add(Restrictions.or(Restrictions.eq("jour", today), Restrictions.eq("jour", DateService.addDays(today, -1))));
+
+				Checklist_Status statut_ok = (Checklist_Status)session.load(Checklist_Status.class, 1);
+				Checklist_Status statut_annule = (Checklist_Status)session.load(Checklist_Status.class, 5);
+				
+				criteria.add(Restrictions.or(
+							//taches non prises en charges
+							Restrictions.eq("heure", DateService.strToDate("01/01/1970")),
+							//ou
+							//statut != ok ou annulé
+							Restrictions.not(
+									Restrictions.or(
+											Restrictions.eq("status", statut_ok), 
+											Restrictions.eq("status", statut_annule)))
+				));
+			}
+			else{
+				criteria.add(Restrictions.eq("jour", today));
+			}
+		}
+		else if(PilotageConstants.LIST_CHECKLIST_EXCEPTIONNEL.equals(filtreTypeListe)){
+			Checklist_Etat etat = (Checklist_Etat)session.load(Checklist_Etat.class, PilotageConstants.CHECKLIST_ETAT_EXCEPTIONNEL);
+			criteria.add(Restrictions.eq("jour", today));
+			criteria.add(Restrictions.eq("base.etat", etat));
+		}
+		else{
+			criteria.add(Restrictions.eq("jour", today));
+		}
+		
+		//récupération des id avec tri par jour/heure d'execution
+		criteria.createAlias("idHoraire", "horaire", Criteria.LEFT_JOIN);
+		criteria.createAlias("sousTache", "sstache", Criteria.LEFT_JOIN);
+		criteria.setProjection(
+				Projections.projectionList()
+					.add(Projections.property("id"))
+					.add(Projections.alias( Projections.sqlProjection("(jour_stamp + ((horaire2_.horaire_stamp + sstache3_.decalage_stamp) % 86400000)) as addTime", new String[] { "addTime" }, new Type[] { new LongType() }), "addTime" ))
+		);
+		criteria.addOrder(Order.asc("addTime"));		
+		
+		List resultID;
+		if(pagination != null)
+			resultID = pagination.setCriteriaPagination(criteria);
+		else
+			resultID = criteria.list();
+		Iterator<Object[]> it = resultID.iterator();
+		List<Integer> listID = new ArrayList<Integer>();
+		while(it.hasNext()){
+			Object[] row = (Object[])it.next();
+			listID.add((Integer)row[0]);
+		}
+		
+		//récupération des current a partir des id
+		List<Checklist_Current> listcurrent = new ArrayList<Checklist_Current>();
+		if (selectTache) {
+			if(listID.size() != 0) {
+				listcurrent = session.createCriteria(Checklist_Current.class)
+														.add(Restrictions.in("id", listID))
+														.list();
+			Collections.sort(listcurrent, new ChecklistCurrentSorter());
+			}
+		} 
+		if (listcurrent.isEmpty()) {
+			pagination.setNrPages(1);
+		}
+		
+		session.getTransaction().commit();
+		
+		return listcurrent;
+	}
+
+	/**
+	 * UPDATE d'un statut
+	 * @param id
+	 * @param statutID
+	 * @throws Exception
+	 */
+	public static void modifyCurrent(Integer id, Integer statutID) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		
+		try{
+			Checklist_Current current = (Checklist_Current)session.load(Checklist_Current.class, id);
+			Checklist_Status statut = (Checklist_Status)session.load(Checklist_Status.class, statutID);
+			
+			current.setStatus(statut);
+			if(current.getHeureGmt() == null)
+				current.setHeureGmt(DateService.strToDate("01/01/1970"));
+			
+			session.update(current);
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * SELECT de la liste des current mises à jour depuis la date/heure passée en paramètre 
+	 * @param lastUpdate (Date)
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Current> getCurrentUpdate(Date lastUpdate) {
+		Session session = PilotageSession.getCurrentSession();
+		Criteria criteria = session.createCriteria(Checklist_Current.class);
+		
+		// recupération de tous les check modifier depuis lastupdate
+		criteria.add(Restrictions.gt("heure", lastUpdate));
+		List<Checklist_Current> listCurrent = criteria.list();
+		session.getTransaction().commit();
+		return listCurrent;
+	}
+
+	/**
+	 * UPDATE du statut d'un checklist_current
+	 * @param selectRow
+	 * @param statutID
+	 * @param userID
+	 * @throws Exception 
+	 */
+	public static void modifyStatut(Integer selectRow, Integer statutID, Integer userID) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		try{
+			Checklist_Status statut = (Checklist_Status)session.load(Checklist_Status.class, statutID);
+			Checklist_Current current = (Checklist_Current)session.load(Checklist_Current.class, selectRow);
+			Users user = (Users)session.load(Users.class, userID);
+			
+			Date now = new Date();
+			Date timeUsed = null;
+			
+			Integer currentStatutID = current.getStatus().getId();
+			if((PilotageConstants.STATUT_EN_COURS.equals(currentStatutID) || PilotageConstants.STATUT_PRIS_EN_CHARGE.equals(currentStatutID)) 
+					&& (PilotageConstants.STATUT_OK.equals(statutID) || PilotageConstants.STATUT_KO.equals(statutID))){
+				timeUsed = DateService.getDateTime(DateService.getDecalageTimeStamp(current.getHeure(), now));
+			}
+			
+			current.setStatus(statut);
+			current.setHeure(now);
+			current.setHeureGmt(DateService.getHeureGMT(now));
+			current.setUser(user);
+			current.setTime_used(timeUsed);
+			
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * SELECT d'une tache dans la checklist identifiée par son id
+	 * @param selectRow
+	 * @return
+	 */
+	public static Checklist_Current get(Integer selectRow) {
+		Session session = PilotageSession.getCurrentSession();
+		
+		Checklist_Current current = (Checklist_Current) session.createCriteria(Checklist_Current.class)
+											.add(Restrictions.eq("id", selectRow))
+											.setMaxResults(1)
+											.uniqueResult();
+		session.getTransaction().commit();
+		return current;
+	}
+
+	/**
+	 * UPDATE d'un commentaire
+	 * @param tacheID
+	 * @param commentaire
+	 * @throws Exception 
+	 */
+	public static void modifyComment(int tacheID, String commentaire) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		
+		try{
+			Checklist_Current current = (Checklist_Current) session.load(Checklist_Current.class, tacheID);
+			current.setCommentaire(commentaire);
+			
+			session.update(current);
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * UPDATE d'une consigne
+	 * @param tacheID
+	 * @param consigne
+	 * @throws Exception 
+	 */
+	public static void modifyConsigne(int tacheID, String consigne) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		
+		try{
+			Checklist_Current current = (Checklist_Current) session.load(Checklist_Current.class, tacheID);
+			Checklist_Consignes checkConsigne = current.getSousTache().getIdConsigne();
+			checkConsigne.setConsigne(consigne);
+			
+			session.update(checkConsigne);
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * INSERT dans checklist_annule d'une entrée pour annuler une tache future
+	 * @param sousTacheID
+	 * @param date
+	 * @param horaireID
+	 * @param userID
+	 * @throws Exception 
+	 */
+	public static void annuleFutureTache(Integer sousTacheID, Date date, Integer horaireID, Integer userID) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		try{
+			Checklist_Base_Soustache sousTache = (Checklist_Base_Soustache)session.load(Checklist_Base_Soustache.class, sousTacheID);
+			Checklist_Horaire horaire = (Checklist_Horaire)session.load(Checklist_Horaire.class, horaireID);
+			Users user = (Users)session.load(Users.class, userID);
+			
+			Checklist_Annule checkAnnule = new Checklist_Annule();
+			checkAnnule.setDate(date);
+			checkAnnule.setTache(sousTache);
+			checkAnnule.setHoraire(horaire);
+			checkAnnule.setUser(user);
+			
+			session.save(checkAnnule);
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * DELETE d'une annulation de tache
+	 * @param sousTacheID
+	 * @param date
+	 * @param horaireID
+	 * @throws Exception
+	 */
+	public static void deteteAnnuleFutureTache(Integer sousTacheID, Date date, Integer horaireID) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		try{
+			Checklist_Base_Soustache sousTache = (Checklist_Base_Soustache)session.load(Checklist_Base_Soustache.class, sousTacheID);
+			Checklist_Horaire horaire = (Checklist_Horaire)session.load(Checklist_Horaire.class, horaireID);
+			
+			Checklist_Annule checkAnnule = (Checklist_Annule) session.createCriteria(Checklist_Annule.class)
+												.add(Restrictions.eq("date", date))
+												.add(Restrictions.eq("tache", sousTache))
+												.add(Restrictions.eq("horaire", horaire))
+												.setMaxResults(1)
+												.uniqueResult();
+			
+			if(checkAnnule != null)
+				session.delete(checkAnnule);
+			session.getTransaction().commit();
+		}
+		catch (Exception e) {
+			PilotageSession.rollbackTransaction(session);
+			throw e;
+		}
+	}
+
+	/**
+	 * SELECT de toutes les annulations du jour
+	 * @param date
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Annule> getAnnulationsOfTheDay(Date date) {
+		Session session = PilotageSession.getCurrentSession();
+		List<Checklist_Annule> listAnnulations = session.createCriteria(Checklist_Annule.class)
+													.add(Restrictions.eq("date", date))
+													.list();
+		session.getTransaction().commit();
+		return listAnnulations;
+	}
+
+	/**
+	 * COUNT du nombre de tache pour 1 journée
+	 * @param date
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static Integer getNombreTacheDuJour(Date date) {
+		Session session = PilotageSession.getCurrentSession();
+		List<Long>	results= (List<Long>)session.createCriteria(Checklist_Current.class)
+								.add(Restrictions.eq("jour", date))
+								.setProjection(Projections.rowCount())
+								.list();
+		session.getTransaction().commit();
+		if (results != null && results.size() > 0){
+			return results.get(0).intValue();
+		} else {
+			return 0;
+		}
+	}
+	
+	/**
+	 * COUNT du nombre de tache entre 2 dates
+	 * @param premierJour
+	 * @param dernierJour
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public static Integer getNombreTache(Date premierJour, Date dernierJour) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		List<Long>	results= (List<Long>)session.createCriteria(Checklist_Current.class)
+								.add(Restrictions.between("jour", premierJour, dernierJour))
+								.setProjection(Projections.rowCount())
+								.list();
+		session.getTransaction().commit();
+		if (results != null && results.size() > 0){
+			return results.get(0).intValue();
+		} else {
+			return 0;
+		}
+	}
+	
+	/**
+	 * SELECT de toutes les taches du jour
+	 * @param date
+	 * @return
+	 * @throws Exception
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Current> getTacheDuJour(Date date) throws Exception {
+		Session session = PilotageSession.getCurrentSession();
+		
+		List<Checklist_Current>	listChecklist = (List<Checklist_Current>)session.createCriteria(Checklist_Current.class)
+												.add(Restrictions.eq("jour", date))
+												.list();
+		session.getTransaction().commit();
+		return listChecklist;
+	}
+	
+	/**
+	 * SELECT du jour de la tache la plus récente
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static Date getPremierChecklist() {
+		Session session = PilotageSession.getCurrentSession();
+		
+		List<Checklist_Current> listTache = session.createCriteria(Checklist_Current.class)
+											.addOrder(Order.asc("jour"))
+											.setMaxResults(1)
+											.list();
+		session.getTransaction().commit();
+		return listTache.get(0).getJour();
+	}
+	
+	/**
+	 * SELECt de la liste des temps de controle
+	 * @param date
+	 * @return
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Date> getListTimeUsed(Date date) {
+		Session session = PilotageSession.getCurrentSession();
+
+		List<Checklist_Current> listTache = session.createCriteria(Checklist_Current.class)
+											.add(Restrictions.eq("jour", date))
+											.list();
+		session.getTransaction().commit();
+		List<Date> listDate = new ArrayList<Date>();
+		for (Checklist_Current cc : listTache) {
+			if (cc.getTime_used() != null) {
+				listDate.add(cc.getTime_used());
+			}
+		}
+		return listDate;
+	}
+}

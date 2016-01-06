@@ -1,0 +1,22 @@
+V 8.15
+
+Contenu:
+	Correction des heures Oceor au-dessus de la checklist.
+	Modification de pilotage.css (GCE et HN)
+	Modification sur checklist: seuls les pilotes peuvent modifier le statut d'une tâche
+	Correction de administration user
+	Correction de la création et de la modification d'un profil sans droits
+	Partie machine : ajout d'un coffre-fort pour les mots de passe
+	Enregistrement des congés en bdd : seuls les jours de semaine sont comptés
+	
+Modification de la base parametre:
+	Exécuter le script V815_modif_bdd_parametre.sql
+	
+Modification de la base epi:
+	Exécuter le script V815_modif_bdd_pilotage.sql
+	
+Modification de jboss-6.1.0.Final
+	server/default/lib
+	ajouter commons-codec-1.8.jar
+	
+Mettre en place l'EAR

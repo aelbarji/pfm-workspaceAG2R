@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Planning_Modif_Ponctuelle" table="planning_modif_ponctuelle">
+		<id name="id" type="integer" column="id">
+			<generator class="increment"/>
+		</id>
+		
+		<property name="dateDebut" column="dateDebut" type="date" not-null="true" length="10" />
+		<property name="dateFin"   column="dateFin"   type="date" not-null="true" length="10" />
+		<property name="dateModif" column="dateModif" type="date" not-null="true" length="10" />
+		<property name="textCell" column="textCell" type="string" not-null="false" length="15" />
+
+		<many-to-one name="idUser" 		column="idUser" 	 class="pilotage.metier.Users" 				 lazy="false"/>
+		<many-to-one name="idEquipe" 	column="idEquipe" 	 class="pilotage.metier.Planning_Nom_Equipe" lazy="false"/>
+		<many-to-one name="idVacation"	column="idVacation"  class="pilotage.metier.Planning_Vacation" 	 lazy="false"/>
+		<many-to-one name="idUserModif"	column="idUserModif" class="pilotage.metier.Users" 				 lazy="false"/>
+	</class>
+</hibernate-mapping>

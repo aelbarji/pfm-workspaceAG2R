@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2011 16:27:03 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="pilotage.metier.Flux_CFT" table="FLUX_CFT">
+        <id name="id" column="ID" type="java.lang.Integer">
+            <generator class="native" />
+        </id>
+        <property name="libelle" column="LIBELLE" type="java.lang.String" 	not-null="true"/>
+        <property name="deleted" column="DELETED" type="boolean" 			not-null="true"/>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Titre_page" table="titre_page">
+ 	 	<id column="ID" name="id" type="string">
+   <!-- add the generate strategy here -->
+ 		 </id>
+		<property column="DESCRIPTION" generated="never" lazy="false"
+			name="description" type="string" />
+		<property column="LIBELLE" generated="never" lazy="false"
+			name="libelle" type="string" />
+	</class>
+</hibernate-mapping>

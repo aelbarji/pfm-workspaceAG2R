@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Bbr_Consignes" table="BBR_CONSIGNES">
+    	<id name="id" type="long" column="ID" >
+            <generator class="sequence">
+                <param name="sequence">S_BBRCONSIGNE_ID</param>
+            </generator>
+    	</id>
+        <property name="bbrorigine" 	type="string" 		column="BBRORIGINE" 	not-null="true" 	length="50" />
+        <property name="bbrcomposant" 	type="string"		column="BBRCOMPOSANT" 	not-null="true" 	length="100" />
+        <property name="bbrtype" 		type="string" 		column="BBRTYPE" 		not-null="false" 	length="60" />
+        <property name="bbrpriority" 	type="big_decimal" 	column="BBRPRIORITY" 	not-null="true" 	precision="22" scale="0" />
+        <property name="localisation" 	type="string" 		column="LOCALISATION" 	not-null="true" 	length="400" />
+    </class>
+</hibernate-mapping>

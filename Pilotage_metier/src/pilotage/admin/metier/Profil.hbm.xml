@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Profil" table="profil">
+		<id column="ID" name="id">
+			<generator class="increment"/>
+		</id>
+		<property column="LIBELLE" generated="never" lazy="false" name="libelle" type="string" />
+		<many-to-one class="pilotage.admin.metier.Menu" column="ACCUEIL" name="accueil" lazy="false"/>
+		<property column="CLIGN_CONSIGNE" generated="never" lazy="false" name="clign_consigne" type="string" />
+		<property column="admin" lazy="false" name="admin" type="boolean" />
+		<property column="pilote" lazy="false" name="pilote" type="boolean" />
+	</class>
+</hibernate-mapping>

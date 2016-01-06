@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+
+    <class name="pilotage.metier.Com_Incident_Service" table="com_incident_service">
+		<id column="id" name="id" type="integer">
+			<generator class="native" />
+		</id>
+		
+        <many-to-one	class="pilotage.metier.Incidents_Gup"		column="id_incident"		lazy="false"		name="idIncident"		not-null="true" />
+        <many-to-one	class="pilotage.metier.Com_Service"			column="id_service"			lazy="false"		name="idService"	not-null="true" />
+ 
+    </class>
+</hibernate-mapping>

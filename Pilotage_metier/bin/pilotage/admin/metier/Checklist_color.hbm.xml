@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+	<class name="pilotage.admin.metier.Checklist_color" table="checklist_color">
+		<id column="ID" name="id" type="integer">
+			<generator class="increment"/>
+		</id>
+		<property column="CHECKLIST_STATUS" name="checklist_status" 	type="integer" />
+		<property column="COULEUR" 			name="couleur" 				type="string" />
+		<property column="RETARD1" 			name="retard1" 				type="string" />
+		<property column="RETARD2" 			name="retard2" 				type="string" />
+	</class>
+</hibernate-mapping>

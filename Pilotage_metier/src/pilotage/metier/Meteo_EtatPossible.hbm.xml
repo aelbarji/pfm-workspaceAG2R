@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping  package="pilotage.metier">
+    <class name="Meteo_EtatPossible" table="meteo_etatpossible">
+        <id name="id" type="integer" column="id" >
+            <generator class="native" />
+        </id>
+        <property name="libelle_etat" type="string" column="libelle_etat" />
+        <property name="couleur" type="string" column="couleur" />
+        <property name="definition" type="string" column="definition" />
+        <property name="impact" type="integer" column="impact" />
+    </class>
+</hibernate-mapping>

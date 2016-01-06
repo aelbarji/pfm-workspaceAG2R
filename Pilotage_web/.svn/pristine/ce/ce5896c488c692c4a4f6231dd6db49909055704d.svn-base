@@ -1,0 +1,21 @@
+Version V809
+Contenue :
+	Evolution de la saisie des astreintes avec un envoi de mail
+	
+Modification de la BASE EPI	
+	Ajout de la table Astreinte_Destinataire : 
+		lancer le SQL V809_Modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	Ajout de titre de page, ajout de droits et de lien
+		lancer le SQL V809_modif_bdd_param.sql
+		
+Modification du fichier pilotage-service.xml
+	ajout des jndi suivant : 
+			<jndi:binding name="pilotage/mailbandeau"><jndi:value>C:\apps\jbossWorkspace\bandeau-mail-prod.jpg</jndi:value></jndi:binding>
+			<jndi:binding name="pilotage/mailpied"><jndi:value>C:\apps\jbossWorkspace\bandeau-pied-de-page.jpg</jndi:value></jndi:binding>
+			
+Dans le repertoire jbossWorkspace, copier le fichier "astreinte.css" se trouvant dans l'EAR, sous Pilotage_web.war\<entite>\jbossWorkspace
+
+Mettre en place l'EAR
+		

@@ -1,0 +1,11 @@
+V8.18
+
+Contenu:
+	Correction divers bugs: 
+		prob checklist jour férié
+		prob machine affichage appli inactive + activer une appli quand un pilote veut ajouter une appli déjà existante mais inactive
+		prob météo sur changement des jours
+
+Modification de la base epi:
+	modifier la procédure SelectIndicateurMeteo
+	éxécuter modif_bdd_epi_V818.sql

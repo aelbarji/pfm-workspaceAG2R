@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<!-- Generated 2 ao?t 2011 16:09:16 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping package="pilotage.metier">
+	<class name="Alertes_Type" table="ALERTES_TYPE">
+		<id name="id" type="integer" column="ID">
+			<generator class="native"/>
+		</id>
+
+		<property name="type" 		column="TYPE" 		type="string" 	not-null="true"		lazy="false"	/>
+		<property name="deleted" 	column="DELETED" 	type="boolean" 	not-null="true"		lazy="false"	/>
+    </class>
+</hibernate-mapping>

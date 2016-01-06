@@ -1,0 +1,22 @@
+Version V820
+
+Contenue :
+	Tableau de Bord
+
+Modification de la BASE EPI	
+	Ajout nouvelle table consignes_type : 
+		changer le nom de la table "environement" par "environnement" et l'attibut également
+		Dans la table "checklist_base" changer attribut "environement" par "environnement"
+		=> lancer le SQL V820_modif_bdd_pilotage.sql
+	
+Modification de la Base PARAMETRE
+	Ajout titre pour le tableau de bord
+		=> lancer le SQL V820_modif_bdd_parametre.sql
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR

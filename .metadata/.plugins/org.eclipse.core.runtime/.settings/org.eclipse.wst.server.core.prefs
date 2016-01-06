@@ -1,0 +1,4 @@
+#Fri May 16 10:50:28 CEST 2014
+module-start-timeout=300000
+runtimes=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<runtimes>\r\n  <runtime PROPERTY_EXEC_ENVIRONMENT\="JavaSE-1.6" PROPERTY_VM_ID\="1400229238776" PROPERTY_VM_TYPE_ID\="org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType" id\="JBoss 6.0 Runtime" location\="C\:/Users/aelbarji/Documents/Servers/jboss-6.0.0.Final" name\="JBoss 6.0 Runtime" org.jboss.ide.eclipse.as.core.runtime.configurationLocation\="server" org.jboss.ide.eclipse.as.core.runtime.configurationName\="default" runtime-type-id\="org.jboss.ide.eclipse.as.runtime.60" timestamp\="0"/>\r\n</runtimes>\r\n
+eclipse.preferences.version=1

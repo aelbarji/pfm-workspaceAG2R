@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+	<class name="Derogation" table="derogation">
+		<id column="id" name="Id" type="integer">
+			<generator class="native" />
+		</id>
+
+		<property column="telephone" 		generated="never" lazy="false" name="telephone" 	not-null="true" type="string" 	length="20" />
+		<property column="service" 			generated="never" lazy="false" name="service" 		not-null="true" type="string" 				/>
+		<property column="realisateur" 		generated="never" lazy="false" name="realisateur" 	not-null="true" type="string" 				/>
+		<property column="description" 		generated="never" lazy="false" name="description" 	not-null="true" type="string" 				/>
+		<property column="client_touche" 	generated="never" lazy="false" name="clientTouche" 	not-null="true" type="string" 				/>
+		<property column="service_impact" 	generated="never" lazy="false" name="serviceImpact" not-null="true" type="string" 				/>
+		<property column="numars" 			generated="never" lazy="false" name="numars" 		not-null="true" type="string"  	length="30" />
+		<property column="tp" 				generated="never" lazy="false" name="tp" 			not-null="true" type="integer" 	length="4" 	/>
+		<property column="time_demande" 	generated="never" lazy="false" name="timeDemande" 	not-null="true" type="date"					/>
+		<property column="heure_demande" 	generated="never" lazy="false" name="heureDemande" 	not-null="true" type="string" 	length="15" />
+		<property column="etude" 			generated="never" lazy="false" name="etude" 		not-null="true" type="integer" 	length="4" 	/>
+		<property column="retour_arriere" 	generated="never" lazy="false" name="retourArriere" not-null="true" type="integer" 	length="4" 	/>
+		<property column="externe" 			generated="never" lazy="false" name="externe" 		not-null="true" type="integer" 	length="4" 	/>
+		<property column="recette" 			generated="never" lazy="false" name="recette" 		not-null="true" type="integer" 	length="4" 	/>
+		<property column="justificatif" 	generated="never" lazy="false" name="justificatif" 	not-null="true" type="string" 				/>
+		<property column="valider" 			generated="never" lazy="false" name="valider" 		not-null="true" type="string" 	length="30" />
+		<property column="message" 			generated="never" lazy="false" name="message" 		not-null="true" type="string" 				/>
+		<property column="date_creation" 	generated="never" lazy="false" name="date_creation" not-null="true" type="date" 				/>
+
+
+		<many-to-one class="pilotage.metier.Derogation_Type" 			column="id_type" 			lazy="false" 	name="idType" 			/>
+		<many-to-one class="pilotage.metier.Users" 						column="id_nom_demandeur" 	lazy="false" 	name="idNomDemandeur" 	/>
+		<many-to-one class="pilotage.metier.Users" 						column="id_nom_createur" 	lazy="false" 	name="idNomCreateur" 	/>
+		<many-to-one class="pilotage.metier.Derogation_Type_Changement" column="type_changement" 	lazy="false" 	name="typeChangement" 	/>
+		<many-to-one class="pilotage.metier.Applicatifs_Liste" 			column="id_appli" 			lazy="false" 	name="idAppli" 			/>
+		<many-to-one class="pilotage.metier.Derogation_Etat" 			column="etat"				lazy="false" 	name="etat" 			/>
+	</class>
+</hibernate-mapping>

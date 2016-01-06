@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Planning_Nom_Equipe" table="planning_nom_equipe">
+		<id name="id" type="integer" column="id">
+			<generator class="increment"/>
+		</id>
+		<property name="nomEquipe" column="nomEquipe" type="string" not-null="true"/>
+	</class>
+</hibernate-mapping>

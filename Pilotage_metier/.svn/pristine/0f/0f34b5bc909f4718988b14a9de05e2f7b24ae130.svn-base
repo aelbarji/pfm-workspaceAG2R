@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_PlageFonctionnement" table="meteo_plagefonctionnement">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="heureDebut" type="time"	not-null="true" column="heure_debut" />
+        <property name="heureFin" type="time" not-null="true" column="heure_fin" />
+        <property name="etatDesire" type="string" column="etat_desire" />
+        <many-to-one name="zone" class="pilotage.metier.Heures_Oceor" lazy="false" column="zone" />
+        <many-to-one name="indicateur" class="pilotage.metier.Meteo_Indicateur" lazy="false" column="id_indicateur" />
+   		<many-to-one name="seuil" class="pilotage.metier.Meteo_SeuilPlage" lazy="false" column="id_seuil" />
+   		<property name="date_creation" type="timestamp" not-null="true" column="date_creation" />
+        <property name="date_suppression" type="timestamp" column="date_suppression" />
+    </class>
+</hibernate-mapping>

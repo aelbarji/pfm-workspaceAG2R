@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes" table="consignes">
+		<id name="id" type="integer" column="id" >
+			<generator class="native"/>
+		</id>
+		<property		name="date"		column="date"		type="timestamp"	not-null="true"/>
+		<property 		name="text" 	column="text" 		type="string"		not-null="true"/>
+		<property		name="couleur"	column="couleur"	type="boolean"		not-null="true"/>
+		<property 		name="fichierconsigne" 	column="fichierconsigne" 		type="string"/>
+		<property 		name="old" 		column="old" 		type="boolean" 		not-null="true"/>
+		<many-to-one 	name="type"	column="type" 	class="pilotage.metier.Consignes_Type" />
+		<many-to-one 	name="createur"	column="createur" 	class="pilotage.metier.Users" />
+	</class>	
+</hibernate-mapping>

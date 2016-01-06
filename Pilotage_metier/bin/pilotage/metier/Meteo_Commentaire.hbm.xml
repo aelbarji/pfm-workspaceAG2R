@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_Commentaire" table="meteo_commentaire">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="meteo" class="pilotage.metier.Meteo_Meteo" column="id_meteo" lazy="false"/>
+        <property name="commentaire" type="string" not-null="false"  column="commentaire" />
+        <property name="date" type="date" column="date" />
+        <property name="horaire" type="time" column="horaire" />
+    </class>
+</hibernate-mapping>

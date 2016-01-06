@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_Environnement" table="meteo_environnement">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="nom_envir" column="libelle" type="string" length="20" />
+        <property name="technique" column="technique" type="int" />
+        <property name="impact" column="impact" type="int" />
+    </class>
+</hibernate-mapping>

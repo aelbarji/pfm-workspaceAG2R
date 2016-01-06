@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping>
+    <class name="pilotage.metier.Bilan_Colonnes" table="bilan_colonnes">
+    
+     	<id column="id" name="id" type="integer">
+			<generator class="increment"/>
+		</id>
+		
+        <property name="nomDsBilan" column="nomDansBilan" type="string"/>
+    
+		<many-to-one class="pilotage.metier.Incident_Colonnes" column="idIncidentColonne" lazy="false" name="incidentColonne" not-null="true" />
+        <many-to-one class="pilotage.metier.Bilan_Envoie" column="idBilan" 	lazy="false" name="bilan" not-null="true" />
+        <property name="position" column="position" type="java.lang.Integer" lazy="false" not-null="false"/>
+		<property name="taille" column="taille" type="java.lang.Integer" lazy="false" not-null="false"/>
+        
+    </class>
+</hibernate-mapping>

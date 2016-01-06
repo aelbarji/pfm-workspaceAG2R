@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+	
+<hibernate-mapping package="pilotage.metier">
+    <class name="Astreinte_Appel" table="astreinte_appel">
+        <id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+        <many-to-one name="astreinte" column="id_astreinte" class="Astreinte" lazy="false"/>
+        <many-to-one name="incident" column="id_incident" class="Incidents" lazy="false" />
+        <property name="date" column="datetime" type="timestamp" lazy="false" />
+        <many-to-one name="statut" column="id_statut" class="Astreinte_Appel_Statut" lazy="false"/>
+        <property name="commentaire" column="commentaire" type="string" />
+    </class>
+</hibernate-mapping>

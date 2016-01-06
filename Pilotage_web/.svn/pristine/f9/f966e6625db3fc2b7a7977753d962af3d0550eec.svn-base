@@ -1,0 +1,31 @@
+V812
+
+Contenu : Ajout de l'envoi par mail du débordement NOC et de la gestion des destinataires
+
+Modification de la BASE EPI
+	Ajout des tables : debordement_NOC, destinataire, debordement_NOC_destinataire
+	lancer le script sql modif_bdd_pilotage_v813
+
+Modification de la Base PARAMETRE
+	lancer le script sql modif_bdd_parametre_v813
+
+Modification du répertoire jbossWorkspace
+	ajouter : 
+	- debordement_noc.css
+	- foot_noc.jpg
+	- head_debordement.jpg
+
+	Dans email.properties, ajouter :
+	- mailserver.sender.fromGup = itce-b-ppr-edc-pil-pilotage-gup@it-ce.fr
+
+Modification de jboss-6.1.0.Final
+	server/default/lib
+	ajouter joda-time-hibernate-1.3.jar
+
+	ajouter dans : server/default/deploy/pilotage-service.xml
+	<jndi:binding name="pilotage/debordementnoc/head"><jndi:value>C:\apps\jbossWorkspace\head_debordement.jpg</jndi:value></jndi:binding>
+	<jndi:binding name="pilotage/debordementnoc/foot"><jndi:value>C:\apps\jbossWorkspace\foot_noc.jpg</jndi:value></jndi:binding>
+	<jndi:binding name="pilotage/debordementNoc/css"><jndi:value>C:\apps\jbossWorkspace\debordement_noc.css</jndi:value></jndi:binding>
+
+
+Mettre en place l'EAR

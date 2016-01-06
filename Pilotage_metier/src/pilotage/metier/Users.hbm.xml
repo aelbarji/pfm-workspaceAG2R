@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Users" table="users">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property 	name="login" 				column="login" 					type="string" 	not-null="true" length="30" />
+		<property 	name="password" 			column="password" 				type="string" 	not-null="true" length="64" />
+		<property 	name="nom" 					column="nom" 					type="string" 	not-null="true" length="30" />
+		<property 	name="prenom" 				column="prenom" 				type="string" 	not-null="true" length="30" />
+		<property 	name="statut" 				column="statut" 				type="integer" 	not-null="true" length="11" />
+		<property 	name="email" 				column="email" 					type="string" 	not-null="true" 			/>
+		<property 	name="myChecklist" 			column="my_checklist" 			type="integer" 	not-null="true" length="11" />
+		<property 	name="refresshChecklist" 	column="refressh_checklist" 	type="integer" 	not-null="true" length="11" />
+		<property 	name="filtreEnv" 			column="filtre_env" 			type="string"	not-null="true" length="100"/>
+		<property 	name="autoXguard" 			column="Auto_Xguard" 			type="integer" 	not-null="true" length="10" />
+		<property 	name="actif" 				column="actif" 					type="boolean" 	not-null="true" 			/>
+		<property 	name="nrPerpage" 			column="nrPerpage" 				type="integer" 	length="11" />
+	</class>
+</hibernate-mapping>

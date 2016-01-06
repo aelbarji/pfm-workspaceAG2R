@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_EtatCourant" table="meteo_etatcourant">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="indicateur" class="pilotage.metier.Meteo_Indicateur" column="id_indicateur" lazy="false"/>
+        <property name="etat" type="string" not-null="true"  column="etat_courant" />
+        <property name="commentaire" type="string" column="commentaire" />
+        <property name="date" type="date" not-null="true" column="date" />
+        <property name="horaire" type="time" column="horaire" />
+        <property name="heure_saisie" type="time" column="heure_saisie" />
+        <property name="heure_debut" type="time" column="heure_debut" />
+        <property name="heure_fin" type="time" column="heure_fin" />
+    </class>
+</hibernate-mapping>
+

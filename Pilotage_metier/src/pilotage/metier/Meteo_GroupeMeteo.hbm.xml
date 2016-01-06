@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_GroupeMeteo" table="meteo_groupemeteo">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <property name="nom_groupeMeteo" column="nom_groupeMeteo" type="string"	length="20" />
+        <many-to-one name="format" class="Meteo_Format" column="format" lazy="false"/>
+        <property name="timezone" column="timezone" type="string"	length="25" />
+    </class>
+</hibernate-mapping>

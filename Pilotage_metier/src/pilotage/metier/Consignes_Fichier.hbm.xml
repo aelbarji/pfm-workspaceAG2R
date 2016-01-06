@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Consignes_Fichier" table="consignes_fichier">
+		<id name="id" type="integer" column="id">
+			<generator class="org.hibernate.id.Assigned"/>
+		</id>
+
+		<property
+			name="nomFichier"
+			column="Nom_fichier"
+			type="string"
+			not-null="true"
+			length="250"
+		/>
+		<property
+			name="localisation"
+			column="Localisation"
+			type="string"
+			not-null="true"
+			length="400"
+		/>
+		<property
+			name="lastmodif"
+			column="Lastmodif"
+			type="java.lang.Long"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="hashcode"
+			column="Hashcode"
+			type="integer"
+			not-null="true"
+			length="10"
+		/>
+		<property
+			name="taille"
+			column="Taille"
+			type="java.math.BigInteger"
+			not-null="true"
+			length="20"
+		/>
+		<property
+			name="m_New"
+			column="new"
+			type="boolean"
+			not-null="true"
+		/>
+		<property
+			name="indexe"
+			column="indexe"
+			type="java.lang.Byte"
+			not-null="true"
+			length="3"
+		/>
+	</class>	
+</hibernate-mapping>

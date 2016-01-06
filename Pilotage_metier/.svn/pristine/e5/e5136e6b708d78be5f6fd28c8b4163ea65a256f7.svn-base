@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+<hibernate-mapping package="pilotage.metier">
+ <class name="Appli_Envir" table="appli_envir">
+  <id column="id" name="id" type="integer">
+   <generator class="native"/>
+  </id>
+  <many-to-one class="pilotage.metier.Applicatifs_Liste"
+   column="id_application" lazy="false" name="idApplication"/>
+  <many-to-one column="id_environnement" name="idEnvironnement" lazy="false" class="pilotage.metier.Environnement"/>
+
+ </class>
+</hibernate-mapping>

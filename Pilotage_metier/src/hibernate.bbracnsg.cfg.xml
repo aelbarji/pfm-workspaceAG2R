@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-configuration PUBLIC "-//Hibernate/Hibernate Configuration DTD 3.0//EN"
+                                         "http://www.hibernate.org/dtd/hibernate-configuration-3.0.dtd">
+<hibernate-configuration>
+ <session-factory>
+  <property name="hibernate.dialect">org.hibernate.dialect.Oracle10gDialect</property>
+  <property name="hibernate.connection.datasource">java:OracleDSBBr</property>
+  <property name="hibernate.default_schema">BBRA</property>
+  <property name="hibernate.show_sql">false</property>
+  <property name="hibernate.format_sql">true</property>
+  <property name="current_session_context_class">org.hibernate.context.ThreadLocalSessionContext</property>
+  <!-- hibernate.pilotage.cfg.xml -->
+  <mapping resource="pilotage/metier/Bbr_Consignes.hbm.xml"/>
+ </session-factory>
+</hibernate-configuration>

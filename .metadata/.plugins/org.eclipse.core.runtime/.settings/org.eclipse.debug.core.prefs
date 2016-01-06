@@ -1,0 +1,3 @@
+#Mon Sep 15 14:15:08 CEST 2014
+prefWatchExpressions=<?xml version\="1.0" encoding\="UTF-8" standalone\="no"?>\r\n<watchExpressions>\r\n<expression enabled\="true" text\="f1_notFerie"/>\r\n<expression enabled\="true" text\="listMachine"/>\r\n<expression enabled\="true" text\="listService"/>\r\n<expression enabled\="true" text\="listApp"/>\r\n<expression enabled\="true" text\="request.getParameter(&quot;type&quot;)"/>\r\n<expression enabled\="true" text\="lpcpj"/>\r\n</watchExpressions>\r\n
+eclipse.preferences.version=1

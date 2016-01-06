@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD//EN"
+                                   "http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd">
+
+<hibernate-mapping package="pilotage.metier">
+    <class name="Meteo_Service_Meteo" table="meteo_service_meteo">
+        <id name="id" type="integer" column="id">
+            <generator class="native" />
+        </id>
+        <many-to-one name="meteo" class="pilotage.metier.Meteo_Meteo" lazy="false" column="id_meteo" />
+        <many-to-one name="service" class="pilotage.metier.Meteo_Service" lazy="false" column="id_service" />
+    	<property name="dateCreation" type="timestamp" not-null="true" column="date_creation" />
+        <property name="dateSuppression" type="timestamp" column="date_suppression" />
+    </class>
+</hibernate-mapping>

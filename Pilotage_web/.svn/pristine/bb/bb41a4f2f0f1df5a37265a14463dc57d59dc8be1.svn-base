@@ -1,0 +1,33 @@
+Version V9.2
+
+Contenue :
+	N°82 : Validation JQuery Engine
+	N°119 Incidents : reorganisation des impacts incidents type Drag&Drop/ "Base Incident" persistence de la recherche
+	N°111 checklist
+
+Modification de la BASE EPI	
+
+	Changement classes JAVA/OBJET:
+		Creation de nouvelle classe : RedirectCreateTypesIncidentsAction et saveImpactTypesIncidentsAction.
+		Modification de l'ensemble des classe incidents type (create, modify, show et redirect)
+		Modification de IncidentsTypesDatabaseService.java
+		Mise à jour de  struts.xml
+		N°111 : modification ChecklistTachesDatabaseService.java méthode delete(integer)
+				ChecklistTachesDatabaseService.java méthode modify(...)
+				ModifyChecklistBaseAction.java
+	Changement JSP:	
+		incidents types : 
+			creation d'une nouvelle jsp createTypes.jsp.
+			Modification listTypes.jsp et modifyType.jsp
+	Correction quleques problemes de codes meteo : ajout de l'action showCreateCaisseAction manquante
+	Correction de bugs liés à la fermeture de session : session.geTransaction().commit();
+Modification de la Base PARAMETRE
+	pas de modification
+		
+Modification du fichier pilotage-service.xml
+	pas de modification			
+
+Modification du répertoire jbossWorkspace
+	pas de modification
+
+Mettre en place l'EAR
