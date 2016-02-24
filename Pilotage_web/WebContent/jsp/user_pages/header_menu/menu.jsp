@@ -138,7 +138,7 @@
 			        	<s:iterator value="#rt.children" id="sm1">
 			        		<li>
 			        			<a class="menuLink" href='<s:property value="#sm1.lien"/>'><span><s:property value="#sm1.menu.libelle"/></span></a> 
-			        
+			        			
 			       				<s:if test="#sm1.children.size()>0">
 			        				<ul>
 			        					<!-- 3eme niveau -->
@@ -160,6 +160,7 @@
 			        				</ul>
 			        			</s:if>
 			        		</li>
+			        		
 				        </s:iterator>
 			        </ul>
 			    </li>

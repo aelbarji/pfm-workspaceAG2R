@@ -19,6 +19,7 @@
 				$('#heureDebut').timeEntry({show24Hours: true , spinnerImage: ''});
 				$('#heureFin').timeEntry({show24Hours: true , spinnerImage: ''});
 				$('#frequence').timeEntry({show24Hours: true , spinnerImage: ''});
+				$('#heureReception').timeEntry({show24Hours: true , spinnerImage: ''});
 			});
 		
 	        $.subscribe('dateExceptionnelleChange',function(event,data) {
@@ -28,7 +29,7 @@
 			function onLoad(){
 				changeTypeFrequenceDate('<s:property value="%{typeFrequenceDate}" />');
 				changeTypeFrequenceHeure('<s:property value="%{typeFrequenceHeure}" />');
-
+				changeTypeFrequenceDemande('<s:property value="%{typeDemande}" />');
 			}
 			
 			//Changement de type de fréquence de date
@@ -53,6 +54,22 @@
 					$("#frequenceHeure1").hide();
 					$("#frequenceHeure2").show();
 				}
+			}
+
+			//Changement de type de la demande
+			function changeTypeFrequenceDemande(frequence) {
+				if (frequence == 0) {
+					$("#champsObligatoires").hide();
+				}
+				for(var i = 1; i < 3; ++i) {
+					if(frequence == i){
+						$("#frequenceDemande" + i).show();
+						$("#champsObligatoires").show();
+					}
+					else{
+						$("#frequenceDemande" + i).hide();
+					}
+				} 
 			}
 
 			//lorsqu'on sélectionne une entrée dans les jours fériés, on voit si on check la case 'tous'
@@ -440,7 +457,7 @@
 				
 				//fréquence heure exceptionnelle
 				if(document.getElementById('typeFrequenceHeure').value == 1){
-					if(! document.getElementById("heurePonctuelle0")){
+					if(! document.getElementById("heurePonctuelle")){
 						alert("Pour un horaire ponctuel, veuillez ajouter au moins une heure");
 						return;
 					}
@@ -513,6 +530,23 @@
 						document.getElementById("decalageSousTacheMinute" + i).value = "0" + minuteDecalage;
 					}
 					i++;
+				}
+
+				//fréquence demande
+				if(document.getElementById('typeFrequenceDemande').value == 1){
+					if(document.getElementById("heureReception").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+						 || document.getElementById("nomEmetteur").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+						  || document.getElementById("descriptionMail").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == "" ){
+						alert("Veuillez entrer une heure reception, le nom de l'émetteur et le description");
+						return;
+					}
+				}
+				else if(document.getElementById('typeFrequenceDemande').value == 2){
+					if(document.getElementById("numeroObs").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+						|| document.getElementById("descriptionObs").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""){
+						alert("Veuillez entrer numéro OBS et le description");
+						return;
+					}
 				}
 				
 				submitData('createChecklistBaseAction.action');
@@ -945,6 +979,68 @@
 
 			<s:include
 				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+				
+			<br><br><br>
+				
+			<div class="contentTableLeft">
+			<h3>Si la tâche est une demande veuillez renseigner les champs suivants:</h3>
+				<table class="dataTable" rules="rows">
+					<tr>
+						<td class="titreColonne">Type de la demande</td>
+					</tr>
+					<tr>
+						<td align="center"><s:select
+								list="#{'0':'Sélectionner un type', '1':'Mail', '2':'OBS'}"
+								name="typeDemande" id="typeFrequenceDemande"
+								onchange="changeTypeFrequenceDemande(this.value)" /></td>
+					</tr>
+					<tr id="frequenceDemande1">
+						<td align="center">
+							<table width="90%">
+								<col width="50%" />
+								<col width="50%" />
+								<tr>
+									<td align="center">Heure r&eacute;ception:
+										<input type="text" name="heureReception" id="heureReception" size="6" value="${heureReception}" />
+									</td>
+									<td align="center">Nom &eacute;metteur:
+										<input type="text" name="nomEmetteur" id="nomEmetteur" size="30" />
+									</td>
+								</tr>
+								<tr>
+									<td align="center" colspan="2">Description:
+										<input type="text" name="descriptionMail" id="descriptionMail" size="30" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					
+					<tr id="frequenceDemande2">
+						<td align="center">
+							<table width="90%">
+								<col width="50%" />
+								<col width="50%" />
+								<tr>
+									<td align="center">Num&eacute;ro OBS:
+										<input type="text" name="numeroObs" id="numeroObs" size="15" />
+									</td>
+									<td align="center">Description:
+										<input type="text" name="descriptionObs" id="descriptionObs" size="30" />
+									</td>
+								</tr>
+				
+							</table>
+						</td> 
+					</tr>
+				</table>
+			
+			<div id="champsObligatoires">
+			 <s:include
+				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+			</div>	
+				
+			</div>
 		</s:form>
 	</div>
 </body>

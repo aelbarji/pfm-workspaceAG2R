@@ -16,6 +16,13 @@ public class Checklist_Base implements Serializable {
 	private Checklist_Criticite criticite;
 	private Boolean actif;
 	
+	private String typeDemande;
+	private Date heureReception;
+	private String nomEmetteur;
+	private String numeroObs;
+	private String descriptionMail;
+	private String descriptionObs;
+	
 	public Integer getId() {
 		return id;
 	}
@@ -58,4 +65,41 @@ public class Checklist_Base implements Serializable {
 	public void setActif(Boolean actif) {
 		this.actif = actif;
 	}
+	public String getTypeDemande() {
+		return typeDemande;
+	}
+	public void setTypeDemande(String typeDemande) {
+		this.typeDemande = typeDemande;
+	}
+	public Date getHeureReception() {
+		return heureReception;
+	}
+	public void setHeureReception(Date dateTime) {
+		this.heureReception = dateTime;
+	}
+	public String getNomEmetteur() {
+		return nomEmetteur;
+	}
+	public void setNomEmetteur(String nomEmetteur) {
+		this.nomEmetteur = nomEmetteur;
+	}
+	public String getNumeroObs() {
+		return numeroObs;
+	}
+	public void setNumeroObs(String numeroObs) {
+		this.numeroObs = numeroObs;
+	}
+	public String getDescriptionMail() {
+		return descriptionMail;
+	}
+	public void setDescriptionMail(String descriptionMail) {
+		this.descriptionMail = descriptionMail;
+	}
+	public String getDescriptionObs() {
+		return descriptionObs;
+	}
+	public void setDescriptionObs(String descriptionObs) {
+		this.descriptionObs = descriptionObs;
+	}
+	
 }

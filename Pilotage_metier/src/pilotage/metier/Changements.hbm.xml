@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Changements" table="changements">
+		<id name="id" type="integer" column="id">
+			<generator class="native"/>
+		</id>
+
+		<property
+			name="resume"
+			column="resume"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="priorite"
+			column="priorite"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="etat"
+			column="etat"
+			type="string"
+			not-null="true"
+		/>
+		<property
+			name="dateDebut"
+			column="date_debut"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="dateFin"
+			column="date_fin"
+			type="timestamp"
+			not-null="true"
+			length="19"
+		/>
+		<property
+			name="demandeur"
+			column="demandeur"
+			type="string"
+		/>
+		<property
+			name="valideur"
+			column="valideur"
+			type="string"
+		/>
+	</class>	
+</hibernate-mapping>

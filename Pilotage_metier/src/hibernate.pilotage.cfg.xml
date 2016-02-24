@@ -73,6 +73,7 @@
 		<mapping resource="pilotage/metier/Bilan_Test.hbm.xml" />
 		<mapping resource="pilotage/metier/Bug.hbm.xml" />
 		<mapping resource="pilotage/metier/Changement.hbm.xml" />
+		<mapping resource="pilotage/metier/Changements.hbm.xml" />
 		<mapping resource="pilotage/metier/Changement_Status.hbm.xml" />
 		<mapping resource="pilotage/metier/Chat.hbm.xml" />
 		<mapping resource="pilotage/metier/Checklist_Annule.hbm.xml" />
@@ -107,6 +108,7 @@
 		<mapping resource="pilotage/metier/Debordement_NOC.hbm.xml"/>
 		<mapping resource="pilotage/metier/Destinataires.hbm.xml"/>
 		<mapping resource="pilotage/metier/Incidents_Gup.hbm.xml"/>
+		<mapping resource="pilotage/metier/Incidents_Itsm.hbm.xml"/>
 		<mapping resource="pilotage/metier/Com_Service.hbm.xml"/>
 		<mapping resource="pilotage/metier/Com_domaine.hbm.xml"/>
 		<mapping resource="pilotage/metier/Com_Incident_Domaine.hbm.xml"/>

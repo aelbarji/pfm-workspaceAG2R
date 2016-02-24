@@ -54,6 +54,12 @@ public class PilotageConstants {
 	public static final Integer PROFIL_PILOTE = 1;
 	
 	/**
+	 * Constantes de demandes
+	 */
+	public static final Integer DEMANDE_MAIL = 1;
+	public static final Integer DEMANDE_OBS = 2;
+	
+	/**
 	 * Constantes de menu
 	 */
 	public static final String AFFECTATION_LISTE_MENU = "AFFECTATION_LISTE_MENU";

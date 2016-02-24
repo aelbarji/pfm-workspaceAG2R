@@ -13,6 +13,13 @@
 		<property name="dateDebut" 	column="date_debut" type="date" 	not-null="true" 	length="10"	/>
 		<property name="actif" 		column="actif" 		type="boolean" 	not-null="true" 				/>
 		
+		<property name="typeDemande" column="type_demande" type="string" />
+		<property name="heureReception" column="heure_reception" type="timestamp" />
+		<property name="nomEmetteur" column="nom_emetteur" type="string" />
+		<property name="numeroObs" column="numero_obs" type="string" />
+		<property name="descriptionMail" column="description_mail" type="string" />
+		<property name="descriptionObs" column="description_obs" type="string" />
+		
 		<many-to-one 	name="etat"				column="etat" 			class="pilotage.metier.Checklist_Etat" 		lazy="false"	/>
 		<many-to-one 	name="environnement"		column="environnement" 	class="pilotage.metier.Environnement" 		lazy="false"	/>
 		<many-to-one 	name="criticite"		column="criticite" 		class="pilotage.metier.Checklist_Criticite" lazy="false"	/>

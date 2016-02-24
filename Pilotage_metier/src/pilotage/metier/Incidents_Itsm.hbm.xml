@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC
+	"-//Hibernate/Hibernate Mapping DTD//EN"
+	"http://www.hibernate.org/dtd/hibernate-mapping-3.0.dtd" >
+
+<hibernate-mapping package="pilotage.metier">
+	<class name="Incidents_Itsm" table="incidents_itsm">
+		<id name="id" type="integer" column="id">
+			<generator class="native" />
+		</id>
+
+		<property name="idRequete" column="id_requete" type="string"
+			not-null="true" />
+		<property name="resume" column="resume" type="string"
+			not-null="true" />
+		<property name="etat" column="etat" type="string" not-null="true" />
+		<property name="priorite" column="priorite" type="string"
+			not-null="true" />
+		<property name="dateCreation" column="date_creation" type="timestamp" not-null="true"/>
+		<property name="dateModification" column="date_modification"
+			type="timestamp" not-null="true" />
+		<property name="urgence" column="urgence" type="string" not-null="true" />
+		<property name="impact" column="impact" type="string" not-null="true" />
+		<property name="nbRelance" column="nb_relance" type="integer"
+			not-null="true" />
+	</class>
+</hibernate-mapping>

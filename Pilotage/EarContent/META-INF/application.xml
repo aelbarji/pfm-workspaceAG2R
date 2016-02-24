@@ -7,4 +7,10 @@
       <context-root>pilotage</context-root>
     </web>
   </module>
+  <module>
+    <web>
+      <web-uri>Pilotage_WS.war</web-uri>
+      <context-root>Pilotage_WS</context-root>
+    </web>
+  </module>
 </application>

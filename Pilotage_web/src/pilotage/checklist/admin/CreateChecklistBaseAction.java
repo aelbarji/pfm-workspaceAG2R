@@ -44,6 +44,13 @@ public class CreateChecklistBaseAction extends AbstractAction {
 	private Integer etat;
 	private Integer criticite;
 	
+	private String typeDemande;
+	private String heureReception;
+	private String nomEmetteur;
+	private String numeroObs;
+	private String descriptionMail;
+	private String descriptionObs;
+	
 	//Variables de la fréquence hebdo
 	private boolean f1_lundi;
 	private boolean f1_mardi;
@@ -561,6 +568,54 @@ public class CreateChecklistBaseAction extends AbstractAction {
 		this.listSousTaches = listSousTaches;
 	}
 
+	public String getTypeDemande() {
+		return typeDemande;
+	}
+
+	public void setTypeDemande(String typeDemande) {
+		this.typeDemande = typeDemande;
+	}
+
+	public String getHeureReception() {
+		return heureReception;
+	}
+
+	public void setHeureReception(String heureReception) {
+		this.heureReception = heureReception;
+	}
+
+	public String getNomEmetteur() {
+		return nomEmetteur;
+	}
+
+	public void setNomEmetteur(String nomEmetteur) {
+		this.nomEmetteur = nomEmetteur;
+	}
+
+	public String getNumeroObs() {
+		return numeroObs;
+	}
+
+	public void setNumeroObs(String numeroObs) {
+		this.numeroObs = numeroObs;
+	}
+
+	public String getDescriptionMail() {
+		return descriptionMail;
+	}
+
+	public void setDescriptionMail(String descriptionMail) {
+		this.descriptionMail = descriptionMail;
+	}
+
+	public String getDescriptionObs() {
+		return descriptionObs;
+	}
+
+	public void setDescriptionObs(String descriptionObs) {
+		this.descriptionObs = descriptionObs;
+	}
+
 	@Override
 	protected boolean validateMetier() {
 		return true;
@@ -635,33 +690,33 @@ public class CreateChecklistBaseAction extends AbstractAction {
 			//Sauvegarde en base
 			Integer id = null;
 			if(PilotageConstants.DATE_FREQ_HEBDO.equals(typeFrequenceDate)){
-				id = ChecklistTachesDatabaseService.saveHebdo(nom, environnement, DateService.strToDate(dateDebut), etat, criticite,
+				id = ChecklistTachesDatabaseService.saveHebdo(nom, environnement, DateService.strToDate(dateDebut), etat, criticite, typeDemande, DateService.getTimeFromString(heureReception), nomEmetteur, descriptionMail, descriptionObs, numeroObs,
 						f1_lundi, f1_mardi, f1_mercredi, f1_jeudi, f1_vendredi, f1_samedi, f1_dimanche, f1_notFerie,
 						typeFrequenceHeure, listHeuresPonctuelles, DateService.getTimeFromString(heureDebut), DateService.getTimeFromString(heureFin), DateService.getTimeFromString(frequence),
 						listSousTaches,documentsSousTaches);
 			}
 			else if(PilotageConstants.DATE_FREQ_MENSUELLE.equals(typeFrequenceDate)){
-				id = ChecklistTachesDatabaseService.saveMensuel(nom, environnement, DateService.strToDate(dateDebut), etat, criticite,
+				id = ChecklistTachesDatabaseService.saveMensuel(nom, environnement, DateService.strToDate(dateDebut), etat, criticite, typeDemande, DateService.getTimeFromString(heureReception), nomEmetteur, descriptionMail, descriptionObs, numeroObs,
 						f2_1er, f2_2eme, f2_3eme, f2_4eme, f2_der,
 						f2_lundi, f2_mardi, f2_mercredi, f2_jeudi, f2_vendredi, f2_samedi, f2_dimanche, f2_jour, f2_notFerie,
 						typeFrequenceHeure, listHeuresPonctuelles, DateService.getTimeFromString(heureDebut), DateService.getTimeFromString(heureFin), DateService.getTimeFromString(frequence),
 						listSousTaches,documentsSousTaches);
 			}
 			else if(PilotageConstants.DATE_FREQ_PAIR_IMPAIR.equals(typeFrequenceDate)){
-				id = ChecklistTachesDatabaseService.saveSemainePairImpair(nom, environnement, DateService.strToDate(dateDebut), etat, criticite,
+				id = ChecklistTachesDatabaseService.saveSemainePairImpair(nom, environnement, DateService.strToDate(dateDebut), etat, criticite, typeDemande, DateService.getTimeFromString(heureReception), nomEmetteur, descriptionMail, descriptionObs, numeroObs,
 						f3_pair, f3_impair,
 						f3_lundi, f3_mardi, f3_mercredi, f3_jeudi, f3_vendredi, f3_samedi, f3_dimanche, f3_notFerie,
 						typeFrequenceHeure, listHeuresPonctuelles, DateService.getTimeFromString(heureDebut), DateService.getTimeFromString(heureFin), DateService.getTimeFromString(frequence),
 						listSousTaches,documentsSousTaches);
 			}
 			else if(PilotageConstants.DATE_FREQ_FERIE.equals(typeFrequenceDate)){
-				id = ChecklistTachesDatabaseService.saveFerie(nom, environnement, DateService.strToDate(dateDebut), etat, criticite,
+				id = ChecklistTachesDatabaseService.saveFerie(nom, environnement, DateService.strToDate(dateDebut), etat, criticite, typeDemande, DateService.getTimeFromString(heureReception), nomEmetteur, descriptionMail, descriptionObs, numeroObs,
 						veilleFerie, jourFerie, lendemainFerie,
 						typeFrequenceHeure, listHeuresPonctuelles, DateService.getTimeFromString(heureDebut), DateService.getTimeFromString(heureFin), DateService.getTimeFromString(frequence),
 						listSousTaches,documentsSousTaches);
 			}
 			else if(PilotageConstants.DATE_FREQ_EXCEPTIONNELLE.equals(typeFrequenceDate)){
-				id = ChecklistTachesDatabaseService.saveExceptionnel(nom, environnement, DateService.strToDate(dateDebut), etat, criticite,
+				id = ChecklistTachesDatabaseService.saveExceptionnel(nom, environnement, DateService.strToDate(dateDebut), etat, criticite, typeDemande, DateService.getTimeFromString(heureReception), nomEmetteur, descriptionMail, descriptionObs, numeroObs,
 						listJoursExceptionnels,
 						typeFrequenceHeure, listHeuresPonctuelles, DateService.getTimeFromString(heureDebut), DateService.getTimeFromString(heureFin), DateService.getTimeFromString(frequence),
 						listSousTaches,documentsSousTaches);

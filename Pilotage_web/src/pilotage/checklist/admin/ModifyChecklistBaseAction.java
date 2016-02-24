@@ -11,8 +11,6 @@ import java.util.Map.Entry;
 import javax.servlet.http.HttpServletRequest;
 
 import org.apache.struts2.ServletActionContext;
-import org.joda.time.DateTime;
-import org.joda.time.LocalDateTime;
 
 import pilotage.database.checklist.ChecklistBaseDatabaseService;
 import pilotage.database.checklist.ChecklistBaseSousTacheDatabaseService;
@@ -53,7 +51,7 @@ public class ModifyChecklistBaseAction extends AbstractAction {
 
 	private Integer typeFrequenceDate;
 	private Integer typeFrequenceHeure;
-
+	
 	// Variables de base
 	private String nom;
 	private Integer environnement;
@@ -61,6 +59,13 @@ public class ModifyChecklistBaseAction extends AbstractAction {
 	private Integer etat;
 	private Integer criticite;
 	private Integer tzTache;
+	
+	private String typeDemande;
+	private String heureReception;
+	private String nomEmetteur;
+	private String numeroObs;
+	private String descriptionMail;
+	private String descriptionObs;
 
 	// Variables de la fréquence hebdo
 	private boolean f1_lundi;
@@ -595,6 +600,54 @@ public class ModifyChecklistBaseAction extends AbstractAction {
 		this.listSousTaches = listSousTaches;
 	}
 
+	public String getTypeDemande() {
+		return typeDemande;
+	}
+
+	public void setTypeDemande(String typeDemande) {
+		this.typeDemande = typeDemande;
+	}
+
+	public String getHeureReception() {
+		return heureReception;
+	}
+
+	public void setHeureReception(String heureReception) {
+		this.heureReception = heureReception;
+	}
+
+	public String getNomEmetteur() {
+		return nomEmetteur;
+	}
+
+	public void setNomEmetteur(String nomEmetteur) {
+		this.nomEmetteur = nomEmetteur;
+	}
+
+	public String getNumeroObs() {
+		return numeroObs;
+	}
+
+	public void setNumeroObs(String numeroObs) {
+		this.numeroObs = numeroObs;
+	}
+
+	public String getDescriptionMail() {
+		return descriptionMail;
+	}
+
+	public void setDescriptionMail(String descriptionMail) {
+		this.descriptionMail = descriptionMail;
+	}
+
+	public String getDescriptionObs() {
+		return descriptionObs;
+	}
+
+	public void setDescriptionObs(String descriptionObs) {
+		this.descriptionObs = descriptionObs;
+	}
+
 	@Override
 	protected boolean validateMetier() {
 		return true;
@@ -955,6 +1008,12 @@ public class ModifyChecklistBaseAction extends AbstractAction {
 					DateService.strToDate(dateDebut),
 					etat,
 					criticite,
+					typeDemande,
+					DateService.getTimeFromString(heureReception),
+					nomEmetteur,
+					descriptionMail,
+					descriptionObs,
+					numeroObs,
 					// argument sur les dates à modifier si les frequences sont
 					// =
 					typeFrequenceDate,

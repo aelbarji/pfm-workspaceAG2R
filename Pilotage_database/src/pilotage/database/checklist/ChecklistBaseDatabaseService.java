@@ -4,6 +4,7 @@ import java.util.Date;
 import java.util.List;
 
 import org.hibernate.Criteria;
+import org.hibernate.SQLQuery;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Projections;
@@ -31,7 +32,7 @@ public class ChecklistBaseDatabaseService {
 	 * @param pagination 
 	 * @return
 	 */
-	public static List<Checklist_Base> getAll(Pagination<Checklist_Base> pagination, String sort, String sens, String filtreNom, Integer filtreEnvironnement, String filtreDateDebut, Integer filtreEtat, Integer filtreCriticite) {
+	public static List<Checklist_Base> getAll(Pagination<Checklist_Base> pagination, String sort, String sens, String filtreNom, Integer filtreEnvironnement, String filtreDateDebut, Integer filtreEtat, Integer filtreCriticite, Integer filtreDemandes) {
 		Session session = PilotageSession.getCurrentSession();
 		Criteria criteria = session.createCriteria(Checklist_Base.class);
 		criteria.add(Restrictions.eq("actif", Boolean.TRUE));
@@ -60,6 +61,10 @@ public class ChecklistBaseDatabaseService {
 			criteria.add(Restrictions.like("criticite", criticite));
 		}
 		
+		if (filtreDemandes != null && filtreDemandes == 1) {
+			criteria.add(Restrictions.or(Restrictions.eq("typeDemande", "1"), Restrictions.eq("typeDemande", "2")));
+		}
+		
 		if("environnement".equals(sort)){
 			criteria.createAlias("environnement", "env", Criteria.LEFT_JOIN);
 			criteria.addOrder("desc".equals(sens) ? Order.desc("env.environnement") : Order.asc("env.environnement"));
@@ -80,7 +85,26 @@ public class ChecklistBaseDatabaseService {
 		session.getTransaction().commit();
 		return listCB;
 	}
-
+	
+	
+	/**
+	 * SELECT demandes
+	 */
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Base> getDemandes() {
+		Session session = PilotageSession.getCurrentSession();
+		String stringQuery = "SELECT cb.* FROM Checklist_base cb "
+				+ "WHERE cb.type_demande > 0 "
+				+ "AND cb.etat IN (SELECT id FROM checklist_etat) "
+				+ "AND cb.environnement IN (SELECT id FROM environnement) "
+				+ "AND cb.criticite IN (SELECT id FROM checklist_criticite)";
+		SQLQuery query = session.createSQLQuery(stringQuery);
+		query.addEntity(Checklist_Base.class);
+		List<Checklist_Base> list = query.list();
+		session.getTransaction().commit();
+		return list;
+	}
+	
 	/**
 	 * SELECT d'une checklist_base
 	 * @param selectRow

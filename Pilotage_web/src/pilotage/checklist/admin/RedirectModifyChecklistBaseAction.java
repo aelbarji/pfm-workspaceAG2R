@@ -1,6 +1,8 @@
 package pilotage.checklist.admin;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import pilotage.database.applicatif.EnvironmentDatabaseService;
@@ -60,6 +62,13 @@ public class RedirectModifyChecklistBaseAction extends AbstractAction {
 	private String dateDebut;
 	private Integer etat;
 	private Integer criticite;
+	
+	private String typeDemande;
+	private String heureReception;
+	private String nomEmetteur;
+	private String numeroObs;
+	private String descriptionMail;
+	private String descriptionObs;
 	
 	//Variables de la fréquence hebdo
 	private boolean f1_lundi;
@@ -599,6 +608,54 @@ public class RedirectModifyChecklistBaseAction extends AbstractAction {
 		this.documentsSousTaches = documentsSousTaches;
 	}
 
+	public String getTypeDemande() {
+		return typeDemande;
+	}
+
+	public void setTypeDemande(String typeDemande) {
+		this.typeDemande = typeDemande;
+	}
+
+	public String getHeureReception() {
+		return heureReception;
+	}
+
+	public void setHeureReception(String heureReception) {
+		this.heureReception = heureReception;
+	}
+
+	public String getNomEmetteur() {
+		return nomEmetteur;
+	}
+
+	public void setNomEmetteur(String nomEmetteur) {
+		this.nomEmetteur = nomEmetteur;
+	}
+
+	public String getNumeroObs() {
+		return numeroObs;
+	}
+
+	public void setNumeroObs(String numeroObs) {
+		this.numeroObs = numeroObs;
+	}
+
+	public String getDescriptionMail() {
+		return descriptionMail;
+	}
+
+	public void setDescriptionMail(String descriptionMail) {
+		this.descriptionMail = descriptionMail;
+	}
+
+	public String getDescriptionObs() {
+		return descriptionObs;
+	}
+
+	public void setDescriptionObs(String descriptionObs) {
+		this.descriptionObs = descriptionObs;
+	}
+
 	@Override
 	protected boolean validateMetier() {
 		return true;
@@ -620,6 +677,19 @@ public class RedirectModifyChecklistBaseAction extends AbstractAction {
 				dateDebut = DateService.dateToStr(base.getDateDebut(), DateService.p1);
 				etat = base.getEtat().getId();
 				criticite = base.getCriticite().getId();
+				
+				typeDemande = base.getTypeDemande();
+				if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_MAIL) {
+					nomEmetteur = base.getNomEmetteur();
+					descriptionMail = base.getDescriptionMail();
+					Date heure = base.getHeureReception();
+					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+					heureReception = dateFormat.format(heure);
+				}
+				else if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_OBS) {
+					numeroObs = base.getNumeroObs();
+					descriptionObs = base.getDescriptionObs();
+				}
 				
 				//jours exceptionnels
 				List<Checklist_Exceptionnel> listJoursExceptionnels = ChecklistExceptionnelDatabaseService.getListFromBase(selectRow);

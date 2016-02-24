@@ -44,4 +44,15 @@ public class ChecklistHoraireDatabaseService {
 		session.getTransaction().commit();
 		return ch.getId();
 	}
+	
+	public static Date getHoraire(Checklist_Base checklist) {
+		Session session = PilotageSession.getCurrentSession();
+
+		Checklist_Horaire ch = (Checklist_Horaire) session
+				.createCriteria(Checklist_Horaire.class)
+				.add(Restrictions.eq("idChecklist", checklist))
+				.uniqueResult();
+		session.getTransaction().commit();
+		return ch.getHoraire();
+	}
 }

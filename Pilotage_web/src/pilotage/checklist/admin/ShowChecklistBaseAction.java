@@ -1,8 +1,8 @@
 package pilotage.checklist.admin;
 
 import java.util.List;
-import net.sf.json.JSONObject;
 
+import net.sf.json.JSONObject;
 import pilotage.database.applicatif.EnvironmentDatabaseService;
 import pilotage.database.checklist.ChecklistBaseDatabaseService;
 import pilotage.database.checklist.ChecklistCriticiteDatabaseService;
@@ -19,7 +19,7 @@ import pilotage.service.constants.PilotageConstants;
 import pilotage.service.string.StringConverter;
 import pilotage.utils.Pagination;
 
-public class ShowChecklistBaseAction extends AbstractAction {
+public class ShowChecklistBaseAction extends AbstractAction  {
 
 	private static final long serialVersionUID = 8601252711002185215L;
 	
@@ -45,13 +45,23 @@ public class ShowChecklistBaseAction extends AbstractAction {
 	private Integer filtreEtatBase;
 	private Integer filtreCriticiteBase;
 	
+	private Integer filtreDemandes = 2;
+	
 	private Pagination<Checklist_Base> pagination;
 	private List<Checklist_Base> listeTaches;
 	
 	private List<Environnement> listEnvironnement;
 	private List<Checklist_Etat> listEtat;
 	private List<Checklist_Criticite> listCriticite;
-	
+
+	public Integer getFiltreDemandes() {
+		return filtreDemandes;
+	}
+
+	public void setFiltreDemandes(Integer filtreDemandes) {
+		this.filtreDemandes = filtreDemandes;
+	}
+
 	public JSONObject getFiltreJson() {
 		return filtreJson;
 	}
@@ -273,11 +283,14 @@ public class ShowChecklistBaseAction extends AbstractAction {
 		Integer userLoggedId = userLogged.getId();
 		filtre = FiltreDatabaseService.getFiltre(userLoggedId,titrePage);
 		
+		
 		if (filtre != null){
 			try {
 				Integer filtreId = filtre.getId();
 				reloadFiltreBase(filtre.getFiltreString());
-				listeTaches = ChecklistBaseDatabaseService.getAll(pagination, sort, sens, filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite);		
+				
+				listeTaches = ChecklistBaseDatabaseService.getAll(pagination, sort, sens, filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite, filtreDemandes);
+						
 				filtreJson = ShowChecklistBaseAction.filtreToString(filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite);
 
 				if (validForm == 1){
@@ -293,7 +306,7 @@ public class ShowChecklistBaseAction extends AbstractAction {
 		}
 		else{
 			try {
-				listeTaches = ChecklistBaseDatabaseService.getAll(pagination, sort, sens, filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite);		
+				listeTaches = ChecklistBaseDatabaseService.getAll(pagination, sort, sens, filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite, filtreDemandes);	
 				filtreJson = ShowChecklistBaseAction.filtreToString(filtreNom, filtreEnvironnement, filtreDateDebut, filtreEtat, filtreCriticite);
 				if (validForm == 1){
 					if (filtreNom != null || filtreEnvironnement != null || filtreDateDebut != null || filtreEtat != null || filtreCriticite != null){

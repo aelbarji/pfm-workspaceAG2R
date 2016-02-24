@@ -669,6 +669,25 @@
 		</action>
 		
 		<!--****************************************************************************** -->
+		<!--******************************* Changements ***************************** -->
+		<!--****************************************************************************** -->
+		
+		<action name="showChangements" class="pilotage.changements.ShowChangements">
+			<result name="ok">jsp/user_pages/changements/listChangements.jsp</result>
+			<result name="error">jsp/error/error.jsp</result>
+			<result name="login" type="redirectAction">enterAction</result>
+			<result name="consigne" type="chain">showConsignesAction</result>
+		</action>
+		
+		<action name="readExcelFile" class="pilotage.changements.ReadExcelFile">
+			<result name="ok" type="redirectAction">showChangements</result>
+			<result name="error">jsp/error/error.jsp</result>
+			<result name="login" type="redirectAction">enterAction</result>
+			<result name="consigne" type="chain">showConsignesAction</result>
+		</action>
+		
+		
+		<!--****************************************************************************** -->
 		<!--******************************* Partie incidents ***************************** -->
 		<!--****************************************************************************** -->	
 		
@@ -984,6 +1003,24 @@
 		
 		<action name="redirectModifyBaseIncident" class="pilotage.incidents.RedirectIncidentsAction">
 			<result name="ok">jsp/user_pages/incidents/base/modifyBaseIncident.jsp</result>
+			<result name="error">jsp/error/error.jsp</result>
+			<result name="login" type="redirectAction">enterAction</result>
+			<result name="consigne" type="chain">showConsignesAction</result>
+		</action>
+		
+		<!--****************************************************************************** -->
+		<!--******************************* Incidents Itsm ***************************** -->
+		<!--****************************************************************************** -->
+		
+		<action name="showIncidentsItsm" class="pilotage.incidents.itsm.ShowIncidentsItsm">
+			<result name="ok">jsp/user_pages/incidents_itsm/listIncidentsItsm.jsp</result>
+			<result name="error">jsp/error/error.jsp</result>
+			<result name="login" type="redirectAction">enterAction</result>
+			<result name="consigne" type="chain">showConsignesAction</result>
+		</action>
+		
+		<action name="importExcelFile" class="pilotage.incidents.itsm.ImportExcelFile">
+			<result name="ok" type="redirectAction">showIncidentsItsm</result>
 			<result name="error">jsp/error/error.jsp</result>
 			<result name="login" type="redirectAction">enterAction</result>
 			<result name="consigne" type="chain">showConsignesAction</result>

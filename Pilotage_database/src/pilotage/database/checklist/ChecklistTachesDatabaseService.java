@@ -1,5 +1,8 @@
 package pilotage.database.checklist;
 
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
@@ -11,7 +14,6 @@ import org.hibernate.Session;
 import org.hibernate.criterion.Projections;
 import org.hibernate.criterion.Restrictions;
 
-import pilotage.admin.metier.Checklist_color;
 import pilotage.metier.Checklist_Base;
 import pilotage.metier.Checklist_Base_Soustache;
 import pilotage.metier.Checklist_Consigne_Documents;
@@ -42,11 +44,22 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param idDemande
+	 * @param numeroObs
+	 * @param description
 	 * @return
 	 */
 	private static Checklist_Base initChecklistBase(Session session,
 			String nom, Integer environnement, Date dateDebut, Integer etat,
-			Integer criticite) {
+			Integer criticite, String typeDemande, Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs) {
 
 		Environnement env = (Environnement) session.load(Environnement.class,
 				environnement);
@@ -56,12 +69,41 @@ public class ChecklistTachesDatabaseService {
 				Checklist_Criticite.class, criticite);
 
 		Checklist_Base base = new Checklist_Base();
+		
+
 		base.setTache(nom);
 		base.setEnvironnement(env);
 		base.setDateDebut(dateDebut);
 		base.setEtat(et);
 		base.setCriticite(crit);
 		base.setActif(Boolean.TRUE);
+		
+		base.setTypeDemande(typeDemande);
+		
+		if (heureReception != null) {
+			SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+			Date currentDate = new Date();
+			String currentDateString = dateFormat.format(currentDate);
+			SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+			String heure = dateFormat2.format(heureReception);
+			String finalDate = currentDateString + " " + heure;
+			SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+			
+			try {
+				Date date = dateFormat3.parse(finalDate);
+				Timestamp datetime = new Timestamp(date.getTime());
+				base.setHeureReception(datetime);
+			} catch (ParseException e) {
+				e.printStackTrace();
+			}
+		} else {
+			base.setHeureReception(null);
+		}
+		
+		base.setNomEmetteur(nomEmetteur);
+		base.setDescriptionMail(descriptionMail);
+		base.setDescriptionObs(descriptionObs);
+		base.setNumeroObs(numeroObs);
 
 		return base;
 	}
@@ -402,6 +444,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param listJoursExceptionnels
 	 * @param typeFrequenceHeure
 	 * @param listHeuresPonctuelles
@@ -412,7 +459,8 @@ public class ChecklistTachesDatabaseService {
 	 * @throws Exception
 	 */
 	public static Integer saveExceptionnel(String nom, Integer environnement,
-			Date dateDebut, Integer etat, Integer criticite,
+			Date dateDebut, Integer etat, Integer criticite, String typeDemande,
+			Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs,
 			List<Date> listJoursExceptionnels, Integer typeFrequenceHeure,
 			List<Date> listHeuresPonctuelles, Date heureDebut, Date heureFin,
 			Date frequence, List<List<String>> listSousTaches,
@@ -422,7 +470,7 @@ public class ChecklistTachesDatabaseService {
 		try {
 			// tache
 			Checklist_Base base = initChecklistBase(session, nom,
-					environnement, dateDebut, etat, criticite);
+					environnement, dateDebut, etat, criticite, typeDemande, heureReception, nomEmetteur, descriptionMail, descriptionObs, numeroObs);
 
 			// jours
 			List<Checklist_Exceptionnel> jours_ex = initListChecklistExceptionnel(
@@ -476,6 +524,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param veilleFerie
 	 * @param jourFerie
 	 * @param lendemainFerie
@@ -488,7 +541,8 @@ public class ChecklistTachesDatabaseService {
 	 * @throws Exception
 	 */
 	public static Integer saveFerie(String nom, Integer environnement,
-			Date dateDebut, Integer etat, Integer criticite,
+			Date dateDebut, Integer etat, Integer criticite, String typeDemande,
+			Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs,
 			Integer[] veilleFerie, Integer[] jourFerie,
 			Integer[] lendemainFerie, Integer typeFrequenceHeure,
 			List<Date> listHeuresPonctuelles, Date heureDebut, Date heureFin,
@@ -499,7 +553,7 @@ public class ChecklistTachesDatabaseService {
 		try {
 			// tache
 			Checklist_Base base = initChecklistBase(session, nom,
-					environnement, dateDebut, etat, criticite);
+					environnement, dateDebut, etat, criticite, typeDemande, heureReception, nomEmetteur, descriptionMail, descriptionObs, numeroObs);
 
 			// jours
 			List<Checklist_Ferie> listJours = initListChecklistFerie(session,
@@ -553,6 +607,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param pair
 	 * @param impair
 	 * @param lundi
@@ -573,7 +632,8 @@ public class ChecklistTachesDatabaseService {
 	 */
 	public static Integer saveSemainePairImpair(String nom,
 			Integer environnement, Date dateDebut, Integer etat,
-			Integer criticite, boolean pair, boolean impair, boolean lundi,
+			Integer criticite, String typeDemande,
+			Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs, boolean pair, boolean impair, boolean lundi,
 			boolean mardi, boolean mercredi, boolean jeudi, boolean vendredi,
 			boolean samedi, boolean dimanche, boolean notFerie,
 			Integer typeFrequenceHeure, List<Date> listHeuresPonctuelles,
@@ -585,7 +645,7 @@ public class ChecklistTachesDatabaseService {
 		try {
 			// tache
 			Checklist_Base base = initChecklistBase(session, nom,
-					environnement, dateDebut, etat, criticite);
+					environnement, dateDebut, etat, criticite, typeDemande, heureReception, nomEmetteur, descriptionMail, descriptionObs, numeroObs);
 
 			// parité
 			List<Checklist_Parite> listParite = initListChecklistParite(base,
@@ -645,6 +705,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param semaine1
 	 * @param semaine2
 	 * @param semaine3
@@ -669,7 +734,8 @@ public class ChecklistTachesDatabaseService {
 	 */
 	// TODO : attente de GCE sur à quoi correspond l'info 'Jour'
 	public static Integer saveMensuel(String nom, Integer environnement,
-			Date dateDebut, Integer etat, Integer criticite, boolean semaine1,
+			Date dateDebut, Integer etat, Integer criticite, String typeDemande,
+			Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs, boolean semaine1,
 			boolean semaine2, boolean semaine3, boolean semaine4,
 			boolean semaineDer, boolean lundi, boolean mardi, boolean mercredi,
 			boolean jeudi, boolean vendredi, boolean samedi, boolean dimanche,
@@ -682,7 +748,7 @@ public class ChecklistTachesDatabaseService {
 		try {
 			// tache
 			Checklist_Base base = initChecklistBase(session, nom,
-					environnement, dateDebut, etat, criticite);
+					environnement, dateDebut, etat, criticite, typeDemande, heureReception, nomEmetteur, descriptionMail, descriptionObs, numeroObs);
 
 			// semaines
 			List<Checklist_Mensuel> listMensuelle = initListChecklistMensuel(
@@ -741,6 +807,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param lundi
 	 * @param mardi
 	 * @param mercredi
@@ -758,7 +829,8 @@ public class ChecklistTachesDatabaseService {
 	 * @throws Exception
 	 */
 	public static Integer saveHebdo(String nom, Integer environnement,
-			Date dateDebut, Integer etat, Integer criticite, boolean lundi,
+			Date dateDebut, Integer etat, Integer criticite, String typeDemande,
+			Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs, boolean lundi,
 			boolean mardi, boolean mercredi, boolean jeudi, boolean vendredi,
 			boolean samedi, boolean dimanche, boolean notFerie,
 			Integer typeFrequenceHeure, List<Date> listHeuresPonctuelles,
@@ -770,7 +842,7 @@ public class ChecklistTachesDatabaseService {
 		try {
 			// tache
 			Checklist_Base base = initChecklistBase(session, nom,
-					environnement, dateDebut, etat, criticite);
+					environnement, dateDebut, etat, criticite, typeDemande, heureReception, nomEmetteur, descriptionMail, descriptionObs, numeroObs);
 
 			// jours
 			List<Checklist_Jour> listJours = initJour(base, lundi, mardi,
@@ -1061,6 +1133,11 @@ public class ChecklistTachesDatabaseService {
 	 * @param dateDebut
 	 * @param etat
 	 * @param criticite
+	 * @param typeDemande
+	 * @param heureReception
+	 * @param nomEmetteur
+	 * @param numeroObs
+	 * @param description
 	 * @param typeFrequenceDate
 	 * @param oldTypeFrequenceDate
 	 * @param listChecklistJourToAdd
@@ -1131,7 +1208,7 @@ public class ChecklistTachesDatabaseService {
 	 */
 	@SuppressWarnings("unchecked")
 	public static void modify(Integer id, String nom, Integer environnement,
-			Date dateDebut, Integer etat, Integer criticite,
+			Date dateDebut, Integer etat, Integer criticite, String typeDemande, Date heureReception, String nomEmetteur, String descriptionMail, String descriptionObs, String numeroObs,
 			Integer typeFrequenceDate, Integer oldTypeFrequenceDate,
 			List<Integer> listChecklistJourToAdd,
 			List<Integer> listChecklistJourToModify,
@@ -1215,6 +1292,32 @@ public class ChecklistTachesDatabaseService {
 			base.setDateDebut(dateDebut);
 			base.setEtat(et);
 			base.setCriticite(crit);
+			base.setTypeDemande(typeDemande);
+			
+			if (heureReception != null) {
+				SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+				Date currentDate = new Date();
+				String currentDateString = dateFormat.format(currentDate);
+				SimpleDateFormat dateFormat2 = new SimpleDateFormat("HH:mm:ss");
+				String heure = dateFormat2.format(heureReception);
+				String finalDate = currentDateString + " " + heure;
+				SimpleDateFormat dateFormat3 = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+				
+				try {
+					Date date = dateFormat3.parse(finalDate);
+					Timestamp datetime = new Timestamp(date.getTime());
+					base.setHeureReception(datetime);
+				} catch (ParseException e) {
+					e.printStackTrace();
+				}
+			} else {
+				base.setHeureReception(null);
+			}
+			
+			base.setNomEmetteur(nomEmetteur);
+			base.setNumeroObs(numeroObs);
+			base.setDescriptionMail(descriptionMail);
+			base.setDescriptionObs(descriptionObs);
 
 			// Date : frequence non changée
 			if (typeFrequenceDate.equals(oldTypeFrequenceDate)) {

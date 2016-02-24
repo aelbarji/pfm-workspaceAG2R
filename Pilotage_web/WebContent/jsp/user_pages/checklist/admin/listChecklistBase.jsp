@@ -61,7 +61,7 @@
 				});
 			}
 		}
-			
+		
         //reinitialisation des filtres 
 		function reinitialiserLesFiltres(){
 			document.getElementById("mainForm").filtreNom.value = '';
@@ -104,6 +104,13 @@
 					<tr>
 						<td colspan=<s:if test="#session.USER_DROITS.contains('CKL_MOD') || #session.USER_DROITS.contains('CKL_DEL')">"6"</s:if><s:else>"5"</s:else>>
 							<s:include value="/jsp/user_pages/pagination/pagination.jsp" />
+						</td>
+					</tr>
+					
+					<tr>
+						<td colspan="6" align="left" valign="top">Afficher uniquement les demandes:<br>
+							&nbsp;&nbsp;&nbsp;&nbsp;
+							<s:radio name="filtreDemandes" list="#{1:'Oui',2:'Non'}" onchange="javascript:lancerRecherche();" />
 						</td>
 					</tr>
 					

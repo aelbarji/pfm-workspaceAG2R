@@ -19,6 +19,7 @@
 				$('#heureDebut').timeEntry({show24Hours: true , spinnerImage: ''});
 				$('#heureFin').timeEntry({show24Hours: true , spinnerImage: ''});
 				$('#frequence').timeEntry({show24Hours: true , spinnerImage: ''});
+				$('#heureReception').timeEntry({show24Hours: true , spinnerImage: ''});
 			});
 			
 	        $.subscribe('dateExceptionnelleChange',function(event,data) {
@@ -28,6 +29,7 @@
 			function onLoad(){
 				changeTypeFrequenceDate('<s:property value="%{typeFrequenceDate}" />');
 				changeTypeFrequenceHeure('<s:property value="%{typeFrequenceHeure}" />');
+				changeTypeFrequenceDemande('<s:property value="%{typeDemande}" />');
 
 				<s:if test="!listSousTaches.isEmpty()">
 					$('#textNoSousTache').hide();
@@ -60,6 +62,22 @@
 					$("#frequenceHeure1").hide();
 					$("#frequenceHeure2").show();
 				}
+			}
+
+			//Changement de type de la demande
+			function changeTypeFrequenceDemande(frequence) {
+				 if (frequence == 0) {
+					$("#champsObligatoires").hide();
+				} 
+				for(var i = 1; i < 3; ++i) {
+					if(frequence == i){
+						$("#frequenceDemande" + i).show();
+						$("#champsObligatoires").show(); 
+					}
+					else{
+						$("#frequenceDemande" + i).hide();
+					}
+				} 
 			}
 
 			//lorsqu'on sélectionne une entrée dans les jours fériés, on voit si on check la case 'tous'
@@ -511,9 +529,27 @@
 					}
 					i++;
 				}
+
+				//fréquence demande
+				if(document.getElementById('typeFrequenceDemande').value == 1){
+					if(document.getElementById("heureReception").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+						 || document.getElementById("nomEmetteur").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+							 || document.getElementById("descriptionMail").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == "" ){
+						alert("Veuillez entrer une heure reception, le nom de l'émetteur et le description");
+						return;
+					}
+				}
+				else if(document.getElementById('typeFrequenceDemande').value == 2){
+					if(document.getElementById("numeroObs").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == ""
+						|| document.getElementById("descriptionObs").value.replace(/^\s+/g,'').replace(/\s+$/g,'') == "" ){
+						alert("Veuillez entrer numéro OBS et le description");
+						return;
+					}
+				}
 				
 				submitData('modifyChecklistBaseAction.action');
 			}
+			
 			function showDocumentationTree(i){
 				var url = "showDocumentationTree.action";
 				var iWidth = 400; 
@@ -1001,6 +1037,65 @@
 			</table>
 			<s:include
 				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+				
+			<br><br><br>
+			
+			<div class="contentTableLeft">
+			<h3>Si la tâche est une demande veuillez renseigner les champs suivants:</h3>
+				<table class="dataTable" rules="rows">
+					<tr>
+						<td class="titreColonne">Type de la demande</td>
+					</tr>
+					<tr>
+						<td align="center"><s:select
+								list="#{'0':'Sélectionner un type', '1':'Mail', '2':'OBS'}"
+								name="typeDemande" id="typeFrequenceDemande"
+								onchange="changeTypeFrequenceDemande(this.value)" /></td>
+					</tr>
+					<tr id="frequenceDemande1">
+						<td align="center">
+							<table width="90%">
+								<col width="50%" />
+								<col width="50%" />
+								<tr>
+									<td align="center">Heure r&eacute;ception:
+										<input type="text" name="heureReception" id="heureReception" size="6" value="${heureReception}" />
+									</td>
+									<td align="center">Nom &eacute;metteur:<s:textfield name="nomEmetteur" id="nomEmetteur" size="30" />
+									</td>
+								</tr>
+								<tr>
+									<td align="center" colspan="2">Description:
+										<s:textfield name="descriptionMail" id="descriptionMail" size="30" />
+									</td>
+								</tr>
+							</table>
+						</td>
+					</tr>
+					<tr id="frequenceDemande2">
+						<td align="center">
+							<table width="90%">
+								<col width="50%" />
+								<col width="50%" />
+								<tr>
+									<td align="center">Num&eacute;ro OBS:
+										<s:textfield name="numeroObs" id="numeroObs" size="15" />
+									</td>
+									<td align="center">Description:
+										<s:textfield name="descriptionObs" id="descriptionObs" size="15" />
+									</td>
+								</tr>
+							</table>
+						</td> 
+					</tr>
+				</table>
+			
+			<div id="champsObligatoires">
+			 <s:include
+				value="/jsp/user_pages/commun/html_body_div_contentTableBottom.jsp" />
+			</div>	
+				
+			</div>
 		</s:form>
 	</div>
 </body>
