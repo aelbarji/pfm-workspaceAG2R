@@ -153,7 +153,7 @@ public class ChecklistDatabaseService {
 	 * @param listSousSousTaches
 	 * @param listHoraires
 	 */
-	public static void addInChecklistOfTheDay(String userLogin, Date date, List<Integer> listSousSousTaches, List<Checklist_Horaire> listHoraires) {
+	public static void addInChecklistOfTheDay(Date date, List<Integer> listSousSousTaches, List<Checklist_Horaire> listHoraires) {
 		Session session = PilotageSession.getCurrentSession();
 		
 		//checklist_current

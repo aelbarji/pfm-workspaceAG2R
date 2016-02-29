@@ -840,7 +840,7 @@ public class CreateChecklistBaseAction extends AbstractAction {
 						listSousTachesID.add(checklistSousTache.getId());
 					
 					if(!listSousTachesID.isEmpty() && !listChecklistHoraireToAdd.isEmpty())
-						ChecklistDatabaseService.addInChecklistOfTheDay(((Users)session.get(PilotageConstants.USER_LOGGED)).getLogin(), today, listSousTachesID, listChecklistHoraireToAdd);
+						ChecklistDatabaseService.addInChecklistOfTheDay(today, listSousTachesID, listChecklistHoraireToAdd);
 				}
 			}
 			

@@ -3,6 +3,7 @@ package pilotage.database.checklist;
 import java.util.Date;
 import java.util.List;
 
+import org.hibernate.Criteria;
 import org.hibernate.Session;
 import org.hibernate.criterion.Order;
 import org.hibernate.criterion.Restrictions;
@@ -45,14 +46,14 @@ public class ChecklistHoraireDatabaseService {
 		return ch.getId();
 	}
 	
-	public static Date getHoraire(Checklist_Base checklist) {
+	@SuppressWarnings("unchecked")
+	public static List<Checklist_Horaire> getHorairesDemandes() {
 		Session session = PilotageSession.getCurrentSession();
-
-		Checklist_Horaire ch = (Checklist_Horaire) session
-				.createCriteria(Checklist_Horaire.class)
-				.add(Restrictions.eq("idChecklist", checklist))
-				.uniqueResult();
+		Criteria criteria = session.createCriteria(Checklist_Horaire.class);
+		criteria.createAlias("idChecklist", "tache");
+		criteria.add(Restrictions.gt("tache.typeDemande", "0"));
+		final List<Checklist_Horaire> results = criteria.list();
 		session.getTransaction().commit();
-		return ch.getHoraire();
+		return results;
 	}
 }

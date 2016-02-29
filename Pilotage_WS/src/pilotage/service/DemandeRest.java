@@ -11,9 +11,10 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 
 import pilotage.bean.DemandesJSON;
-import pilotage.database.checklist.ChecklistBaseDatabaseService;
+import pilotage.database.checklist.ChecklistCurrentDatabaseService;
 import pilotage.database.checklist.ChecklistHoraireDatabaseService;
 import pilotage.metier.Checklist_Base;
+import pilotage.metier.Checklist_Horaire;
 
 @Path("/demandes")
 public class DemandeRest {
@@ -22,39 +23,48 @@ public class DemandeRest {
 	@Produces(MediaType.APPLICATION_JSON + ";charset=utf-8")
 	public List<DemandesJSON> getListeDemandes() {
 		List<DemandesJSON> listJSON = new ArrayList<DemandesJSON>();
-		List<Checklist_Base> list = ChecklistBaseDatabaseService.getDemandes();
+		List<Checklist_Horaire> listDemandesHoraire = ChecklistHoraireDatabaseService.getHorairesDemandes();
+		
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		SimpleDateFormat simpleDateFormat2 = new SimpleDateFormat("yyyy-MM-dd");
 		SimpleDateFormat simpleDateFormat3 = new SimpleDateFormat("HH:mm:ss");
-		for (Checklist_Base c : list) {
+		for (Checklist_Horaire c : listDemandesHoraire) {
+			final Checklist_Base tache = c.getIdChecklist();
 			DemandesJSON demande = new DemandesJSON();
 			demande.setId_demande(c.getId().toString());
-			if (Integer.parseInt(c.getTypeDemande())==1) {
+			if (Integer.parseInt(tache.getTypeDemande()) == 1) {
 				demande.setType("mail");
-				demande.setDescription(c.getDescriptionMail());
+				demande.setDescription(tache.getDescriptionMail());
 			}
 			else {
 				demande.setType("obs");
-				demande.setDescription(c.getDescriptionObs());
+				demande.setDescription(tache.getDescriptionObs());
 			}
-			demande.setNom(c.getTache());
-			demande.setEnvironnement(c.getEnvironnement().getEnvironnement());
-			demande.setNumero_obs(c.getNumeroObs());
-			demande.setNom_emetteur(c.getNomEmetteur());
-			demande.setEtat(c.getEtat().getEtat());
-			demande.setCriticite(c.getCriticite().getLibelle());
-			if (c.getHeureReception() != null) {
-				String heureReception = simpleDateFormat.format(c.getHeureReception());
+			demande.setNom(tache.getTache());
+			demande.setEnvironnement(tache.getEnvironnement().getEnvironnement());
+			demande.setNumero_obs(tache.getNumeroObs());
+			demande.setNom_emetteur(tache.getNomEmetteur());
+			
+			demande.setCriticite(tache.getCriticite().getLibelle());
+			if (tache.getHeureReception() != null) {
+				String heureReception = simpleDateFormat.format(tache.getHeureReception());
 				demande.setHeure_reception(heureReception);
 			}
 			else {
 				demande.setHeure_reception("");
 			}
 			
-			String date_debut = simpleDateFormat2.format(c.getDateDebut());
-			Date horaire = ChecklistHoraireDatabaseService.getHoraire(c);
+			String date_debut = simpleDateFormat2.format(tache.getDateDebut());
+			Date horaire = c.getHoraire();
 			String heure_reception = simpleDateFormat3.format(horaire);
 			demande.setHeure_realisation(date_debut + " " + heure_reception);
+			
+			String etat = ChecklistCurrentDatabaseService.getStatus(c);
+			if (etat.equals("Pris en charge par")) {
+				etat = "Affecté";
+			}
+			demande.setEtat(etat);
+			
 			listJSON.add(demande);
 		}
 		

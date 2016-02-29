@@ -679,16 +679,18 @@ public class RedirectModifyChecklistBaseAction extends AbstractAction {
 				criticite = base.getCriticite().getId();
 				
 				typeDemande = base.getTypeDemande();
-				if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_MAIL) {
-					nomEmetteur = base.getNomEmetteur();
-					descriptionMail = base.getDescriptionMail();
-					Date heure = base.getHeureReception();
-					SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
-					heureReception = dateFormat.format(heure);
-				}
-				else if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_OBS) {
-					numeroObs = base.getNumeroObs();
-					descriptionObs = base.getDescriptionObs();
+				if (typeDemande != null) {
+					if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_MAIL) {
+						nomEmetteur = base.getNomEmetteur();
+						descriptionMail = base.getDescriptionMail();
+						Date heure = base.getHeureReception();
+						SimpleDateFormat dateFormat = new SimpleDateFormat("HH:mm:ss");
+						heureReception = dateFormat.format(heure);
+					}
+					else if (Integer.parseInt(typeDemande) == PilotageConstants.DEMANDE_OBS) {
+						numeroObs = base.getNumeroObs();
+						descriptionObs = base.getDescriptionObs();
+					}
 				}
 				
 				//jours exceptionnels

@@ -1207,7 +1207,7 @@ public class ModifyChecklistBaseAction extends AbstractAction {
 			
 			if (!listSousTachesID.isEmpty()
 					&& !listChecklistHoraireToAdd.isEmpty()&& base.getEtat().getId() != 2)
-				ChecklistDatabaseService.addInChecklistOfTheDay(null, today,
+				ChecklistDatabaseService.addInChecklistOfTheDay(today,
 						listSousTachesID, listChecklistHoraireToAdd);
 			}
 		}
