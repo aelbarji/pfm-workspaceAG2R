@@ -25,7 +25,7 @@ public class ChangementRest {
 		SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
 		for (Changements c : listChangements) {
 			ChangementJSON changementJSON = new ChangementJSON();
-			changementJSON.setId_changement(c.getId().toString());
+			changementJSON.setId_changement(c.getIdChangement().toString());
 
 			String dateDebut = simpleDateFormat.format(c.getDateDebut());
 			changementJSON.setDebut(dateDebut);
