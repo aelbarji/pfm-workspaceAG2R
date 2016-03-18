@@ -61,9 +61,9 @@ public class ExportExcel {
 
 	// colonnes des astreintes
 	private static final String ASTREINTES = "Astreintes";
-	private static final String PERIODE = "Période";
+	private static final String PERIODE = "Pï¿½riode";
 	private static final String COLLABORATEUR = "Collaborateur";
-	private static final String TELEPHONE = "Téléphone";
+	private static final String TELEPHONE = "Tï¿½lï¿½phone";
 
 	// colonnes des planning semaine
 	private static final String PILOTE = "Pilote";
@@ -89,11 +89,11 @@ public class ExportExcel {
 		fontWhiteBold.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		fontWhiteBold.setColor(HSSFColor.WHITE.index);
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
-		// Style alignement à droite
+		// Style alignement ï¿½ droite
 		HSSFCellStyle rightStyle = lExcelDoc.createCellStyle();
 		rightStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 
@@ -152,7 +152,7 @@ public class ExportExcel {
 		cell.setCellStyle(headerStyle);
 		rowIndex++;
 
-		// La blanc de première ligne
+		// La blanc de premiï¿½re ligne
 		row = sheet.createRow(rowIndex++);
 		cell = row.createCell(0);
 		row.setHeight((short) 400);
@@ -233,7 +233,7 @@ public class ExportExcel {
 		cell.setCellStyle(headerStyle);
 		rowIndex++;
 
-		// La blanc de première ligne
+		// La blanc de premiï¿½re ligne
 		row = sheet.createRow(rowIndex);
 		cell = row.createCell(0);
 		row.setHeight((short) 400);
@@ -322,13 +322,13 @@ public class ExportExcel {
 		fontRedBoldItalique.setColor(HSSFColor.RED.index);
 		fontRedBoldItalique.setItalic(true);
 
-		// Style centré rouge
+		// Style centrï¿½ rouge
 		HSSFCellStyle centerStyleRed = lExcelDoc.createCellStyle();
 		centerStyleRed.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		centerStyleRed.setVerticalAlignment(HSSFCellStyle.VERTICAL_JUSTIFY);
 		centerStyleRed.setFont(fontRedBoldItalique);
 
-		// Style centré colonne
+		// Style centrï¿½ colonne
 		HSSFCellStyle centerStyleTitleColumn = lExcelDoc.createCellStyle();
 		centerStyleTitleColumn.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		centerStyleTitleColumn.setVerticalAlignment(HSSFCellStyle.ALIGN_CENTER);
@@ -343,7 +343,7 @@ public class ExportExcel {
 		centerStyleTitleColumn.setBorderRight((short) 2);
 		centerStyleTitleColumn.setFont(fontBlackBold);
 
-		// Style centré gras
+		// Style centrï¿½ gras
 		HSSFCellStyle centerStyleBold = lExcelDoc.createCellStyle();
 		centerStyleBold.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		// centerStyleBold.setAlignment(HSSFCellStyle.ALIGN_JUSTIFY);
@@ -355,7 +355,7 @@ public class ExportExcel {
 		centerStyleBold.setBorderRight((short) 1);
 		centerStyleBold.setFont(fontBlackBold);
 
-		// Style alignement à droite
+		// Style alignement ï¿½ droite
 		HSSFCellStyle rightStyle = lExcelDoc.createCellStyle();
 		rightStyle.setBorderBottom((short) 1);
 		rightStyle.setBorderTop((short) 1);
@@ -414,7 +414,7 @@ public class ExportExcel {
 
 		/******* 3 PREMIERS ENCADRES *******/
 		int i;
-		row = sheet.createRow(rowIndex); // création de la ligne 2
+		row = sheet.createRow(rowIndex); // crï¿½ation de la ligne 2
 
 		for (i = 6; i < 15; i++) {
 			cell = row.createCell(i);
@@ -438,15 +438,15 @@ public class ExportExcel {
 					cell.setCellValue(nomMois[ld.getMonthOfYear()-1] + " " + ld.getYear());
 				}
 				if (rowIndex == 5 && c == 1) // MOIS
-					cell.setCellValue("Société Cliente :");
+					cell.setCellValue("Sociï¿½tï¿½ Cliente :");
 				if (rowIndex == 5 && c == 4) // MOIS
 					cell.setCellValue("ITCE");
 				if (rowIndex == 6 && c == 1) // MOIS
 					cell.setCellValue("Projet :");
 				if (rowIndex == 6 && c == 4) // MOIS
-					cell.setCellValue("Pilotage Mutualisé");
+					cell.setCellValue("Pilotage Mutualisï¿½");
 				if (rowIndex == 7 && c == 1) // MOIS
-					cell.setCellValue("Nom/Prénom de l'intervenant :");
+					cell.setCellValue("Nom/Prï¿½nom de l'intervenant :");
 				if (rowIndex == 7 && c == 4) // MOIS
 					cell.setCellValue(nomIntervenant);
 				if (rowIndex == 8 && c == 1) // MOIS
@@ -481,7 +481,7 @@ public class ExportExcel {
 			}
 		}
 
-		// troisème tableau
+		// troisï¿½me tableau
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 18, 23));
 		sheet.addMergedRegion(new CellRangeAddress(5, 8, 18, 23));
 
@@ -497,7 +497,7 @@ public class ExportExcel {
 		// premier tableau
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 1, 3));
 		sheet.addMergedRegion(new CellRangeAddress(4, 4, 4, 8));
-		// Société cliente
+		// Sociï¿½tï¿½ cliente
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 1, 3));
 		sheet.addMergedRegion(new CellRangeAddress(5, 5, 4, 8));
 		// PROJET
@@ -513,7 +513,7 @@ public class ExportExcel {
 
 		/******* TABLEAU HEURES EFFECTUEES *******/
 		rowIndex = rowIndex + 2;
-		row = sheet.createRow(rowIndex); // création de la ligne 11
+		row = sheet.createRow(rowIndex); // crï¿½ation de la ligne 11
 
 		cell = row.createCell(3);
 		cell.setCellValue("LUNDI");
@@ -585,7 +585,7 @@ public class ExportExcel {
 		cell = row.createCell(23);
 		cell.setCellStyle(centerStyleTitleColumn);
 
-		row = sheet.createRow(++rowIndex); // création de la ligne 12
+		row = sheet.createRow(++rowIndex); // crï¿½ation de la ligne 12
 		row.setHeight((short) 1800);
 		cell = row.createCell(2);
 		cell.setCellValue("SEMAINE");
@@ -598,7 +598,7 @@ public class ExportExcel {
 		}
 		for (i = 4; i < 23; i = i + 3) {
 			cell = row.createCell(i);
-			cell.setCellValue("Après-Midi");
+			cell.setCellValue("Aprï¿½s-Midi");
 			cell.setCellStyle(centerStyleVert);
 		}
 
@@ -640,23 +640,23 @@ public class ExportExcel {
 		Duration tmpsNuit6 = new Duration(0);
 		Duration tmpsNuitAll = new Duration(0);
 
-		for (rowIndex = 13; rowIndex < 19; ++rowIndex) { // création de la ligne
-															// 13 à 18
+		for (rowIndex = 13; rowIndex < 19; ++rowIndex) { // crÃ©ation de la ligne
+															// 13 Ã  18
 			row = sheet.createRow(rowIndex);
 			cell = row.createCell(2);
 			cell.setCellStyle(centerStyleBold);
 			if (rowIndex == 13) {
-				cell.setCellValue("1ère");
+				cell.setCellValue("1Ã¨re");
 			} else if (rowIndex == 14) {
-				cell.setCellValue("2ème");
+				cell.setCellValue("2Ã¨me");
 			} else if (rowIndex == 15) {
-				cell.setCellValue("3ème");
+				cell.setCellValue("3Ã¨me");
 			} else if (rowIndex == 16) {
-				cell.setCellValue("4ème");
+				cell.setCellValue("4Ã¨me");
 			} else if (rowIndex == 17) {
-				cell.setCellValue("5ème");
+				cell.setCellValue("5Ã¨me");
 			} else {
-				cell.setCellValue("6ème");
+				cell.setCellValue("6Ã¨me");
 			}
 
 			for (int j = 3; j < 24; j++) {
@@ -668,7 +668,7 @@ public class ExportExcel {
 		Long tSem = (long) 0;
 		Long tmpsNuit = (long) 0;
 		Integer tJourSem = 0;
-		boolean jourTravaillé = false;
+		boolean jourTravaille = false;
 		Integer cpt = 0;
 		int z = 3;
 		int ind = 0;
@@ -692,26 +692,26 @@ public class ExportExcel {
 						|| (listCRA.get(noSem).get(noJour).get(0).getPartiJour().getId() == 1 && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() == 5)
 						|| (listCRA.get(noSem).get(noJour).get(1) != null && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() == 1)) {
 					ind = z;
-					jourTravaillé = true;
+					jourTravaille = true;
 				} else if ((listCRA.get(noSem).get(noJour).get(0).getPartiJour().getId() == 2 && listCRA.get(noSem).get(noJour).get(1) == null)
 						|| (listCRA.get(noSem).get(noJour).get(0).getPartiJour().getId() == 2 && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() == 5)
 						|| (listCRA.get(noSem).get(noJour).get(1) != null && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() ==2)) {
 					ind = z + 1;
-					jourTravaillé = true;
+					jourTravaille = true;
 				} else if ((listCRA.get(noSem).get(noJour).get(0).getPartiJour().getId() == 3 && listCRA.get(noSem).get(noJour).get(1) == null)
 						|| (listCRA.get(noSem).get(noJour).get(0).getPartiJour().getId() == 3 && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId().equals(5))
 						|| (listCRA.get(noSem).get(noJour).get(1) != null && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() == 3)) {
 					ind = z + 2;
-					jourTravaillé = true;
+					jourTravaille = true;
 				} else if (listCRA.get(noSem).get(noJour).get(1) != null && listCRA.get(noSem).get(noJour).get(1).getPartiJour().getId() == 4) {
 					cell = row.getCell(1+z);
 					cell.setCellValue("AM");
 					tJourMA += 1;
-					jourTravaillé = false;
+					jourTravaille = false;
 				} else {
-					jourTravaillé = false;
+					jourTravaille = false;
 				}
-				if (jourTravaillé) {
+				if (jourTravaille) {
 					tJourSem += 1;
 					if(listCRA.get(noSem).get(noJour).get(1) == null){
 						DateTime heureDeb = new DateTime(listCRA.get(noSem)
@@ -810,7 +810,7 @@ public class ExportExcel {
 		/****** TABLEAUX TOTAUX ET RECAPITULATIF ******/
 
 		for (rowIndex = 20; rowIndex < 22; ++rowIndex) {
-			row = sheet.createRow(rowIndex); // création de la ligne 20 et 21
+			row = sheet.createRow(rowIndex); // crï¿½ation de la ligne 20 et 21
 			for (int j = 3; j < 6; j++) {
 				cell = row.createCell(j);
 				cell.setCellStyle(centerStyleTitleColumn);
@@ -822,25 +822,25 @@ public class ExportExcel {
 				cell = row.createCell(j);
 				cell.setCellStyle(centerStyleTitleColumn);
 				if (j == 8)
-					cell.setCellValue("Récapitulatif des \n Absences Hebdomadaires");
+					cell.setCellValue("RÃ¨capitulatif des \n Absences Hebdomadaires");
 			}
 
 		}
 		sheet.addMergedRegion(new CellRangeAddress(20, 21, 3, 5));
 		sheet.addMergedRegion(new CellRangeAddress(20, 21, 8, 12));
 
-		row = sheet.createRow(rowIndex); // création de la ligne 22
+		row = sheet.createRow(rowIndex); // crï¿½ation de la ligne 22
 		row.setHeight((short) 3000);
 		cell = row.createCell(2);
 		cell.setCellValue("SEMAINE");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(3);
-		cell.setCellValue("Jours travaillés");
+		cell.setCellValue("Jours travaillÃ©s");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(4);
-		cell.setCellValue("Heures travaillées");
+		cell.setCellValue("Heures travaillÃ©es");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(5);
@@ -852,62 +852,62 @@ public class ExportExcel {
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(8);
-		cell.setCellValue("Congés Légaux (CL)");
+		cell.setCellValue("CongÃ©s LÃ©gaux (CL)");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(9);
-		cell.setCellValue("Récupération Temps \n Travail Employé (RTTE)");
+		cell.setCellValue("RÃ©cupÃ©ration Temps \n Travail EmployÃ© (RTTE)");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(10);
-		cell.setCellValue("Récupération Temps \n Travail Employeur (RTTS)");
+		cell.setCellValue("RÃ©cupÃ©ration Temps \n Travail Employeur (RTTS)");
 		cell.setCellStyle(centerStyleVert);
 		cell = row.createCell(11);
-		cell.setCellValue("Congés exceptionnels (CE)");
+		cell.setCellValue("CongÃ©s exceptionnels (CE)");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(12);
-		cell.setCellValue("Arrêt Maladie (AM)");
+		cell.setCellValue("ArrÃªt Maladie (AM)");
 		cell.setCellStyle(centerStyleVert);
 
 		cell = row.createCell(15);
-		cell.setCellValue("* A remplir et à co-signer chaque mois et en fin de mission par le client \n et par le collaborateur du  Groupe HN \n * A envoyer au Service Commercial après signature, \n par télécopie au 01.44.67.13.49");
+		cell.setCellValue("* A remplir et Ã  co-signer chaque mois et en fin de mission par le client \n et par le collaborateur du  Groupe HN \n * A envoyer au Service Commercial aprï¿½s signature, \n par tï¿½lï¿½copie au 01.44.67.13.49");
 		cell.setCellStyle(centerStyleRed);
 		sheet.addMergedRegion(new CellRangeAddress(22, 22, 15, 23));
 
 		for (rowIndex = 23; rowIndex < 30; ++rowIndex) {
-			row = sheet.createRow(rowIndex); // création de la ligne 23
+			row = sheet.createRow(rowIndex); // crï¿½ation de la ligne 23
 			cell = row.createCell(2);
 			cell.setCellStyle(centerStyleBold);
 			if (rowIndex == 23)
-				cell.setCellValue("1ère");
+				cell.setCellValue("1Ã¨re");
 			if (rowIndex == 24)
-				cell.setCellValue("2ème");
+				cell.setCellValue("2Ã¨me");
 			if (rowIndex == 25)
-				cell.setCellValue("3ème");
+				cell.setCellValue("3Ã¨me");
 			if (rowIndex == 26)
-				cell.setCellValue("4ème");
+				cell.setCellValue("4Ã¨me");
 			if (rowIndex == 27)
-				cell.setCellValue("5ème");
+				cell.setCellValue("5Ã¨me");
 			if (rowIndex == 28)
-				cell.setCellValue("6ème");
+				cell.setCellValue("6Ã¨me");
 			if (rowIndex == 29)
 				cell.setCellValue("TOTAL");
 
 			cell = row.createCell(7);
 			cell.setCellStyle(centerStyleBold);
 			if (rowIndex == 23)
-				cell.setCellValue("1ère");
+				cell.setCellValue("1Ã¨re");
 			if (rowIndex == 24)
-				cell.setCellValue("2ème");
+				cell.setCellValue("2Ã¨me");
 			if (rowIndex == 25)
-				cell.setCellValue("3ème");
+				cell.setCellValue("3Ã¨me");
 			if (rowIndex == 26)
-				cell.setCellValue("4ème");
+				cell.setCellValue("4Ã¨me");
 			if (rowIndex == 27)
-				cell.setCellValue("5ème");
+				cell.setCellValue("5Ã¨me");
 			if (rowIndex == 28)
-				cell.setCellValue("6ème");
+				cell.setCellValue("6Ã¨me");
 			if (rowIndex == 29)
 				cell.setCellValue("TOTAL");
 
@@ -1086,7 +1086,7 @@ public class ExportExcel {
 		HSSFSheet sheet2 = lExcelDoc.createSheet();
 		sheet2.setDefaultColumnWidth(11);
 
-		row = sheet2.createRow(2); // création de la ligne 2
+		row = sheet2.createRow(2); // crï¿½ation de la ligne 2
 		for (i = 3; i < 11; i++) {
 			cell = row.createCell(i);
 			cell.setCellStyle(centerStyleTitleColumn);
@@ -1106,15 +1106,15 @@ public class ExportExcel {
 				if (l == 4 && c == 3) // MOIS
 					cell.setCellValue("Novembre 2013");
 				if (l == 5 && c == 1) // MOIS
-					cell.setCellValue("Société Cliente :");
+					cell.setCellValue("SociÃ¨tÃ© Cliente :");
 				if (l == 5 && c == 3) // MOIS
 					cell.setCellValue("ITCE");
 				if (l == 6 && c == 1) // MOIS
 					cell.setCellValue("Projet :");
 				if (l == 6 && c == 3) // MOIS
-					cell.setCellValue("Pilotage Mutualisé");
+					cell.setCellValue("Pilotage MutualisÃ©");
 				if (l == 7 && c == 1) // MOIS
-					cell.setCellValue("Nom/Prénom de l'intervenant :");
+					cell.setCellValue("Nom/PrÃ©nom de l'intervenant :");
 				if (l == 7 && c == 3) // MOIS
 					cell.setCellValue(nomIntervenant);
 				if (l == 8 && c == 1) // MOIS
@@ -1152,7 +1152,7 @@ public class ExportExcel {
 		// premier tableau
 		sheet2.addMergedRegion(new CellRangeAddress(4, 4, 1, 2));
 		sheet2.addMergedRegion(new CellRangeAddress(4, 4, 3, 5));
-		// Société cliente
+		// Sociï¿½tï¿½ cliente
 		sheet2.addMergedRegion(new CellRangeAddress(5, 5, 1, 2));
 		sheet2.addMergedRegion(new CellRangeAddress(5, 5, 3, 5));
 		// PROJET
@@ -1168,7 +1168,7 @@ public class ExportExcel {
 
 		/** TABLEAU ASTREINTE ET HEURES SUPPLEMENTAIRES **/
 
-		row = sheet2.createRow(11); // création de la ligne 11
+		row = sheet2.createRow(11); // crï¿½ation de la ligne 11
 
 		for (i = 1; i < 8; i++) {
 			cell = row.createCell(i);
@@ -1182,11 +1182,11 @@ public class ExportExcel {
 			cell = row.createCell(i);
 			cell.setCellStyle(centerStyleTitleColumn);
 			if (i == 10)
-				cell.setCellValue("HEURES SUPPLEMENTAIRES (Présence sur site client)");
+				cell.setCellValue("HEURES SUPPLEMENTAIRES (PrÃ©sence sur site client)");
 		}
 		sheet2.addMergedRegion(new CellRangeAddress(11, 11, 10, 19));
 
-		row = sheet2.createRow(12); // création de la ligne 12
+		row = sheet2.createRow(12); // crï¿½ation de la ligne 12
 		cell = row.createCell(1);
 		cell.setCellValue("Dates");
 		cell.setCellStyle(centerStyle);
@@ -1202,7 +1202,7 @@ public class ExportExcel {
 		sheet2.addMergedRegion(new CellRangeAddress(12, 12, 4, 5));
 
 		cell = row.createCell(6);
-		cell.setCellValue("Dimanche et Jour Férié");
+		cell.setCellValue("Dimanche et Jour FÃ©riÃ©");
 		cell.setCellStyle(centerStyle);
 		sheet2.addMergedRegion(new CellRangeAddress(12, 12, 6, 7));
 
@@ -1227,11 +1227,11 @@ public class ExportExcel {
 		sheet2.addMergedRegion(new CellRangeAddress(12, 12, 16, 17));
 
 		cell = row.createCell(18);
-		cell.setCellValue("Jour Férié");
+		cell.setCellValue("Jour FÃ©riÃ©");
 		cell.setCellStyle(centerStyle);
 		sheet2.addMergedRegion(new CellRangeAddress(12, 12, 18, 19));
 
-		row = sheet2.createRow(13); // création de la ligne 13
+		row = sheet2.createRow(13); // crï¿½ation de la ligne 13
 
 		for (i = 1; i < 8; i++) {
 			cell = row.createCell(i);
@@ -1267,7 +1267,7 @@ public class ExportExcel {
 			}
 		}
 
-		row = sheet2.createRow(21); // création de la ligne 21
+		row = sheet2.createRow(21); // crï¿½ation de la ligne 21
 
 		for (i = 1; i < 7; i++) {
 			cell = row.createCell(i);
@@ -1337,11 +1337,11 @@ public class ExportExcel {
 		fontPetite.setFontHeightInPoints((short) 8);
 		fontPetite.setColor(HSSFColor.BLACK.index);
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
-		// Style alignement à droite
+		// Style alignement ï¿½ droite
 		HSSFCellStyle rightStyle = lExcelDoc.createCellStyle();
 		rightStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 
@@ -1396,7 +1396,7 @@ public class ExportExcel {
 		String libelleAnnee = "";
 		String libelleSemaine = "";
 		String title = "Planning hebdomadaire des pilotes ";
-		String titleVacation = " Légende vacation ";
+		String titleVacation = " LÃ©gende vacation ";
 		selectedAnnee = Integer.parseInt(numSelectedAnnee);
 		libelleAnnee = mapAnnee.get(String.valueOf(selectedAnnee));
 		selectedSemaine = Integer.parseInt(numSelectedSemaine);
@@ -1443,7 +1443,7 @@ public class ExportExcel {
 			couleurStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			couleurStyle.setFont(fontPetite);
 
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			HSSFColor hssfcolorCouleur = new HSSFColor();
 			HSSFPalette paletteCouleur = lExcelDoc.getCustomPalette();
@@ -1456,7 +1456,7 @@ public class ExportExcel {
 
 			if (hssfcolorCouleur == null) {
 				// on definit un index nouveau pour chaque nouvelle couleur
-				// utilisée
+				// utilisï¿½e
 				Short nouvelIndex = ColorService
 						.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 				// on ajoute l'index dans la liste
@@ -1500,7 +1500,7 @@ public class ExportExcel {
 		text.applyFont(fontWhiteBold);
 		cell.setCellStyle(headerStyle);
 
-		// La blanc de première ligne
+		// La blanc de premiï¿½re ligne
 		row = sheet.createRow(rowIndex++);
 		cell = row.createCell(0);
 		row.setHeight((short) 400);
@@ -1573,7 +1573,7 @@ public class ExportExcel {
 			lundiStyle.setBorderLeft((short) 1);
 			lundiStyle.setBorderBottom((short) 1);
 
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			byte red;
 			byte green;
@@ -1595,7 +1595,7 @@ public class ExportExcel {
 					// hssfcolorLundi =
 					// paletteLundi.getColor(HSSFColor.LAVENDER.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1630,7 +1630,7 @@ public class ExportExcel {
 
 				couleur = (String) ligneUser.get("mardi");
 
-				// on reconstitue le code couleur récupérée si il ne fait pas
+				// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas
 				// partie de la palette
 
 				red = ColorService.valueRedColor(couleur);
@@ -1645,7 +1645,7 @@ public class ExportExcel {
 					// paletteMardi.getColor(HSSFColor.GOLD.index);
 
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1676,7 +1676,7 @@ public class ExportExcel {
 			mercrediStyle.setBorderTop((short) 1);
 			mercrediStyle.setBorderLeft((short) 1);
 			mercrediStyle.setBorderBottom((short) 1);
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			if (!couleur.equals("")) {
 				red = ColorService.valueRedColor(couleur);
@@ -1690,7 +1690,7 @@ public class ExportExcel {
 					// hssfcolorMercredi =
 					// paletteMercredi.getColor(HSSFColor.BROWN.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1722,7 +1722,7 @@ public class ExportExcel {
 			jeudiStyle.setBorderTop((short) 1);
 			jeudiStyle.setBorderLeft((short) 1);
 			jeudiStyle.setBorderBottom((short) 1);
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 
 			if (!couleur.equals("")) {
@@ -1737,7 +1737,7 @@ public class ExportExcel {
 					// hssfcolorJeudi =
 					// paletteJeudi.getColor(HSSFColor.AQUA.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1767,7 +1767,7 @@ public class ExportExcel {
 			vendrediStyle.setBorderTop((short) 1);
 			vendrediStyle.setBorderLeft((short) 1);
 			vendrediStyle.setBorderBottom((short) 1);
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 
 			if (!couleur.equals("")) {
@@ -1782,7 +1782,7 @@ public class ExportExcel {
 					// hssfcolorVendredi =
 					// paletteVendredi.getColor(HSSFColor.INDIGO.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1814,7 +1814,7 @@ public class ExportExcel {
 			samediStyle.setBorderTop((short) 1);
 			samediStyle.setBorderLeft((short) 1);
 			samediStyle.setBorderBottom((short) 1);
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 
 			if (!couleur.equals("")) {
@@ -1829,7 +1829,7 @@ public class ExportExcel {
 					// hssfcolorSamedi =
 					// paletteSamedi.getColor(HSSFColor.CORNFLOWER_BLUE.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1860,7 +1860,7 @@ public class ExportExcel {
 			dimancheStyle.setBorderTop((short) 1);
 			dimancheStyle.setBorderLeft((short) 1);
 			dimancheStyle.setBorderBottom((short) 1);
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			if (!couleur.equals("")) {
 				red = ColorService.valueRedColor(couleur);
@@ -1874,7 +1874,7 @@ public class ExportExcel {
 					// hssfcolorDimanche =
 					// paletteDimanche.getColor(HSSFColor.CORAL.index);
 					// on definit un index nouveau pour chaque nouvelle couleur
-					// utilisée
+					// utilisï¿½e
 					Short nouvelIndex = ColorService
 							.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 					// on ajoute l'index dans la liste
@@ -1912,7 +1912,7 @@ public class ExportExcel {
 		List<Short> listeIndexCouleurDejaUtilise = new ArrayList<Short>();
 		// short compteurListeIndexCouleur=0;
 
-		// Definition des style de caratères
+		// Definition des style de caratï¿½res
 		// Style du font
 		HSSFFont fontTitleWhiteBold = lExcelDoc.createFont();
 		fontTitleWhiteBold.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
@@ -1929,15 +1929,15 @@ public class ExportExcel {
 		fontPetite.setFontHeightInPoints((short) 8);
 		fontPetite.setColor(HSSFColor.BLACK.index);
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
-		// Style alignement à droite
+		// Style alignement ï¿½ droite
 		HSSFCellStyle rightStyle = lExcelDoc.createCellStyle();
 		rightStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 
-		// Définition des style de cellules
+		// Dï¿½finition des style de cellules
 		// style des titres de la page
 		HSSFCellStyle TitleStyle = lExcelDoc.createCellStyle();
 		TitleStyle.setFont(fontWhiteBold);
@@ -1980,7 +1980,7 @@ public class ExportExcel {
 		contentStyle.setBorderLeft(HSSFCellStyle.BORDER_THIN);
 		contentStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
-		// Style de l'entête du tableau
+		// Style de l'entï¿½te du tableau
 		HSSFCellStyle headerStyle = lExcelDoc.createCellStyle();
 		headerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		headerStyle.setVerticalAlignment(HSSFCellStyle.VERTICAL_CENTER);
@@ -2031,7 +2031,7 @@ public class ExportExcel {
 
 		StringBuffer buffer = new StringBuffer(title);
 
-		// reconstitution de la date selectionnée
+		// reconstitution de la date selectionnï¿½e
 
 		Calendar c = Calendar.getInstance();
 		c.setTime(dateSelected);
@@ -2083,7 +2083,7 @@ public class ExportExcel {
 			couleurStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			couleurStyle.setFont(fontPetite);
 
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			HSSFColor hssfcolorCouleur = new HSSFColor();
 			HSSFPalette paletteCouleur = lExcelDoc.getCustomPalette();
@@ -2101,7 +2101,7 @@ public class ExportExcel {
 				// paletteCouleur.getColor(HSSFColor.DARK_YELLOW.index);
 
 				// on definit un index nouveau pour chaque nouvelle couleur
-				// utilisée
+				// utilisï¿½e
 				Short nouvelIndex = ColorService
 						.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 				// on ajoute l'index dans la liste
@@ -2197,7 +2197,7 @@ public class ExportExcel {
 					String Couleur = (String) listeVacationsMoisParPilote
 							.get(u.getId()).get(i).get("couleur");
 
-					// données à afficher
+					// donnï¿½es ï¿½ afficher
 					// date du jour
 					c.setTime(mapJourDate.get(i));
 					// String DateJour = String.valueOf(c.get(Calendar.DATE));
@@ -2222,7 +2222,7 @@ public class ExportExcel {
 					jourStyle.setBorderBottom(HSSFCellStyle.BORDER_THIN);
 
 					if (!Couleur.equals("")) {
-						// on reconstitue le code couleur récupérée si il ne
+						// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne
 						// fait pas partie de la palette
 						HSSFColor hssfcolorJour = new HSSFColor();
 						HSSFPalette paletteJour = lExcelDoc.getCustomPalette();
@@ -2240,7 +2240,7 @@ public class ExportExcel {
 							// paletteJour.getColor(HSSFColor.LAVENDER.index);
 
 							// on definit un index nouveau pour chaque nouvelle
-							// couleur utilisée
+							// couleur utilisï¿½e
 							Short nouvelIndex = ColorService
 									.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 							// on ajoute l'index dans la liste
@@ -2285,7 +2285,7 @@ public class ExportExcel {
 		return lExcelDoc;
 	}
 
-	// methode à compléter pour l'export planning mois
+	// methode ï¿½ complï¿½ter pour l'export planning mois
 	public static HSSFWorkbook exportPlanningMois(Date dateSelected,
 			Map<Integer, Integer> mapJour, Planning_Nom_Equipe equip,
 			Map<Integer, String> couleurliste,
@@ -2307,11 +2307,11 @@ public class ExportExcel {
 		fontWhiteBold.setBoldweight(HSSFFont.BOLDWEIGHT_BOLD);
 		fontWhiteBold.setColor(HSSFColor.WHITE.index);
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 
-		// Style alignement à droite
+		// Style alignement ï¿½ droite
 		HSSFCellStyle rightStyle = lExcelDoc.createCellStyle();
 		rightStyle.setAlignment(HSSFCellStyle.ALIGN_LEFT);
 
@@ -2361,13 +2361,13 @@ public class ExportExcel {
 		contentStyle.setBorderRight(HSSFCellStyle.BORDER_THIN);
 
 		// Titre du tableau
-		// on a besoin de la date sélectionnée ainsi que l'equipe sélectionnée
-		// pour compléter le titre
+		// on a besoin de la date sï¿½lectionnï¿½e ainsi que l'equipe sï¿½lectionnï¿½e
+		// pour complï¿½ter le titre
 		String title = "Planning de : ";
-		String titleVacation = " Légende vacation ";
+		String titleVacation = " LÃ©gende vacation ";
 		StringBuffer buffer = new StringBuffer(title);
 
-		// reconstitution de la date selectionnée
+		// reconstitution de la date selectionnï¿½e
 		Calendar c = Calendar.getInstance();
 		c.setTime(dateSelected);
 
@@ -2433,7 +2433,7 @@ public class ExportExcel {
 			couleurStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 			couleurStyle.setFont(fontPetite);
 
-			// on reconstitue le code couleur récupérée si il ne fait pas partie
+			// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait pas partie
 			// de la palette
 			HSSFColor hssfcolorCouleur = new HSSFColor();
 			HSSFPalette paletteCouleur = lExcelDoc.getCustomPalette();
@@ -2444,7 +2444,7 @@ public class ExportExcel {
 
 			if (hssfcolorCouleur == null) {
 				// on definit un index nouveau pour chaque nouvelle couleur
-				// utilisée
+				// utilisï¿½e
 				Short nouvelIndex = ColorService
 						.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 				// on ajoute l'index dans la liste
@@ -2481,7 +2481,7 @@ public class ExportExcel {
 		text.applyFont(fontWhiteBold);
 		row.getCell(0).setCellStyle(headerStyle);
 
-		// La blanc de première ligne
+		// La blanc de premiï¿½re ligne
 		row = sheet.createRow(rowIndex++);
 		cell = row.createCell(0);
 		row.setHeight((short) 400);
@@ -2532,7 +2532,7 @@ public class ExportExcel {
 		row.getCell(6).setCellStyle(colomnTitleStyle);
 
 		// il faut afficher ici le contenu du planning pour chaque jour de la
-		// semaine à la date sélectionnée et pour l'equipe sélectionnée
+		// semaine ï¿½ la date sï¿½lectionnï¿½e et pour l'equipe sï¿½lectionnï¿½e
 
 		try {
 			int compteurColonneCellule = 0;
@@ -2577,7 +2577,7 @@ public class ExportExcel {
 				jourStyle.setBorderBottom((short) 1);
 
 				if (!Couleur.equals("")) {
-					// on reconstitue le code couleur récupérée si il ne fait
+					// on reconstitue le code couleur rï¿½cupï¿½rï¿½e si il ne fait
 					// pas partie de la palette
 					HSSFColor hssfcolorJour = new HSSFColor();
 					HSSFPalette paletteJour = lExcelDoc.getCustomPalette();
@@ -2591,7 +2591,7 @@ public class ExportExcel {
 					if (hssfcolorJour == null) {
 
 						// on definit un index nouveau pour chaque nouvelle
-						// couleur utilisée
+						// couleur utilisï¿½e
 						Short nouvelIndex = ColorService
 								.getIndexCouleurNonUtilise(listeIndexCouleurDejaUtilise);
 						// on ajoute l'index dans la liste
@@ -2716,7 +2716,7 @@ public class ExportExcel {
 			clair = hssfcolor.getIndex();
 		}
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		centerStyle.setFont(fontBlackBold);
@@ -3259,7 +3259,7 @@ public class ExportExcel {
 
 		row = sheet.createRow(rowIndex);
 		cell = row.createCell(0);
-		cell.setCellValue("Légende :");
+		cell.setCellValue("LÃ©gende :");
 
 		sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,
 				nbEnvir));
@@ -3487,7 +3487,7 @@ public class ExportExcel {
 		commentStyle.setBorderTop((short) 2);
 		commentStyle.setBorderBottom((short) 2);
 
-		// Style centré
+		// Style centrï¿½
 		HSSFCellStyle centerStyle = lExcelDoc.createCellStyle();
 		centerStyle.setAlignment(HSSFCellStyle.ALIGN_CENTER);
 		centerStyle.setFont(fontBlackBold);
@@ -3832,7 +3832,7 @@ public class ExportExcel {
 
 		row = sheet.createRow(rowIndex);
 		cell = row.createCell(0);
-		cell.setCellValue("Légende :");
+		cell.setCellValue("LÃ©gende :");
 
 		sheet.addMergedRegion(new CellRangeAddress(rowIndex, rowIndex, 0,
 				nbColumn));

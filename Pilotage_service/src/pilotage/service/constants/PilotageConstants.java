@@ -337,4 +337,5 @@ public class PilotageConstants {
 	public static final String CHAMP_FIN = "champ_fin";
 	public static final String FORMAT = "format";
 	public static final String NBTOTAL = "nbTotal";
+	
 }
