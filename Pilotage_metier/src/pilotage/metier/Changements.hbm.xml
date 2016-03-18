@@ -51,5 +51,10 @@
 			column="valideur"
 			type="string"
 		/>
+		<property
+			name="idChangement"
+			column="id_changement"
+			type="string"
+		/>
 	</class>	
 </hibernate-mapping>
