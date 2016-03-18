@@ -89,7 +89,7 @@ public class ShowChangements extends AbstractAction {
 			listeChangements = ChangementsDatabaseService.getAll(pagination);
 			return OK;
 		} catch (Exception e) {
-			error = getText("error.message.generique") + " : " + e.getMessage();
+			error = getText("error.message.export.excel");
 			return ERROR;
 		}
 	}
