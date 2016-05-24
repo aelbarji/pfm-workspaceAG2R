@@ -52,6 +52,7 @@ public class ReadExcelFile extends AbstractAction implements
 
 			String filePath = servletRequest.getSession().getServletContext()
 					.getRealPath("/");
+			System.out.println(filePath);
 			File fileToCreate = new File(filePath, myFileFileName);
 			FileUtils.copyFile(this.myFile, fileToCreate);
 
@@ -60,7 +61,7 @@ public class ReadExcelFile extends AbstractAction implements
 
 			return OK;
 		} catch (Exception e) {
-			error = getText("error.message.generique") + " : " + e.getMessage();
+			error = getText("error.message.export.excel");
 			return ERROR;
 		}
 	}

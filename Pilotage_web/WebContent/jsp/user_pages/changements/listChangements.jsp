@@ -56,6 +56,7 @@ input[type=file] {
 			<s:hidden name="selectedID" id="selectedID" />
 
 			<table class="dataTable" rules="all">
+				<col width="8%"	/>
 				<col width="25%" />
 				<col width="8%" />
 				<col width="8%" />
@@ -66,10 +67,11 @@ input[type=file] {
 
 				<thead>
 					<tr>
-						<td colspan="7"><s:include
+						<td colspan="8"><s:include
 								value="/jsp/user_pages/pagination/pagination.jsp" /></td>
 					</tr>
 					<tr valign="middle">
+						<th class="titreColonne">ID Changement</th>
 						<th class="titreColonne">R&eacute;sum&eacute;</th>
 						<th class="titreColonne">Priorit&eacute;</th>
 						<th class="titreColonne">Etat</th>
@@ -83,7 +85,7 @@ input[type=file] {
 				<tbody>
 					<s:if test="%{listeChangements.isEmpty()}">
 						<tr>
-							<td colspan="7" class="emptyListText">Aucun changement
+							<td colspan="8" class="emptyListText">Aucun changement
 								trouvé</td>
 						</tr>
 					</s:if>
@@ -91,6 +93,7 @@ input[type=file] {
 					<s:else>
 						<s:iterator value="listeChangements" status="stuts">
 							<tr>
+							<td align="center"><s:property value="%{idChangement}" /></td>
 								<td align="left">&nbsp;&nbsp;<s:property value="%{resume}" /></td>
 								<td align="center"><s:property value="%{priorite}" /></td>
 								<td align="center"><s:property value="%{etat}" /></td>
@@ -106,7 +109,7 @@ input[type=file] {
 				</tbody>
 				<tfoot>
 					<tr>
-						<td colspan="7"><s:include
+						<td colspan="8"><s:include
 								value="/jsp/user_pages/pagination/pagination.jsp" /></td>
 					</tr>
 				</tfoot>

@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import org.apache.poi.ss.usermodel.Cell;
@@ -61,34 +62,6 @@ public class IncidentsItsmDatabaseService {
 		}
 	}
 
-	public static String getCellValueAsString(final Cell cell) {
-		String res = null;
-		if (cell != null) {
-			if (cell.getCellType() == Cell.CELL_TYPE_NUMERIC) {
-				final double cellValDbl = cell.getNumericCellValue();
-				res = String.valueOf(cellValDbl).trim();
-			} else if (cell.getCellType() == Cell.CELL_TYPE_ERROR) {
-				res = null; // on ignore
-			} else if (cell.getCellType() == Cell.CELL_TYPE_FORMULA) {
-				if (cell.getCachedFormulaResultType() == Cell.CELL_TYPE_ERROR) {
-					res = null; // on ignore
-				} else if (cell.getCachedFormulaResultType() == Cell.CELL_TYPE_NUMERIC) {
-					final double cellValDbl = cell.getNumericCellValue();
-					res = String.valueOf(cellValDbl).trim();
-				} else {
-					res = cell.getStringCellValue();
-				}
-			} else {
-				res = cell.getStringCellValue();
-			}
-		}
-
-		if (res != null && res.equals("")) {
-			res = null;
-		}
-		return res;
-	}
-
 	public static List<Incidents_Itsm> importExcel(File file) throws Exception {
 		List<Incidents_Itsm> list = new ArrayList<Incidents_Itsm>();
 		try {
@@ -98,41 +71,62 @@ public class IncidentsItsmDatabaseService {
 			// Load worksheet
 			XSSFSheet mySheet = myWorkBook.getSheetAt(0);
 
-			for (int i = 2; i <= mySheet.getLastRowNum(); i++) {
-				Row row = mySheet.getRow(i);
+			boolean hasDataFlag = true;
+			Cell cell = null;
+			Iterator<Row> rowIterator = mySheet.rowIterator();
+			rowIterator.next();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
 
-				String idRequete = getCellValueAsString(row.getCell(0));
-				String etat = getCellValueAsString(row.getCell(21));
-				String priorite = getCellValueAsString(row.getCell(22));
-				String prioriteParts[] = priorite.split("-");
-				String impact = getCellValueAsString(row.getCell(24));
-				String impactParts[] = impact.split("-");
-				Integer nbRelance = (int) row.getCell(25).getNumericCellValue();
-				String urgence = getCellValueAsString(row.getCell(23));
-				String urgenceParts[] = urgence.split("-");
-				String resume = getCellValueAsString(row.getCell(41));
+				if (row.getRowNum() == 0) {
+					continue;
+				}
 
-				java.util.Date util_date_creation = row.getCell(1)
-						.getDateCellValue();
-				java.util.Date util_date_modification = row.getCell(3)
-						.getDateCellValue();
-				Timestamp date_creation = new Timestamp(
-						util_date_creation.getTime());
-				Timestamp date_modification = new Timestamp(
-						util_date_modification.getTime());
+				if (row.getRowNum() == 1) {
+					continue;
+				}
 
-				if (priorite.contains("-") && urgence.contains("-")
-						&& impact.contains("-")) {
-					list.add(new Incidents_Itsm(idRequete, date_modification,
-							date_creation, resume, etat, prioriteParts[1],
-							urgenceParts[1], impactParts[1], nbRelance));
+				cell = row.getCell(0);
+				hasDataFlag = (cell != null);
+				if (hasDataFlag)
+					hasDataFlag = (cell.getCellType() != Cell.CELL_TYPE_BLANK);
+				if (hasDataFlag) {
+					String idRequete = row.getCell(0).getStringCellValue();
+					String etat = row.getCell(3).getStringCellValue();
+					String priorite = row.getCell(4).getStringCellValue();
+					String prioriteParts[] = priorite.split("-");
+					String impact = row.getCell(6).getStringCellValue();
+					String impactParts[] = impact.split("-");
+					Integer nbRelance = (int) row.getCell(7)
+							.getNumericCellValue();
+					String urgence = row.getCell(5).getStringCellValue();
+					String urgenceParts[] = urgence.split("-");
+					String resume = row.getCell(8).getStringCellValue();
+
+					java.util.Date util_date_creation = row.getCell(1)
+							.getDateCellValue();
+					java.util.Date util_date_modification = row.getCell(2)
+							.getDateCellValue();
+					Timestamp date_creation = new Timestamp(
+							util_date_creation.getTime());
+					Timestamp date_modification = new Timestamp(
+							util_date_modification.getTime());
+
+					if (priorite.contains("-") && urgence.contains("-")
+							&& impact.contains("-")) {
+						list.add(new Incidents_Itsm(idRequete,
+								date_modification, date_creation, resume, etat,
+								prioriteParts[1], urgenceParts[1],
+								impactParts[1], nbRelance));
+					} else {
+						list.add(new Incidents_Itsm(idRequete,
+								date_modification, date_creation, resume, etat,
+								priorite, urgence, impact, nbRelance));
+					}
 				} else {
-					list.add(new Incidents_Itsm(idRequete, date_modification,
-							date_creation, resume, etat, priorite, urgence,
-							impact, nbRelance));
+					break;
 				}
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;

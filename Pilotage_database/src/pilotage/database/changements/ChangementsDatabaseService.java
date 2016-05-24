@@ -5,8 +5,10 @@ import java.io.FileInputStream;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.Iterator;
 import java.util.List;
 
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -94,38 +96,50 @@ public class ChangementsDatabaseService {
 			// Load worksheet
 			XSSFSheet mySheet = myWorkBook.getSheetAt(0);
 
-			for (int i = 1; i <= mySheet.getLastRowNum(); i++) {
-				Row row = mySheet.getRow(i);
+			boolean hasDataFlag = true;
+			Cell cell = null;
+			Iterator<Row> rowIterator = mySheet.rowIterator();
+			rowIterator.next();
+			while (rowIterator.hasNext()) {
+				Row row = rowIterator.next();
+				cell = row.getCell(0);
+				hasDataFlag = (cell != null);
+				if (hasDataFlag)
+					hasDataFlag = (cell.getCellType() != Cell.CELL_TYPE_BLANK);
+				if (hasDataFlag) {
+					String idChangement = row.getCell(0).getStringCellValue();
+					String resume = row.getCell(1).getStringCellValue();
+					String priorite = row.getCell(2).getStringCellValue();
+					String etat = row.getCell(3).getStringCellValue();
 
-				String resume = row.getCell(1).getStringCellValue();
-				String priorite = row.getCell(2).getStringCellValue();
-				String etat = row.getCell(3).getStringCellValue();
+					java.util.Date util_date_debut = row.getCell(4)
+							.getDateCellValue();
+					java.util.Date util_date_fin = row.getCell(5)
+							.getDateCellValue();
+					Timestamp date_debut = new Timestamp(
+							util_date_debut.getTime());
+					Timestamp date_fin = new Timestamp(util_date_fin.getTime());
 
-				java.util.Date util_date_debut = row.getCell(4)
-						.getDateCellValue();
-				java.util.Date util_date_fin = row.getCell(5)
-						.getDateCellValue();
-				Timestamp date_debut = new Timestamp(util_date_debut.getTime());
-				Timestamp date_fin = new Timestamp(util_date_fin.getTime());
+					String demandeur;
+					if (row.getCell(6) == null) {
+						demandeur = "";
+					} else {
+						demandeur = row.getCell(6).getStringCellValue();
+					}
 
-				String demandeur;
-				if (row.getCell(6) == null) {
-					demandeur = "";
+					String valideur;
+					if (row.getCell(7) == null) {
+						valideur = "";
+					} else {
+						valideur = row.getCell(7).getStringCellValue();
+					}
+
+					list.add(new Changements(resume, priorite, etat,
+							date_debut, date_fin, demandeur, valideur, idChangement));
 				} else {
-					demandeur = row.getCell(6).getStringCellValue();
+					break;
 				}
-				
-				String valideur;
-				if (row.getCell(7) == null) {
-					valideur = "";
-				} else {
-					valideur = row.getCell(7).getStringCellValue();
-				}
-
-				list.add(new Changements(resume, priorite, etat, date_debut,
-						date_fin, demandeur, valideur));
 			}
-
 		} catch (Exception e) {
 			e.printStackTrace();
 			throw e;
