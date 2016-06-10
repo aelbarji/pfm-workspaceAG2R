@@ -6,7 +6,7 @@
 <struts>
 
 	<constant name="struts.enable.DynamicMethodInvocation" value="false" />
-	<constant name="struts.devMode" value="true" />
+	<constant name="struts.devMode" value="false" />
 	<constant name="struts.custom.i18n.resources" value="Ressources" />
 	<constant name="struts.multipart.maxSize" value="10000000"></constant>
     <constant name="struts.i18n.encoding" value="UTF-8"/>
@@ -1019,7 +1019,7 @@
 			<result name="consigne" type="chain">showConsignesAction</result>
 		</action>
 		
-		<action name="importExcelFile" class="pilotage.incidents.itsm.ImportExcelFile">
+		<action name="synchroniserIncidents" class="pilotage.incidents.itsm.IncidentsItsmClient">
 			<result name="ok" type="redirectAction">showIncidentsItsm</result>
 			<result name="error">jsp/error/error.jsp</result>
 			<result name="login" type="redirectAction">enterAction</result>

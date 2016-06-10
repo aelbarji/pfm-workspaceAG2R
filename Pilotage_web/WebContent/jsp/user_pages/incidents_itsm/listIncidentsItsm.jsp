@@ -36,15 +36,9 @@ input[type=file] {
 
 	<div class="contentTable">
 
-		<form action="importExcelFile" method="POST"
+		<form action="synchroniserIncidents" method="POST"
 			enctype="multipart/form-data">
-			<button type="button" id="button"
-				onclick="$('#myFileInput').trigger('click');">Choisir un
-				fichier</button>
-			<input id="myFileInput" type="file" name="myFile"
-				size="20" onchange="pressed()" /> <label id="fileLabel">Aucun
-				fichier sélectionné</label> 
-			<input type="submit" value="Uploader" />
+			<input type="submit" value="Lancer Synchronisation" />
 		</form> 
 		<br>
 

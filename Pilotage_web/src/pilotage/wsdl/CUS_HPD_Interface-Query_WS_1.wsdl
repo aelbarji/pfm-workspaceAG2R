@@ -1,0 +1,393 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wsdl:definitions targetNamespace="urn:CUS_HPD_Interface-Query_WS" xmlns:s0="urn:CUS_HPD_Interface-Query_WS" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <wsdl:types>
+    <xsd:schema elementFormDefault="qualified" targetNamespace="urn:CUS_HPD_Interface-Query_WS">
+      <xsd:element name="Incident_Query_Light_Service" type="s0:InputMapping11"/>
+      <xsd:complexType name="InputMapping11">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Incident_Number" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Incident_Query_Light_ServiceResponse" type="s0:OutputMapping11"/>
+      <xsd:complexType name="OutputMapping11">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Numero_Incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_creation" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Date_signalement" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Modifie_par" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_modification" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Motif_Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Source_signalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Impact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Urgence" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Priorite" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Groupe_Affecte" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Intervenant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_resolution" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Groupe_resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Login_Client" type="xsd:string"/>
+                <xsd:element name="Nom_Client" type="xsd:string"/>
+                <xsd:element name="Prenom_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="VIP" nillable="true" type="s0:VIPType"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Relance" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Environnement" nillable="true" type="s0:EnvironnementType"/>
+                <xsd:element minOccurs="0" name="TicketSourceSignalee" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="VIPType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Yes"/>
+          <xsd:enumeration value="No"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="EnvironnementType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="PROD"/>
+          <xsd:enumeration value="DEV"/>
+          <xsd:enumeration value="REC"/>
+          <xsd:enumeration value="QUAL"/>
+          <xsd:enumeration value="INT"/>
+          <xsd:enumeration value="TEST"/>
+          <xsd:enumeration value="VALID"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Incident_Query_Full_Service" type="s0:InputMapping8"/>
+      <xsd:complexType name="InputMapping8">
+        <xsd:sequence>
+          <xsd:element minOccurs="0" name="Incident_Number" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Incident_Query_Full_ServiceResponse" type="s0:OutputMapping8"/>
+      <xsd:complexType name="OutputMapping8">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Numero_Incident" type="xsd:string"/>
+                <xsd:element name="Resume" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Remarques" type="xsd:string"/>
+                <xsd:element name="Createur" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_creation" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Date_signalement" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Modifie_par" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_modification" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Motif_Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Source_signalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Impact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Urgence" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Priorite" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Groupe_Affecte" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Intervenant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_resolution" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Delai_resolution" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="Groupe_resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Methode_Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_Association_Incident" nillable="true" type="s0:Type_Association_IncidentType"/>
+                <xsd:element name="Societe_Client" type="xsd:string"/>
+                <xsd:element name="Departement_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Site_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Login_Client" type="xsd:string"/>
+                <xsd:element name="Nom_Client" type="xsd:string"/>
+                <xsd:element name="Prenom_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Adresse_mail_Client" type="xsd:string"/>
+                <xsd:element name="Numero_Telephone_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="VIP" nillable="true" type="s0:VIPType"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Produit" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Modele" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Fabricant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Produit" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Modele" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Fabricant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Societe_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Departement_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Site_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Nom_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Prenom_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Numero_Telephone_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Adresse_mail_Contact" type="xsd:string"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Relance" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Absence_de_consigne" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element minOccurs="0" name="Appel_astreinte" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Tickets_Fils" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Environnement" nillable="true" type="s0:EnvironnementType"/>
+                <xsd:element minOccurs="0" name="TicketSourceSignalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="TraitePilotage" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element minOccurs="0" name="Service" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="HPD_CI" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="ServiceCI" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:simpleType name="Type_Association_IncidentType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Original"/>
+          <xsd:enumeration value="Duplicate"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:simpleType name="Absence_de_consigneType">
+        <xsd:restriction base="xsd:string">
+          <xsd:enumeration value="Oui"/>
+        </xsd:restriction>
+      </xsd:simpleType>
+      <xsd:element name="Incident_QueryList_Light_Service" type="s0:InputMapping10"/>
+      <xsd:complexType name="InputMapping10">
+        <xsd:sequence>
+          <xsd:element name="Qualification" type="xsd:string"/>
+          <xsd:element name="startRecord" type="xsd:string"/>
+          <xsd:element name="maxLimit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Incident_QueryList_Light_ServiceResponse" type="s0:OutputMapping10"/>
+      <xsd:complexType name="OutputMapping10">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Numero_Incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_creation" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Date_signalement" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Modifie_par" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_modification" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Motif_Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Source_signalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Impact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Urgence" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Priorite" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Groupe_Affecte" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Intervenant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_resolution" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Groupe_resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Login_Client" type="xsd:string"/>
+                <xsd:element name="Nom_Client" type="xsd:string"/>
+                <xsd:element name="Prenom_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="VIP" nillable="true" type="s0:VIPType"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Relance" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Environnement" nillable="true" type="s0:EnvironnementType"/>
+                <xsd:element minOccurs="0" name="TicketSourceSignalee" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Incident_QueryList_Full_Service" type="s0:InputMapping7"/>
+      <xsd:complexType name="InputMapping7">
+        <xsd:sequence>
+          <xsd:element name="Qualification" type="xsd:string"/>
+          <xsd:element name="startRecord" type="xsd:string"/>
+          <xsd:element name="maxLimit" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="Incident_QueryList_Full_ServiceResponse" type="s0:OutputMapping7"/>
+      <xsd:complexType name="OutputMapping7">
+        <xsd:sequence>
+          <xsd:element maxOccurs="unbounded" name="getListValues">
+            <xsd:complexType>
+              <xsd:sequence>
+                <xsd:element name="Numero_Incident" type="xsd:string"/>
+                <xsd:element name="Resume" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Remarques" type="xsd:string"/>
+                <xsd:element name="Createur" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_creation" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Date_signalement" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Modifie_par" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_modification" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Motif_Etat" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Source_signalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_incident" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Impact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Urgence" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Priorite" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Groupe_Affecte" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Intervenant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Date_resolution" type="xsd:dateTime"/>
+                <xsd:element minOccurs="0" name="Delai_resolution" type="xsd:decimal"/>
+                <xsd:element minOccurs="0" name="Groupe_resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Methode_Resolution" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Type_Association_Incident" nillable="true" type="s0:Type_Association_IncidentType"/>
+                <xsd:element name="Societe_Client" type="xsd:string"/>
+                <xsd:element name="Departement_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Site_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Login_Client" type="xsd:string"/>
+                <xsd:element name="Nom_Client" type="xsd:string"/>
+                <xsd:element name="Prenom_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Adresse_mail_Client" type="xsd:string"/>
+                <xsd:element name="Numero_Telephone_Client" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="VIP" nillable="true" type="s0:VIPType"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Produit" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Modele" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Fabricant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Ope_Resol_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv1" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv2" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Niv3" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Produit" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Modele" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Categ_Prod_Resol_Fabricant" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Societe_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Departement_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Site_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Nom_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Prenom_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Numero_Telephone_Contact" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="Adresse_mail_Contact" type="xsd:string"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Relance" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Absence_de_consigne" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element minOccurs="0" name="Appel_astreinte" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element default="0" minOccurs="0" name="Nb_Tickets_Fils" type="xsd:int"/>
+                <xsd:element minOccurs="0" name="Environnement" nillable="true" type="s0:EnvironnementType"/>
+                <xsd:element minOccurs="0" name="TicketSourceSignalee" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="TraitePilotage" nillable="true" type="s0:Absence_de_consigneType"/>
+                <xsd:element minOccurs="0" name="Service" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="HPD_CI" type="xsd:string"/>
+                <xsd:element minOccurs="0" name="ServiceCI" type="xsd:string"/>
+              </xsd:sequence>
+            </xsd:complexType>
+          </xsd:element>
+        </xsd:sequence>
+      </xsd:complexType>
+      <xsd:element name="AuthenticationInfo" type="s0:AuthenticationInfo"/>
+      <xsd:complexType name="AuthenticationInfo">
+        <xsd:sequence>
+          <xsd:element name="userName" type="xsd:string"/>
+          <xsd:element name="password" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="authentication" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="locale" type="xsd:string"/>
+          <xsd:element minOccurs="0" name="timeZone" type="xsd:string"/>
+        </xsd:sequence>
+      </xsd:complexType>
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="Incident_Query_Light_ServiceSoapOut">
+    <wsdl:part element="s0:Incident_Query_Light_ServiceResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_QueryList_Light_ServiceSoapOut">
+    <wsdl:part element="s0:Incident_QueryList_Light_ServiceResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_QueryList_Light_ServiceSoapIn">
+    <wsdl:part element="s0:Incident_QueryList_Light_Service" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_Query_Light_ServiceSoapIn">
+    <wsdl:part element="s0:Incident_Query_Light_Service" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_QueryList_Full_ServiceSoapOut">
+    <wsdl:part element="s0:Incident_QueryList_Full_ServiceResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="ARAuthenticate">
+    <wsdl:part element="s0:AuthenticationInfo" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_Query_Full_ServiceSoapOut">
+    <wsdl:part element="s0:Incident_Query_Full_ServiceResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_Query_Full_ServiceSoapIn">
+    <wsdl:part element="s0:Incident_Query_Full_Service" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="Incident_QueryList_Full_ServiceSoapIn">
+    <wsdl:part element="s0:Incident_QueryList_Full_Service" name="parameters"/>
+  </wsdl:message>
+  <wsdl:portType name="HPD_Interface-Query_WSPortTypePortType">
+    <wsdl:operation name="Incident_Query_Light_Service">
+      <wsdl:input message="s0:Incident_Query_Light_ServiceSoapIn"/>
+      <wsdl:output message="s0:Incident_Query_Light_ServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_Query_Full_Service">
+      <wsdl:input message="s0:Incident_Query_Full_ServiceSoapIn"/>
+      <wsdl:output message="s0:Incident_Query_Full_ServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_QueryList_Light_Service">
+      <wsdl:input message="s0:Incident_QueryList_Light_ServiceSoapIn"/>
+      <wsdl:output message="s0:Incident_QueryList_Light_ServiceSoapOut"/>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_QueryList_Full_Service">
+      <wsdl:input message="s0:Incident_QueryList_Full_ServiceSoapIn"/>
+      <wsdl:output message="s0:Incident_QueryList_Full_ServiceSoapOut"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="HPD_Interface-Query_WSPortTypeSoapBinding" type="s0:HPD_Interface-Query_WSPortTypePortType">
+    <soap:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="Incident_Query_Light_Service">
+      <soap:operation soapAction="urn:CUS_HPD_Interface-Query_WS/Incident_Query_Light_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_Query_Full_Service">
+      <soap:operation soapAction="urn:CUS_HPD_Interface-Query_WS/Incident_Query_Full_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_QueryList_Light_Service">
+      <soap:operation soapAction="urn:CUS_HPD_Interface-Query_WS/Incident_QueryList_Light_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Incident_QueryList_Full_Service">
+      <soap:operation soapAction="urn:CUS_HPD_Interface-Query_WS/Incident_QueryList_Full_Service" style="document"/>
+      <wsdl:input>
+        <soap:header message="s0:ARAuthenticate" part="parameters" use="literal"/>
+        <soap:body use="literal"/>
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal"/>
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CUS_HPD_Interface-Query_WSService">
+    <wsdl:documentation>Web Service de consultation de tickets incident</wsdl:documentation>
+    <wsdl:port binding="s0:HPD_Interface-Query_WSPortTypeSoapBinding" name="HPD_Interface-Query_WSPortTypeSoap">
+      <soap:address location="http://itsm-mt-pp/arsys/services/ARService?server=itsm-ars-pp.windows.appli&amp;webService=CUS_HPD_Interface-Query_WS"/>
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>
