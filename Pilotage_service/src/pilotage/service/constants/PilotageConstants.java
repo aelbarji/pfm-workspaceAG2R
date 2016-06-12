@@ -66,7 +66,7 @@ public class PilotageConstants {
 	public static final String AFFECTATION_LISTE_ID_CHECKBOX = "AFFECTATION_LISTE_ID_CHECKBOX";
 	
 	/**
-	 * Nombre d'éléments des tableaux par page
+	 * Nombre d'ï¿½lï¿½ments des tableaux par page
 	 */
 	public static final int NB_USERS_PER_PAGE = 50;
 	public static final int NB_CONSIGNES_PER_PAGE = 10;
@@ -165,7 +165,7 @@ public class PilotageConstants {
 	public static final Integer IMPACT_CRITIQUE				= 1;
 	
 	/**
-	 * Constantes de dérogation
+	 * Constantes de dï¿½rogation
 	 */
 	public static final Integer DEROGATION_ETAT_ENREGISTREE = 1;
 	public static final Integer DEROGATION_ETAT_ENVOYEE = 2;
@@ -228,7 +228,7 @@ public class PilotageConstants {
 	public static final String CHECKLIST_FUTUR_DATE	= "checklist_futur_date";
 	
 	/**
-	 * Constantes de jour férié
+	 * Constantes de jour fï¿½riï¿½
 	 */
 	public static final Integer JOUR_AN				=	1;
 	public static final Integer VENDREDI_PAQUES		=	2;
@@ -265,8 +265,8 @@ public class PilotageConstants {
 	 * Constantes de feedback
 	 */
 	public static final String FEEDBACK_ETAT_EN_ATTENTE	= "En attente";
-	public static final String FEEDBACK_ETAT_VALIDE		= "Validé";
-	public static final String FEEDBACK_ETAT_ANNULE		= "Annulé";
+	public static final String FEEDBACK_ETAT_VALIDE		= "Validï¿½";
+	public static final String FEEDBACK_ETAT_ANNULE		= "Annulï¿½";
 	
 	/**
 	 * Constantes de historique
@@ -276,7 +276,7 @@ public class PilotageConstants {
 	public static final String HISTORIQUE_MODULE_BILAN			= "Bilan";
 	public static final String HISTORIQUE_MODULE_CHECKLIST		= "Checklist";
 	public static final String HISTORIQUE_MODULE_CONSIGNES		= "Consignes";
-	public static final String HISTORIQUE_MODULE_DEROGATION		= "Dérogation";
+	public static final String HISTORIQUE_MODULE_DEROGATION		= "Dï¿½rogation";
 	public static final String HISTORIQUE_MODULE_ENVIRONNEMENT	= "Environnement";
 	public static final String HISTORIQUE_MODULE_FEEDBACK		= "Feedback";
 	public static final String HISTORIQUE_MODULE_INCIDENTS		= "Incident";
@@ -306,7 +306,7 @@ public class PilotageConstants {
 	public static final String PLANNING_EQUIPE = "equipe";
 	
 	/**
-	 * Constantes des noms des classes appelées avant les exports ou l'on met un objet en session  
+	 * Constantes des noms des classes appelï¿½es avant les exports ou l'on met un objet en session  
 	 */
 	public static final String NAME_CLASS_BEFORE_EXPORT_1= "pilotage.planning.planning.ExportPlanningSemaineAction";
 	public static final String NAME_CLASS_BEFORE_EXPORT_2= "pilotage.planning.planning.ExportPlanningMoisPiloteAction";
@@ -315,7 +315,7 @@ public class PilotageConstants {
 	
 	
 	/**
-	 * Constantes de météo
+	 * Constantes de mï¿½tï¿½o
 	 */
 	public static final String ID_TYPE ="idType";
 	public static final String ETAT ="etat";
@@ -337,5 +337,10 @@ public class PilotageConstants {
 	public static final String CHAMP_FIN = "champ_fin";
 	public static final String FORMAT = "format";
 	public static final String NBTOTAL = "nbTotal";
+	
+	/**
+	 * Constantes pour timer appel Incident ITSM
+	 */
+	public static Boolean isIncidentsItsmTimerStarted = false;
 	
 }
